@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48">
+  <defs>
+    <clipPath id="c-email">
+      <path d="M0 0h48v48H0z"/>
+    </clipPath>
+    <filter id="a-email" filterUnits="objectBoundingBox" x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix in="SourceGraphic" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+    </filter>
+    <image id="b-email" width="48" height="48" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAADlElEQVRoge2XT2wMURzHf2O6/aMlKGWpPyFpNEqUqCAOUkJpgggaEgcHSUOyemia0IsUiYMLJxqJ+pNIRS8lDhrEiiLbNioIm2hrqaZVdP+x8x5fB2y8ebN2urMjDvNN5jBv3u83n+97v3nzHpEjR44cOXLk6D8U/DVZ0Bo9YB2PwWdHwVWkdu0NgB+p+Lfw0VmFYFe6U4fWX/ve2MU6RoLvCWST6/R1UnYvtOulyYSgJx/s5TEw3AWbfgva8Rrc8WaYC9YaPekbeRXgu96B1240Dc+elIOvHZLysMH76G8YaybBIzGwohXR2hlmAVIVSFXAKuvA83jCwWDzDydPxItDQlCkzG07/FDTODDPtaSzybw+EwbEIOm5T3VhsDwvbfCxVcVgp17IwHkc/MgpfTlaMgBteSn4tvfgOd/A1WaEzhZYgucF28BLgjL8mg9gZ9cjUuYW23f0WzPA6q+KzzcMgqvbRw3erKpgbSfAM7/LZXK7A1/YHCIihN1TxeebB6wZ4OXnjOsz7wqC3smm4EPzp4BNaTPOs/Q8AlU5Ql/dgFkzEHZPBXv+0PjlmwfAi7f+Nbf2dBl4dZ8cWxCD9rpa6h/0TtaXliUDRL+nv7IO3P01wWrRjKAnX4Y/uMd4S7LnLVj9CkOWkUWTxL6rhy0biPeLjSz4uU9KNBtLtxD92lPxqjPGy2L4HsIXpyV8x2d1ohiz8mPaDBAR4Y43A2xOPXhBzNhI8YWEJlnTyWTbAwyvHC/GLR5Jq4F4TKyrBMzrS1BSelMhxHp3mso71DROjC0J2mKA6PdsVNYlng0VYMdeIdZiepOIgSW5Yo6isG0G4vGxloVgtztk+IpWfApNGFWu/oaxYp65EdsNEBHhWUMmWO/RnyuV+ytY6SGQqow6T08gW+Qp/PJPDMRzBapyMLAkN+X4Zw2Z+v9F8qA0GrAq+FSXyDNJ0/eRTmT/lV7Td7FBk3ilutSPupLxbdS1my6BVIX4nyZUKBmiCYMZmCd86YjOKrQHz4QiXbrDlJllVDpSll9HpHu6TYiJOaKdM8FW3xBZ/O36fvKvHL2XSKGy+L1ydxNllb4DV+0llrRMbkLfZX2TXEL+7jOElie2MFkRbnVS341GfbPhB4po7QxyrWslpaLUfjITws0u0qZVKrmLkh8p4zH+mixobQfA/O3gRWFzG7V0XnMjYL0PoLXvh0912Tg8jhw5cuTIkaOU9QPYulR2yQGePgAAAABJRU5ErkJggg=="/>
+    <mask id="e-email">
+      <g filter="url(#a-email)">
+        <use xlink:href="#b-email"/>
+      </g>
+    </mask>
+    <g id="d-email" clip-path="url(#c-email)">
+      <path fill="#f495f9" d="M0 0h48v48H0z"/>
+    </g>
+  </defs>
+  <path d="M24 10c1.105 0 2 .895 2 2a2.003 2.003 0 01-1.766 1.988L24 14H10a2.003 2.003 0 00-1.988 1.766L8 16v16c0 1.027.773 1.871 1.766 1.988L10 34h28a2.003 2.003 0 001.988-1.758l.012-.23-.105-15.84-14.66 11.52a2 2 0 01-2.13.214l-.218-.129-10.758-7.226a1.997 1.997 0 01-.547-2.774 1.997 1.997 0 012.574-.664l.203.117 9.547 6.415 13.516-10.622a4.005 4.005 0 015.406.426l.211.25c.48.61.77 1.344.84 2.114l.016.332L44 32a5.996 5.996 0 01-5.648 5.988L38 38H10a5.996 5.996 0 01-5.988-5.648L4 32V16a5.996 5.996 0 015.648-5.988L10 10zm0 0" fill="#f495f9"/>
+  <use xlink:href="#d-email" mask="url(#e-email)"/>
+</svg>
