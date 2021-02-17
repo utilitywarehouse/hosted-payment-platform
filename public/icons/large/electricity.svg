@@ -1,0 +1,12 @@
+<svg width="48" height="48" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <path d="M8.394 43.795a1 1 0 01-.299-1.22l7.713-16.429H10.4a1 1 0 01-.938-1.346l7.433-20.146a1 1 0 111.876.692l-6.936 18.8h5.547a1.001 1.001 0 01.906 1.425l-6.414 13.661 24.414-20.84H25.912a1 1 0 01-.805-1.593L33.062 6h-9.177a1 1 0 010-2h11.156a1 1 0 01.805 1.593l-7.955 10.798h11.11a1 1 0 01.648 1.761l-30 25.61a.998.998 0 01-1.255.033z" id="a-electricity"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <path d="M0 0h48v48H0z"/>
+    <mask id="b-electricity" fill="#fff">
+      <use xlink:href="#a-electricity"/>
+    </mask>
+    <path fill="#62dd99" mask="url(#b-electricity)" d="M0 0h48v48H0z"/>
+  </g>
+</svg>

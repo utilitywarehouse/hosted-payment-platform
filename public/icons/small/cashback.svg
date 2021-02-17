@@ -1,0 +1,12 @@
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <path d="M20 4a2 2 0 011.995 1.85L22 6v12a2 2 0 01-1.85 1.995L20 20H4a2 2 0 01-1.995-1.85L2 18v-2.941a2 2 0 011.842-1.994l.149-.006L16.995 13a1 1 0 01.126 1.993l-.116.007L4 15.059V18h16V6H4v4.032a1 1 0 01-1.993.116L2 10.032V6a2 2 0 011.85-1.995L4 4h16z" id="a-cashback"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <path fill-opacity="0" fill="#FFF" d="M0 0h24v24H0z"/>
+    <mask id="b-cashback" fill="#fff">
+      <use xlink:href="#a-cashback"/>
+    </mask>
+    <path fill="#F495F9" mask="url(#b-cashback)" d="M0 0h24v24H0z"/>
+  </g>
+</svg>

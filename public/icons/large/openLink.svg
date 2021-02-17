@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48">
+  <defs>
+    <clipPath id="c-open-link">
+      <path d="M0 0h48v48H0z"/>
+    </clipPath>
+    <filter id="a-open-link" filterUnits="objectBoundingBox" x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix in="SourceGraphic" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+    </filter>
+    <image id="b-open-link" width="48" height="48" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACj0lEQVRoge2Yy2sTQQDGZ5NofEFvgrY2UqEQfICK9SAVfB1ML+KhrT1Y4qFYFEoOe/Qg/ge9aS6KDzwVROOhighCg6JpGxEPEZs0JniT0u7C7oz9PMRu3GQ3TWZ3u7HMD+awu7PffN8wu/MgRCAQCDY1YOMDYFd/gAXBV0ZKYHLMxwDXivzm18rYop1+YCPD8HO/y+7JBgQIXydkqOyVuuSVsBNAghJhZLV6JwgppFt29n8yhOwRAfxm3QDIJcLQkxOgnz6ARdTmf32JBdD8WVvd4vB20P2nweQYlOxed2OtNaJ2d4E+zXL/v+nkV0vduslttwZ2exLlOzsIqXzEZq2tq1Y6jc0vFLeBPptzNAFZBIC2NAjWQa3rP/wM7VTUnQB6csLZ7DleAP11pmnzRuldgR4fdR6Azr83987F51DlzpaFDPP5oXrzuxiY/H39zuAJwKLLJhGlb4/r5rU3V/Dz2E6wIw88CGAW4TbPjl+yNj87bKqnX4iD9ShtGKB2Kd1Ba80bdbWlg6D3vrRxAHvzRn3LITVS8jGAHKuEGFsEi1xu+j09Pgo2WAa79Q303XmOht0JYKuvTR0G7U+B9qegzR7i1Qm5aaolAsoTIs1UjAfmIoQQrhC2+4HaXpdCv13dO1Q+zKomr76Pq1F3OmTzL6fbHRHAb0QAvxEB/KZBgAPKv1dQu23PJ1ulfmcXXXZLu9pI3Zby3As3jj+gZvaBnnxp1s6lefXsF3PIPyIS6TOupbcDJHy0BBbkbesvJyzaKjzmVbMfQrnsXYKpeV7hpsGrDCmkkt5oq3In6HTG2fFKo3Oj6Yxnp3JGiFwiDP31TdBcGqx3xbnxHgU0PwM9fQMfg1s8NS8QCASe8wfBJvz3jFKangAAAABJRU5ErkJggg=="/>
+    <mask id="e-open-link">
+      <g filter="url(#a-open-link)">
+        <use xlink:href="#b-open-link"/>
+      </g>
+    </mask>
+    <g id="d-open-link" clip-path="url(#c-open-link)">
+      <path fill="#f495f9" d="M0 0h48v48H0z"/>
+    </g>
+  </defs>
+  <path d="M21.957 14c1.105 0 2 .895 2 2a2.003 2.003 0 01-1.77 1.988l-.23.012H12a2.003 2.003 0 00-1.988 1.766L10 20v16c0 1.027.773 1.871 1.766 1.988L12 38h16a2.003 2.003 0 001.988-1.766L30 36v-9.816c0-1.106.895-2 2-2 1.027 0 1.871.773 1.988 1.765l.012.235V36a5.996 5.996 0 01-5.648 5.988L28 42H12a5.996 5.996 0 01-5.988-5.648L6 36V20a5.996 5.996 0 015.648-5.988L12 14zm18.04-8l.25.016A2 2 0 0141.996 8v14l-.013.23c-.168 1.504-1.933 2.313-3.187 1.372l-6.61-4.954-4.773 4.766-.176.156c-.785.621-1.93.57-2.656-.156a2.003 2.003 0 01.004-2.828l4.773-4.766.23-.215a4 4 0 014.997-.156l3.41 2.555V10H26l-.25-.016A1.998 1.998 0 0124 8c0-1.105.895-2 2-2zm0 0" fill="#f495f9"/>
+  <use xlink:href="#d-open-link" mask="url(#e-open-link)"/>
+</svg>

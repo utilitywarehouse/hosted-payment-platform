@@ -1,9 +1,11 @@
-html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -13,4 +15,36 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Work Sans"), local("WorkSans"),
+    /* IE6-IE8 */ url("../public/fonts/work_sans/WorkSans-Regular-latin.woff2")
+      format("woff2");
+}
+
+@font-face {
+  font-family: "Work Sans SemiBold";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Work Sans SemiBold"), local("WorkSansSemiBold"),
+    /* IE6-IE8 */ url("../public/fonts/work_sans/WorkSans-SemiBold-latin.woff2")
+      format("woff2");
+}
+
+@font-face {
+  font-family: "Aeonik Bold";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Aeonik Bold"), local("AeonikBold"),
+    /* IE6-IE8 */ url("../public/fonts/aeonik/Aeonik-Bold.woff2")
+      format("woff2");
 }
