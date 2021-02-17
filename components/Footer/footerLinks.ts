@@ -46,6 +46,11 @@ export interface IFooterLinks {
   [section: string]: ISection;
 }
 
+export interface ShortFooterLinksInterface {
+  name: string;
+  href: string;
+}
+
 export const footerLinks: IFooterLinks = {
   [FooterLinkCategory.Legal]: {
     category: "Legal",
@@ -240,3 +245,30 @@ export const footerLinks: IFooterLinks = {
     ],
   },
 };
+
+export const shortFooterLinks: ShortFooterLinksInterface[] = [
+  {
+    name: "Terms and conditions",
+    href: "https://uw.co.uk/legal/terms-conditions",
+  },
+  {
+    name: "Codes of practice",
+    href: "https://uw.co.uk/legal/codes-of-practice",
+  },
+  {
+    name: "Accessibility",
+    href: "https://telecomplus.co.uk/legal/accessibility",
+  },
+  {
+    name: "Cookies policy",
+    href: "https://uw.co.uk/legal/cookies-policy",
+  },
+  {
+    name: "Staying safe online",
+    href: "https://uw.co.uk/help/staying-safe-online",
+  },
+  {
+    name: "Privacy",
+    href: "https://uw.co.uk/legal/privacy-customer",
+  },
+];

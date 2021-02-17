@@ -1,6 +1,6 @@
 import { CssBaseline, styled } from "@material-ui/core";
 import React from "react";
-// import Footer from './Footer';
+import Footer from "./Footer";
 import { Navbar } from "./Navbar";
 import Theme from "./Theme";
 
@@ -10,7 +10,7 @@ const Layout: React.FC = ({ children }) => (
       <CssBaseline />
       <Navbar />
       <React.Fragment>{children ?? <></>}</React.Fragment>
-      {/* <Footer /> */}
+      <Footer />
     </Container>
   </Theme>
 );

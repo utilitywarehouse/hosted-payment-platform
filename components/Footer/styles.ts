@@ -68,6 +68,17 @@ const getStyles = (theme: Theme): StyleRules =>
         },
       },
     },
+    linksContainer: {
+      "& a": {
+        lineHeight: "1.82025rem",
+        "&:hover": {
+          textDecoration: "none",
+        },
+        "& p:hover": {
+          color: darken(theme.palette.common.white, 0.4),
+        },
+      },
+    },
     sectionHeading: {
       fontFamily: "Work Sans SemiBold,sans-serif",
       marginBottom: theme.spacing(1),
