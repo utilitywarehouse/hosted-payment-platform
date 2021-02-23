@@ -1,0 +1,39 @@
+section.paymentMethod {
+  padding: 1.5rem 0;
+  border-bottom: 2px solid rgba(30, 10, 70, 0.1);
+}
+
+section.paymentMethod h4 {
+  margin-bottom: 0;
+  opacity: 0.3;
+}
+
+section.paymentMethod.show h4 {
+  margin-bottom: 1.5rem;
+}
+
+section.paymentMethod.show h4 {
+  opacity: 1;
+}
+
+.cardInput,
+.cardDetailsContainer {
+  max-width: 350px;
+}
+
+.cardInput {
+  margin-bottom: 1.5rem;
+}
+
+.cardDetailsContainer {
+  display: flex;
+}
+
+.cardDetailsContainer > div {
+  max-width: 161px;
+  margin-bottom: 0.875rem;
+}
+
+.cardDetailsContainer > div:first-child {
+  margin-right: 1.75rem;
+}

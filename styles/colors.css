@@ -1,0 +1,16 @@
+:root {
+  --primary-purple: #550091;
+  --light-tint: #f5f0f8;
+  --action-cyan: #75a7fd;
+  --midnight: #1e0a46;
+  --highlight: #f394f8;
+  --white: #ffffff;
+  --button-focus: #6b75dc;
+  --primary-button-hover: #b9d2fd;
+  --success: #1b7e48;
+  --warning: #f09b43;
+  --error: #ce2261;
+  --primary-light-background: #ede4f2;
+  --grey: #808080;
+  --light-grey: #c9c9c9;
+}

@@ -1,0 +1,139 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Aeonik Bold", "Work Sans", sans-serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 2.5rem;
+  line-height: 2.8125rem;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 1.96875rem;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.265625rem;
+}
+
+h4 {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 0.984375rem;
+}
+
+h5 {
+  font-size: 1rem;
+  line-height: 1.125rem;
+  margin-bottom: var(--spacing-x1);
+}
+
+a {
+  color: var(--midnight);
+  text-decoration: none;
+  font-size: 1.25rem;
+  transition: all 0.3s ease-in;
+}
+
+a:hover {
+  transition: all 0.3s ease;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--midnight);
+  opacity: 0.4;
+  text-decoration: none;
+}
+
+a:active {
+  color: var(--action-cyan);
+  text-decoration: none;
+}
+
+p {
+  font-size: 1.25rem;
+  line-height: 2.0225rem;
+  margin-bottom: 1rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+label {
+  font-size: 0.8125rem;
+  line-height: 1.618rem;
+}
+
+small {
+  font-size: 1rem;
+  line-height: 1.618rem;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+ul,
+li {
+  margin: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 3.25rem;
+    line-height: 3.65625rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    line-height: 2.25rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.6875rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+    line-height: 1.125rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  h1 {
+    font-size: 4rem;
+    line-height: 4.5rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    line-height: 2.8125rem;
+  }
+
+  h3 {
+    font-size: 2.0625rem;
+    line-height: 2.3203125rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    line-height: 1.40625rem;
+  }
+}
