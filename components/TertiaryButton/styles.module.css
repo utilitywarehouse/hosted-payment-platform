@@ -1,0 +1,24 @@
+.tertiaryButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid var(--action-cyan);
+  cursor: pointer;
+  user-select: none;
+}
+
+.tertiaryButton.small {
+  font-size: 1rem;
+}
+
+.tertiaryButton:hover {
+  color: rgba(30, 10, 70, 0.4);
+}
+
+.tertiaryButton:hover svg path:last-of-type {
+  fill: rgba(30, 10, 70, 0.4);
+}
+
+.tertiaryButton:active {
+  color: var(--action-cyan);
+}

@@ -1,0 +1,85 @@
+button.button {
+  box-sizing: content-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.125rem;
+  background-color: var(--action-cyan);
+  border: 2px solid var(--action-cyan);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+}
+
+button.button:hover:not(:disabled) {
+  border-color: var(--primary-button-hover);
+  background-color: var(--primary-button-hover);
+}
+
+button.button:active,
+button.button:focus {
+  border-color: var(--button-focus);
+  background-color: var(--button-focus);
+}
+
+button.button:disabled {
+  opacity: 0.25;
+  color: #884db2;
+  cursor: not-allowed;
+}
+
+button.regular {
+  height: 2.25rem;
+  padding: 0 1.5rem;
+  border-radius: 3.25rem;
+}
+
+button.large {
+  height: 3.25rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 3.75rem;
+  white-space: nowrap;
+}
+
+button.secondary {
+  background: transparent;
+}
+
+button.secondary:hover {
+  background: transparent;
+}
+
+button.secondary:focus {
+  color: var(--button-focus);
+  border-color: var(--button-focus);
+  background: transparent;
+}
+
+button.light {
+  color: var(--midnight);
+}
+
+button.dark {
+  color: var(--white);
+}
+
+button.light.secondary:hover {
+  border-color: var(--midnight);
+}
+
+button.dark.secondary:hover {
+  border-color: var(--white);
+}
+
+svg.dropdownIcon {
+  margin-left: var(--spacing-x1);
+  transition: all 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.isOpen > svg {
+  transform: rotate(180deg);
+}
