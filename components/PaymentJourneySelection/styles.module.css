@@ -22,12 +22,13 @@ section.amountSelection {
   align-items: flex-start;
   cursor: pointer;
   transition: all 0.3s ease;
-  border-color: var(--action-cyan);
+  border-color: rgba(30, 10, 70, 0.3);
+  background-color: var(--white);
   user-select: none;
 }
 
 .card:hover {
-  border-color: var(--midnight);
+  border-color: var(--action-cyan);
 }
 
 .cardsContainer {
@@ -73,24 +74,4 @@ section.amountSelection {
 
 .fullAmountHeadingContainer p:last-of-type svg {
   margin-right: 4px;
-}
-
-.info {
-  max-width: 490px;
-  margin-top: 1.5rem;
-  margin-bottom: 0.875rem;
-  display: flex;
-}
-
-.info p {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 19px;
-}
-
-.info svg {
-  margin-top: -6px;
-  margin-right: 8px;
-  width: 2rem;
-  height: 2rem;
 }

@@ -6,17 +6,33 @@ import { InputWrapper } from "./InputWrapper";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   prefix?: string;
+  isValid?: boolean;
+  showSuccessIcon?: boolean;
   cleaveOptions?: CleaveOptions;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, name, label, prefix, cleaveOptions, ...rest }, ref) =>
+  (
+    {
+      className,
+      name,
+      label,
+      prefix,
+      isValid,
+      showSuccessIcon,
+      cleaveOptions,
+      ...rest
+    },
+    ref
+  ) =>
     Boolean(label) ? (
       <InputWrapper
         className={className}
         name={name}
         label={label}
         prefix={prefix}
+        isValid={isValid}
+        showSuccessIcon={showSuccessIcon}
       >
         {!!cleaveOptions ? (
           <Cleave id={name} name={name} options={cleaveOptions} {...rest} />
