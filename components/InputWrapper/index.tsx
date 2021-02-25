@@ -1,15 +1,31 @@
 import classNames from "classnames";
 import { FocusEvent, forwardRef, InputHTMLAttributes, useState } from "react";
+import SuccessOutlinedIcon from "../../public/icons/small/success-outlined.svg";
 import styles from "./styles.module.css";
 
 interface FormFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name?: string;
   label?: string;
   prefix?: string;
+  isValid?: boolean;
+  showSuccessIcon?: boolean;
 }
 
 export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
-  ({ children, className, name, label, prefix, onBlur, ...rest }, ref) => {
+  (
+    {
+      children,
+      className,
+      name,
+      label,
+      prefix,
+      isValid,
+      showSuccessIcon,
+      onBlur,
+      ...rest
+    },
+    ref
+  ) => {
     const [hovered, setHovered] = useState<boolean>(false);
     const [focused, setFocused] = useState<boolean>(false);
 
@@ -38,7 +54,15 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
     const renderLabel = () =>
       hasLabel ? <label htmlFor={name}>{label}</label> : null;
 
-    const renderPrefix = () => (hasPrefix ? <span>{prefix}</span> : null);
+    const renderPrefix = () =>
+      hasPrefix ? <span className={styles.prefix}>{prefix}</span> : null;
+
+    const renderSuffix = () =>
+      !!showSuccessIcon && isValid ? (
+        <span className={styles.suffix}>
+          <SuccessOutlinedIcon />
+        </span>
+      ) : null;
 
     return (
       <div
@@ -49,6 +73,7 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
             [styles.hovered]: hovered,
             [styles.focused]: focused,
             [styles.prefixed]: hasPrefix,
+            [styles.isValid]: isValid,
           },
           className
         )}
@@ -62,6 +87,7 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
         {renderLabel()}
         {renderPrefix()}
         {children}
+        {renderSuffix()}
         {!!label && <hr />}
       </div>
     );

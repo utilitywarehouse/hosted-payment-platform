@@ -16,13 +16,8 @@ section.paymentMethod.show h4 {
   opacity: 1;
 }
 
-.cardInput,
 .cardDetailsContainer {
   max-width: 350px;
-}
-
-.cardInput {
-  margin-bottom: 1.5rem;
 }
 
 .cardDetailsContainer {
@@ -36,4 +31,22 @@ section.paymentMethod.show h4 {
 
 .cardDetailsContainer > div:first-child {
   margin-right: 1.75rem;
+}
+
+.cardInput {
+  position: relative;
+  max-width: 350px;
+  margin-bottom: 1.5rem;
+}
+
+.acceptedCards {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.acceptedCards > svg:last-child {
+  margin-left: 0.5rem;
 }

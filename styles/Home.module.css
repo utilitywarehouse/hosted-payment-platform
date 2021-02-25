@@ -27,7 +27,7 @@
   width: 318px;
   height: 2px;
   margin-left: 0;
-  margin-bottom: 85.5px;
+  margin-bottom: 150px;
   border-width: 0;
   background-color: var(--highlight);
 }
@@ -36,6 +36,17 @@
   max-width: 200px;
   font-size: 1rem;
   line-height: 23px;
+}
+
+.safeAndSecureMessage {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.safeAndSecureMessage p {
+  margin-top: 0;
+  margin-left: 0.5rem;
 }
 
 .buttonsContainer {

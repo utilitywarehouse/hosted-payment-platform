@@ -93,14 +93,22 @@
   overflow: visible;
 }
 
-.withLabel span {
+.withLabel .prefix,
+.withLabel .suffix {
   position: absolute;
   top: 1.625rem;
-  left: 0;
   bottom: 0;
   line-height: 1.92rem;
   padding-left: 1rem;
   user-select: none;
+}
+
+.withLabel .prefix {
+  left: 0;
+}
+
+.withLabel .suffix {
+  right: 1rem;
 }
 
 .withLabel input {
@@ -126,4 +134,12 @@
 .withLabel.hovered hr,
 .withLabel.focused hr {
   background-color: var(--action-cyan);
+}
+
+.withLabel.isValid label {
+  color: var(--success);
+}
+
+.withLabel.isValid hr {
+  background-color: var(--success);
 }
