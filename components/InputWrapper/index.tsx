@@ -8,6 +8,7 @@ interface FormFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   prefix?: string;
   isValid?: boolean;
+  errorMessage?: string;
   showSuccessIcon?: boolean;
 }
 
@@ -20,6 +21,7 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
       label,
       prefix,
       isValid,
+      errorMessage,
       showSuccessIcon,
       onBlur,
       ...rest
@@ -28,9 +30,7 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
   ) => {
     const [hovered, setHovered] = useState<boolean>(false);
     const [focused, setFocused] = useState<boolean>(false);
-
-    const hasLabel = Boolean(label);
-    const hasPrefix = Boolean(prefix);
+    const [error, setError] = useState<string | null>();
 
     const handleMouseEnter = () => {
       setHovered(true);
@@ -46,16 +46,21 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
 
     const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
       setFocused(false);
+
       if (typeof onBlur === "function") {
         onBlur(event);
+      }
+
+      if (!!errorMessage) {
+        setError(errorMessage);
       }
     };
 
     const renderLabel = () =>
-      hasLabel ? <label htmlFor={name}>{label}</label> : null;
+      !!label ? <label htmlFor={name}>{label}</label> : null;
 
     const renderPrefix = () =>
-      hasPrefix ? <span className={styles.prefix}>{prefix}</span> : null;
+      !!prefix ? <span className={styles.prefix}>{prefix}</span> : null;
 
     const renderSuffix = () =>
       !!showSuccessIcon && isValid ? (
@@ -68,12 +73,13 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
       <div
         className={classNames(
           {
-            [styles.withLabel]: hasLabel,
-            [styles.withoutLabel]: !hasLabel,
+            [styles.withLabel]: !!label,
+            [styles.withoutLabel]: !label,
             [styles.hovered]: hovered,
             [styles.focused]: focused,
-            [styles.prefixed]: hasPrefix,
-            [styles.isValid]: isValid,
+            [styles.prefixed]: !!prefix,
+            [styles.valid]: isValid,
+            [styles.error]: !!error,
           },
           className
         )}

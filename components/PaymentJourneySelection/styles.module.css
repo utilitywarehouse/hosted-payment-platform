@@ -53,25 +53,41 @@ section.amountSelection {
   font-size: 1.25rem;
 }
 
-.fullAmountHeadingContainer {
+.amountSelectedContainer {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.fullAmountHeadingContainer p {
+.amountSelectedContainer p {
   margin: 0;
 }
 
-.fullAmountHeadingContainer p:first-of-type {
+.amountSelectedContainer p:first-of-type {
   font-family: "Aeonik Bold";
   font-size: 1.5rem;
 }
 
-.fullAmountHeadingContainer p:last-of-type {
+.amountSelectedContainer p:last-of-type {
   font-size: 1rem;
 }
 
-.fullAmountHeadingContainer p:last-of-type svg {
+.amountSelectedContainer p:last-of-type svg {
   margin-right: 4px;
+}
+
+.partialAmountInput {
+  max-width: 236px;
+  margin-top: 1.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.partialAmountInputHelp {
+  font-size: 0.8125rem;
+  line-height: 20px;
+  margin-bottom: 1rem;
+}
+
+.partialAmountInfoMessage {
+  max-width: 580px;
 }

@@ -7,6 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   prefix?: string;
   isValid?: boolean;
+  errorMessage?: string;
   showSuccessIcon?: boolean;
   cleaveOptions?: CleaveOptions;
 }
@@ -19,6 +20,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       label,
       prefix,
       isValid,
+      errorMessage,
       showSuccessIcon,
       cleaveOptions,
       ...rest
@@ -32,6 +34,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         label={label}
         prefix={prefix}
         isValid={isValid}
+        errorMessage={errorMessage}
         showSuccessIcon={showSuccessIcon}
       >
         {!!cleaveOptions ? (

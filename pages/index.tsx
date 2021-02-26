@@ -29,12 +29,6 @@ const Home = () => {
   );
 
   useEffect(() => {
-    if (paymentJourney === "full") {
-      setPaymentAmount(FULL_DEBT_AMOUNT);
-    }
-  }, [paymentJourney]);
-
-  useEffect(() => {
     setIsCardValid(cardNumber.split(" ").join("").length === 16);
   }, [cardNumber]);
 
@@ -51,7 +45,11 @@ const Home = () => {
   const isCardTypeValid = ACCEPTED_CARD_TYPES.includes(cardType);
 
   const isReadyToProceed =
-    !!paymentJourney && isCardValid && isExpiryDateValid && isSecurityCodeValid;
+    !!paymentJourney &&
+    paymentAmount &&
+    isCardValid &&
+    isExpiryDateValid &&
+    isSecurityCodeValid;
 
   const handleEdit = () => {
     setPaymentJourney(null);
@@ -87,14 +85,15 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={8}>
           <PaymentJourneySelection
-            paymentJourney={paymentJourney}
             fullAmount={FULL_DEBT_AMOUNT}
+            paymentJourney={paymentJourney}
+            paymentAmount={paymentAmount}
             onPaymentJourneyChange={setPaymentJourney}
-            onPaymentAmountChange={() => {}}
+            onPaymentAmountChange={setPaymentAmount}
             onEdit={handleEdit}
           />
           <PaymentMethod
-            show={!!paymentAmount && paymentJourney === "full"}
+            show={!!paymentAmount}
             cardNumber={cardNumber}
             cardType={cardType}
             expiryDate={expiryDate}

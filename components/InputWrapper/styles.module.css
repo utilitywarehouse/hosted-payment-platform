@@ -136,10 +136,18 @@
   background-color: var(--action-cyan);
 }
 
-.withLabel.isValid label {
+.withLabel.valid label {
   color: var(--success);
 }
 
-.withLabel.isValid hr {
+.withLabel.valid hr {
   background-color: var(--success);
+}
+
+.withLabel.error label {
+  color: var(--error);
+}
+
+.withLabel.error hr {
+  background-color: var(--error);
 }

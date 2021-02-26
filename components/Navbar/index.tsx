@@ -53,7 +53,7 @@ export const Navbar: React.FC = () => {
         <RootContainer>
           <Toolbar className={classes.root} component="nav">
             {/* UW Logo */}
-            <Link href="https://uw.co.uk/">
+            <Link href="https://uw.co.uk/" className={classes.logo}>
               {isDesktop && !isScrolled && <DesktopDark />}
               {isDesktop && isScrolled && <DesktopLight />}
               {!isDesktop && isTablet && <Tablet />}

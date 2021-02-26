@@ -27,7 +27,6 @@ button.button:focus {
 
 button.button:disabled {
   opacity: 0.25;
-  color: #884db2;
   cursor: not-allowed;
 }
 
@@ -45,10 +44,7 @@ button.large {
   white-space: nowrap;
 }
 
-button.secondary {
-  background: transparent;
-}
-
+button.secondary,
 button.secondary:hover {
   background: transparent;
 }
@@ -67,8 +63,9 @@ button.dark {
   color: var(--white);
 }
 
-button.light.secondary:hover {
+button.light.secondary:hover:not(:disabled) {
   border-color: var(--midnight);
+  background: transparent;
 }
 
 button.dark.secondary:hover {
