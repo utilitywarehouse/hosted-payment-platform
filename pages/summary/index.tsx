@@ -2,7 +2,7 @@ import { Grid } from "@material-ui/core";
 import { Base64 } from "js-base64";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "../../components/Button";
 import { ContinueButtons } from "../../components/ContinueButtons";
 import { PageLayout } from "../../components/PageLayout";
@@ -19,11 +19,8 @@ const PaymentSummary = () => {
     overdueBalance,
     paymentAmount,
     lastFourDigits,
+    token,
   ] = decodedQueryString.split(",");
-
-  useEffect(() => {
-    console.log(overdueBalance, paymentAmount);
-  });
 
   const balanceAfterPayment = Number(overdueBalance) - Number(paymentAmount);
 
