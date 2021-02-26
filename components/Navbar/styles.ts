@@ -35,6 +35,11 @@ const getStyles = (theme: Theme): StyleRules =>
     backdrop: {
       zIndex: 500,
     },
+    logo: {
+      "&:hover": {
+        opacity: 1,
+      },
+    },
   });
 
 export default getStyles;
