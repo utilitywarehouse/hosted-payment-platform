@@ -1,13 +1,3 @@
-.container {
-  padding-top: 174px;
-  padding-bottom: 138px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--light-tint);
-}
-
 .grid {
   max-width: 1366px;
   padding-left: 4rem;
@@ -30,34 +20,6 @@
   margin-bottom: 150px;
   border-width: 0;
   background-color: var(--highlight);
-}
-
-.safeAndSecure {
-  max-width: 200px;
-  font-size: 1rem;
-  line-height: 23px;
-}
-
-.safeAndSecureMessage {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.safeAndSecureMessage p {
-  margin-top: 0;
-  margin-left: 0.5rem;
-}
-
-.buttonsContainer {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.buttonsContainer button:last-of-type {
-  margin-left: 2rem;
 }
 
 @media only screen and (min-width: 768px) {

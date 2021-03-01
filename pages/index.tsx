@@ -1,15 +1,18 @@
 import { Grid } from "@material-ui/core";
 import { CreditCardType } from "cleave.js/options/creditCard";
-import Head from "next/head";
+import { Base64 } from "js-base64";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Button } from "../components/Button";
+import { ContinueButtons } from "../components/ContinueButtons";
+import { PageLayout } from "../components/PageLayout";
 import { PaymentJourneySelection } from "../components/PaymentJourneySelection";
 import { PaymentMethod } from "../components/PaymentMethod";
-import LockIcon from "../public/icons/large/lock.svg";
 import styles from "../styles/Home.module.css";
 
 const NAME = "John Smith";
-const FULL_DEBT_AMOUNT = 185.89;
+const OVERDUE_BALANCE = 185.89;
+const LAST_FOUR_DIGITS = "1234";
 
 const ACCEPTED_CARD_TYPES: CreditCardType[] = ["visa", "mastercard"];
 
@@ -60,32 +63,25 @@ const Home = () => {
     setSecurityCode("");
   };
 
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Debt Payment - UW</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
-      </Head>
+  const getSummaryUrl = () => {
+    const amount = paymentAmount?.toFixed(2);
+    const queryString = `${OVERDUE_BALANCE},${amount},${LAST_FOUR_DIGITS}`;
+    const base64QueryString = Base64.btoa(queryString);
+    const encodedQueryString = encodeURIComponent(base64QueryString);
+    return `/summary?q=${encodedQueryString}`;
+  };
 
+  return (
+    <PageLayout title="Debt Payment - UW">
       <Grid container className={styles.grid}>
         <Grid item xs={12} md={4}>
           <h3 className={styles.greeting}>Hi {NAME}</h3>
           <h1 className={styles.heading}>Make a payment</h1>
           <hr className={styles.horizontalRule} />
-          <div className={styles.safeAndSecureMessage}>
-            <LockIcon />
-            <p className={styles.safeAndSecure}>
-              Our payment system is safe and secure.
-            </p>
-          </div>
         </Grid>
         <Grid item xs={12} md={8}>
           <PaymentJourneySelection
-            fullAmount={FULL_DEBT_AMOUNT}
+            fullAmount={OVERDUE_BALANCE}
             paymentJourney={paymentJourney}
             paymentAmount={paymentAmount}
             onPaymentJourneyChange={setPaymentJourney}
@@ -107,14 +103,18 @@ const Home = () => {
             onExpiryDateChange={setExpiryDate}
             onSecurityCodeChange={setSecurityCode}
           />
-          <div className={styles.buttonsContainer}>
-            <Button size="large" disabled={!isReadyToProceed}>
-              Continue
-            </Button>
-          </div>
+        </Grid>
+        <Grid item xs={12}>
+          <ContinueButtons>
+            <Link href={getSummaryUrl()}>
+              <Button size="large" disabled={!isReadyToProceed}>
+                Continue
+              </Button>
+            </Link>
+          </ContinueButtons>
         </Grid>
       </Grid>
-    </div>
+    </PageLayout>
   );
 };
 

@@ -1,0 +1,70 @@
+.grid {
+  max-width: 1366px;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.title {
+  color: var(--primary-purple);
+  margin-bottom: 2.5rem;
+}
+
+.subtitle {
+  font-family: "Aeonik Bold";
+  font-size: 1.75rem;
+  line-height: 32px;
+  color: var(--midnight);
+}
+
+.cardTop {
+  background-color: var(--white);
+  border-radius: 8px 8px 0 0;
+  padding: 2.625rem 4rem 2rem;
+  margin-top: 3rem;
+}
+
+.cardBottom {
+  background-color: var(--primary-purple);
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 3rem;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4rem;
+  color: var(--white);
+  font-family: "Aeonik Bold";
+  font-size: 1.25rem;
+}
+
+.item {
+  font-family: "Aeonik Bold";
+  font-size: 1.25rem;
+  line-height: 23px;
+  color: var(--primary-purple);
+  display: flex;
+  justify-content: space-between;
+}
+
+.divider {
+  width: 100%;
+  height: 2px;
+  border-width: 0;
+  background-color: #f5f0f8;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.cardNumber {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+
+.cardNumber span:first-of-type {
+  color: var(--primary-purple);
+}
+
+.outstandingBalanceAfterPayment {
+  font-size: 2.0625rem;
+}
