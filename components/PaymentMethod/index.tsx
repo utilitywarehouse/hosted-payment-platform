@@ -10,6 +10,7 @@ import styles from "./styles.module.css";
 
 interface PaymentMethodProps {
   show: boolean;
+  name: string;
   cardNumber: string;
   cardType: CreditCardType;
   expiryDate: string;
@@ -18,6 +19,7 @@ interface PaymentMethodProps {
   isCardTypeValid: boolean;
   isExpiryDateValid: boolean;
   isSecurityCodeValid: boolean;
+  onNameChange: (name: string) => void;
   onCardNumberChange: (cardNumber: string) => void;
   onCardTypeChange: (cardType: CreditCardType) => void;
   onExpiryDateChange: (expiryDate: string) => void;
@@ -26,6 +28,7 @@ interface PaymentMethodProps {
 
 export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
   show,
+  name,
   cardNumber,
   cardType,
   expiryDate,
@@ -34,11 +37,16 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
   isCardTypeValid,
   isExpiryDateValid,
   isSecurityCodeValid,
+  onNameChange,
   onCardNumberChange,
   onCardTypeChange,
   onExpiryDateChange,
   onSecurityCodeChange,
 }) => {
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onNameChange(event.target.value);
+  };
+
   const handleExpiryDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     onExpiryDateChange(event.target.value);
   };
@@ -56,6 +64,14 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
       <h4>Payment method</h4>
       {show && (
         <>
+          <Input
+            className={styles.cardInput}
+            label="Name on card"
+            value={name}
+            isValid={!!name?.trim()}
+            showSuccessIcon={true}
+            onChange={handleNameChange}
+          />
           <InputWrapper
             className={styles.cardInput}
             label="Card number"

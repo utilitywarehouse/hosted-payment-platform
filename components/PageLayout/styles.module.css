@@ -1,0 +1,9 @@
+.container {
+  padding-top: 174px;
+  padding-bottom: 138px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-tint);
+}

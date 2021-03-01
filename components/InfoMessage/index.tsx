@@ -1,10 +1,10 @@
 import classNames from "classnames";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactNode } from "react";
 import InfoOutlinedIcon from "../../public/icons/small/info-outlined.svg";
 import styles from "./styles.module.css";
 
 interface InfoMessageProps {
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
   className?: string;
 }
 

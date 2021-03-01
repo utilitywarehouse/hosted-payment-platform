@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1366px;
+  margin-top: 1.5rem;
+}
+
+.safeAndSecure {
+  max-width: 200px;
+  font-size: 1rem;
+  line-height: 23px;
+}
+
+.safeAndSecureMessage {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.safeAndSecureMessage p {
+  margin-top: 0;
+  margin-left: 0.5rem;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.buttonsContainer button:last-of-type {
+  margin-left: 2rem;
+}
