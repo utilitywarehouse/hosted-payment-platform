@@ -21,6 +21,7 @@ export type PaymentJourneyType = "full" | "partial" | null;
 const Home = () => {
   const [paymentJourney, setPaymentJourney] = useState<PaymentJourneyType>();
   const [paymentAmount, setPaymentAmount] = useState<number>();
+  const [name, setName] = useState<string>();
   const [cardType, setCardType] = useState<CreditCardType>();
   const [cardNumber, setCardNumber] = useState<string>("");
   const [expiryDate, setExpiryDate] = useState<string>("");
@@ -90,6 +91,7 @@ const Home = () => {
           />
           <PaymentMethod
             show={!!paymentAmount}
+            name={name}
             cardNumber={cardNumber}
             cardType={cardType}
             expiryDate={expiryDate}
@@ -98,6 +100,7 @@ const Home = () => {
             isCardTypeValid={isCardTypeValid}
             isExpiryDateValid={isExpiryDateValid}
             isSecurityCodeValid={isSecurityCodeValid}
+            onNameChange={setName}
             onCardNumberChange={setCardNumber}
             onCardTypeChange={setCardType}
             onExpiryDateChange={setExpiryDate}
