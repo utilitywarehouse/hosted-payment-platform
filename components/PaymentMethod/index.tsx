@@ -71,6 +71,7 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
             isValid={!!name?.trim()}
             showSuccessIcon={true}
             onChange={handleNameChange}
+            autoFocus={true}
           />
           <InputWrapper
             className={styles.cardInput}

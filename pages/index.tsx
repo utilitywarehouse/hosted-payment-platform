@@ -1,7 +1,8 @@
 import { Grid } from "@material-ui/core";
+import axios from "axios";
 import { CreditCardType } from "cleave.js/options/creditCard";
 import { Base64 } from "js-base64";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { ContinueButtons } from "../components/ContinueButtons";
@@ -12,16 +13,17 @@ import styles from "../styles/Home.module.css";
 
 const NAME = "John Smith";
 const OVERDUE_BALANCE = 185.89;
-const LAST_FOUR_DIGITS = "1234";
 
 const ACCEPTED_CARD_TYPES: CreditCardType[] = ["visa", "mastercard"];
+const SPREEDLY_URL = `https://core.spreedly.com/v1/payment_methods.json?environment_key=${process.env.NEXT_PUBLIC_SPREEDLY_ENVIRONMENT_KEY}`;
 
 export type PaymentJourneyType = "full" | "partial" | null;
 
 const Home = () => {
+  const router = useRouter();
   const [paymentJourney, setPaymentJourney] = useState<PaymentJourneyType>();
   const [paymentAmount, setPaymentAmount] = useState<number>();
-  const [name, setName] = useState<string>();
+  const [name, setName] = useState<string>("");
   const [cardType, setCardType] = useState<CreditCardType>();
   const [cardNumber, setCardNumber] = useState<string>("");
   const [expiryDate, setExpiryDate] = useState<string>("");
@@ -62,11 +64,35 @@ const Home = () => {
     setCardType(null);
     setExpiryDate("");
     setSecurityCode("");
+    setName("");
   };
 
-  const getSummaryUrl = () => {
+  const handleSubmit = async () => {
+    const [month, yearShort] = expiryDate.split("/");
+
+    const res = await axios.post(SPREEDLY_URL, {
+      payment_method: {
+        credit_card: {
+          full_name: name,
+          number: cardNumber.split(" ").join(""),
+          verification_value: securityCode,
+          month,
+          year: `20${yearShort}`,
+        },
+      },
+    });
+
+    router.push(
+      getSummaryUrl(
+        res?.data?.transaction?.token,
+        res?.data?.transaction?.payment_method.last_four_digits
+      )
+    );
+  };
+
+  const getSummaryUrl = (token: string, lastFourDigits: string) => {
     const amount = paymentAmount?.toFixed(2);
-    const queryString = `${OVERDUE_BALANCE},${amount},${LAST_FOUR_DIGITS}`;
+    const queryString = `${OVERDUE_BALANCE},${amount},${lastFourDigits},${token}`;
     const base64QueryString = Base64.btoa(queryString);
     const encodedQueryString = encodeURIComponent(base64QueryString);
     return `/summary?q=${encodedQueryString}`;
@@ -109,11 +135,13 @@ const Home = () => {
         </Grid>
         <Grid item xs={12}>
           <ContinueButtons>
-            <Link href={getSummaryUrl()}>
-              <Button size="large" disabled={!isReadyToProceed}>
-                Continue
-              </Button>
-            </Link>
+            <Button
+              size="large"
+              disabled={!isReadyToProceed}
+              onClick={handleSubmit}
+            >
+              Continue
+            </Button>
           </ContinueButtons>
         </Grid>
       </Grid>
