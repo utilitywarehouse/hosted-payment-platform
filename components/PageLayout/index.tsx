@@ -18,6 +18,7 @@ export const PageLayout: FunctionComponent<PageLayoutProps> = ({
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
       />
+      <script src="https://core.spreedly.com/iframe/iframe-v1.min.js" />
     </Head>
     {children}
   </div>

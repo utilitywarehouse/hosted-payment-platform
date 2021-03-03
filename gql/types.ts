@@ -1,4 +1,8 @@
-export interface AccountResponseInterface {
+export interface GetAccountResponseInterface {
+  getAccount: GetAccountInterface;
+}
+
+export interface GetAccountInterface {
   accountId: string;
   accountNumber: string;
   customerFirstName: string;
@@ -6,7 +10,7 @@ export interface AccountResponseInterface {
   overdueBalance: AmountInterface;
 }
 
-export interface AccountVariablesInterface {
+export interface GetAccountVariablesInterface {
   accountNumber: string;
 }
 
