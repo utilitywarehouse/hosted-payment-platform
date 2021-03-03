@@ -1,14 +1,22 @@
+import { useMutation } from "@apollo/client";
 import { Grid } from "@material-ui/core";
 import { Base64 } from "js-base64";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { Button } from "../../components/Button";
 import { ContinueButtons } from "../../components/ContinueButtons";
 import { PageLayout } from "../../components/PageLayout";
 import { TertiaryButton } from "../../components/TertiaryButton";
+import { MAKE_PAYMENT } from "../../gql/mutation";
+import {
+  MakePaymentResponseInterface,
+  MakePaymentVariablesInterface,
+} from "../../gql/types";
 import LeftChevronIcon from "../../public/icons/small/chevron-left.svg";
+import { getBrowserInfo } from "../../utils/browser";
 import { formatGBP } from "../../utils/currency";
+import { getHost } from "../../utils/host";
+import { uuid } from "../../utils/uuid";
 import styles from "./styles.module.css";
 
 const PaymentSummary = () => {
@@ -16,13 +24,39 @@ const PaymentSummary = () => {
   const queryString = (router.query["q"] as string) || "";
   const decodedQueryString = decodeURIComponent(Base64.atob(queryString));
   const [
+    accountNumber,
+    accountId,
     overdueBalance,
     paymentAmount,
     lastFourDigits,
-    token,
+    externalPaymentToken,
+    ip,
   ] = decodedQueryString.split(",");
 
   const balanceAfterPayment = Number(overdueBalance) - Number(paymentAmount);
+
+  const [makePayment] = useMutation<
+    MakePaymentResponseInterface,
+    MakePaymentVariablesInterface
+  >(MAKE_PAYMENT);
+
+  const handlePayment = () => {
+    makePayment({
+      variables: {
+        accountReference: `//uw.co.uk/customer/account-number/${accountNumber}`,
+        accountId,
+        externalPaymentToken,
+        clientFingerprint: getBrowserInfo(),
+        redirectUrl: getHost(),
+        correlationId: uuid(),
+        ip,
+        amount: {
+          currency: "GBP",
+          value: paymentAmount,
+        },
+      },
+    });
+  };
 
   return (
     <PageLayout title="Payment Summary - UW">
@@ -65,9 +99,9 @@ const PaymentSummary = () => {
           >
             <LeftChevronIcon /> Back
           </TertiaryButton>
-          <Link href="#">
-            <Button size="large">Confirm payment</Button>
-          </Link>
+          <Button size="large" onClick={handlePayment}>
+            Confirm payment
+          </Button>
         </ContinueButtons>
       </Grid>
     </PageLayout>

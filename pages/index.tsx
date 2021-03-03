@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/client";
 import { Grid } from "@material-ui/core";
 import axios from "axios";
 import { CreditCardType } from "cleave.js/options/creditCard";
@@ -9,10 +10,13 @@ import { ContinueButtons } from "../components/ContinueButtons";
 import { PageLayout } from "../components/PageLayout";
 import { PaymentJourneySelection } from "../components/PaymentJourneySelection";
 import { PaymentMethod } from "../components/PaymentMethod";
+import { GET_ACCOUNT } from "../gql/query";
+import {
+  GetAccountResponseInterface,
+  GetAccountVariablesInterface,
+} from "../gql/types";
 import styles from "../styles/Home.module.css";
-
-const NAME = "John Smith";
-const OVERDUE_BALANCE = 185.89;
+import { getIpAddress } from "../utils/ip";
 
 const ACCEPTED_CARD_TYPES: CreditCardType[] = ["visa", "mastercard"];
 const SPREEDLY_URL = `https://core.spreedly.com/v1/payment_methods.json?environment_key=${process.env.NEXT_PUBLIC_SPREEDLY_ENVIRONMENT_KEY}`;
@@ -21,6 +25,15 @@ export type PaymentJourneyType = "full" | "partial" | null;
 
 const Home = () => {
   const router = useRouter();
+
+  const queryString = (router.query["id"] as string) || "";
+  const accountNumber = decodeURIComponent(Base64.atob(queryString));
+  const { data } = useQuery<
+    GetAccountResponseInterface,
+    GetAccountVariablesInterface
+  >(GET_ACCOUNT, { variables: { accountNumber } });
+
+  const [ip, setIp] = useState<string>();
   const [paymentJourney, setPaymentJourney] = useState<PaymentJourneyType>();
   const [paymentAmount, setPaymentAmount] = useState<number>();
   const [name, setName] = useState<string>("");
@@ -33,6 +46,17 @@ const Home = () => {
   const [isSecurityCodeValid, setIsSecurityCodeValid] = useState<boolean>(
     false
   );
+
+  const overdueBalance = data?.getAccount.overdueBalance.value;
+
+  const setIpAddress = async () => {
+    const ipAddress = await getIpAddress();
+    setIp(ipAddress);
+  };
+
+  useEffect(() => {
+    setIpAddress();
+  }, []);
 
   useEffect(() => {
     setIsCardValid(cardNumber.split(" ").join("").length === 16);
@@ -92,7 +116,7 @@ const Home = () => {
 
   const getSummaryUrl = (token: string, lastFourDigits: string) => {
     const amount = paymentAmount?.toFixed(2);
-    const queryString = `${OVERDUE_BALANCE},${amount},${lastFourDigits},${token}`;
+    const queryString = `${accountNumber},${data?.getAccount.accountId},${overdueBalance},${amount},${lastFourDigits},${token},${ip}`;
     const base64QueryString = Base64.btoa(queryString);
     const encodedQueryString = encodeURIComponent(base64QueryString);
     return `/summary?q=${encodedQueryString}`;
@@ -102,13 +126,15 @@ const Home = () => {
     <PageLayout title="Debt Payment - UW">
       <Grid container className={styles.grid}>
         <Grid item xs={12} md={4}>
-          <h3 className={styles.greeting}>Hi {NAME}</h3>
+          <h3 className={styles.greeting}>
+            Hi {data?.getAccount.customerFirstName}
+          </h3>
           <h1 className={styles.heading}>Make a payment</h1>
           <hr className={styles.horizontalRule} />
         </Grid>
         <Grid item xs={12} md={8}>
           <PaymentJourneySelection
-            fullAmount={OVERDUE_BALANCE}
+            fullAmount={Number(overdueBalance)}
             paymentJourney={paymentJourney}
             paymentAmount={paymentAmount}
             onPaymentJourneyChange={setPaymentJourney}
