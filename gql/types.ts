@@ -15,6 +15,10 @@ export interface GetAccountVariablesInterface {
 }
 
 export interface MakePaymentResponseInterface {
+  makePayment: MakePaymentInterface;
+}
+
+export interface MakePaymentInterface {
   success: boolean;
   failureCode: FailureCodeType;
   requiredAction: RequiredActionInterface;
