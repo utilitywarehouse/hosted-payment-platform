@@ -94,7 +94,7 @@ const Home = () => {
   const handleSubmit = async () => {
     const [month, yearShort] = expiryDate.split("/");
 
-    const res = await axios.post(SPREEDLY_URL, {
+    const { data } = await axios.post(SPREEDLY_URL, {
       payment_method: {
         credit_card: {
           full_name: name,
@@ -106,12 +106,16 @@ const Home = () => {
       },
     });
 
-    router.push(
-      getSummaryUrl(
-        res?.data?.transaction?.token,
-        res?.data?.transaction?.payment_method.last_four_digits
-      )
-    );
+    if (data?.transaction.succeeded) {
+      router.push(
+        getSummaryUrl(
+          data?.transaction.payment_method.token,
+          data?.transaction.payment_method.last_four_digits
+        )
+      );
+    } else {
+      router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
+    }
   };
 
   const getSummaryUrl = (token: string, lastFourDigits: string) => {
@@ -123,7 +127,7 @@ const Home = () => {
   };
 
   return (
-    <PageLayout title="Debt Payment - UW">
+    <PageLayout title="Debt payment - UW">
       <Grid container className={styles.grid}>
         <Grid item xs={12} md={4}>
           <h3 className={styles.greeting}>

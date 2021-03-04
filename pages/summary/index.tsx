@@ -40,10 +40,19 @@ const PaymentSummary = () => {
 
   const balanceAfterPayment = Number(overdueBalance) - Number(paymentAmount);
 
-  const [makePayment, { data, loading, error }] = useMutation<
+  const [makePayment, { loading, error }] = useMutation<
     MakePaymentResponseInterface,
     MakePaymentVariablesInterface
-  >(MAKE_PAYMENT);
+  >(MAKE_PAYMENT, {
+    onCompleted: ({ makePayment: { success } }) => {
+      if (success) {
+        setPaymentConfirmed(true);
+        setTimeout(() => {
+          router.push("/success");
+        }, 2000);
+      }
+    },
+  });
 
   const handlePayment = () => {
     makePayment({
@@ -61,32 +70,26 @@ const PaymentSummary = () => {
         },
       },
     });
-
-    if (data?.success) {
-      setPaymentConfirmed(true);
-    }
   };
 
   useEffect(() => {
     if (loading) {
       setShowLoader(true);
-    } else {
-      setShowLoader(false);
     }
   }, [loading]);
+
+  if (error) {
+    router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
+  }
 
   const getLoadingImage = () => (paymentConfirmed ? TickGif : LoadingGif);
 
   const getPaymentMessage = () =>
     paymentConfirmed ? "Payment confirmed" : "Processing payment";
 
-  if (error) {
-    router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
-  }
-
   return (
     <>
-      <PageLayout title="Payment Summary - UW">
+      <PageLayout title="Payment summary - UW">
         <Grid container className={styles.grid}>
           <Grid item xs={12}>
             <h1 className={styles.title}>Payment summary</h1>

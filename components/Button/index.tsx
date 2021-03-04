@@ -3,7 +3,7 @@ import React, { ButtonHTMLAttributes, forwardRef } from "react";
 import DropdownIcon from "../../public/icons/small/dropdown.svg";
 import styles from "./styles.module.css";
 
-type ButtonSize = "large" | "regular";
+type ButtonSize = "large" | "regular" | "small";
 type ButtonStyling = "primary" | "secondary";
 type ButtonTheme = "light" | "dark";
 

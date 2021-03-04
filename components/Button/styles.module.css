@@ -36,6 +36,15 @@ button.regular {
   border-radius: 3.25rem;
 }
 
+button.small {
+  height: 2rem;
+  font-size: 1rem;
+  padding: 0 1rem;
+  border-radius: 3.25rem;
+  line-height: 1.75;
+  box-sizing: border-box;
+}
+
 button.large {
   height: 3.25rem;
   padding-left: 2rem;

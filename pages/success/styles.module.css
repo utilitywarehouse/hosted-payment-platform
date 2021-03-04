@@ -1,0 +1,107 @@
+.layout {
+  padding-top: 80px;
+}
+
+.layout > svg {
+  width: 100%;
+}
+
+.gridWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  max-width: 1366px;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid p {
+  margin-top: 2.5rem;
+}
+
+.grid h1 {
+  color: var(--primary-purple);
+}
+
+.darkGrid h1,
+.darkGrid p {
+  color: var(--white);
+}
+
+.lightGrid {
+  padding-top: 5.75rem;
+}
+
+.nextSteps {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1366px;
+  width: 100%;
+  padding: 4rem;
+  padding-bottom: 7.5rem;
+}
+
+.nextSteps > div {
+  max-width: 265px;
+}
+
+.nextSteps h3 {
+  margin-top: 3.25rem;
+}
+
+.downloadContainer {
+  position: relative;
+  width: 90vw;
+  max-width: 1450px;
+  padding: 1.75rem 5.75rem 0;
+  color: var(--white);
+  background-color: var(--primary-purple);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.downloadContainer h2 {
+  margin-bottom: 2rem;
+}
+
+.downloadContainer svg {
+  position: relative;
+  right: 2vw;
+}
+
+@media only screen and (min-width: 768px) {
+  .layout {
+    padding-top: 88px;
+  }
+
+  .gridWrapper {
+    height: 440px;
+    background-color: var(--primary-purple);
+  }
+
+  .downloadContainer h2 {
+    max-width: 530px;
+  }
+
+  .downloadContainer svg {
+    right: 5vw;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .layout {
+    padding-top: 92px;
+  }
+
+  .downloadContainer svg {
+    right: 10vw;
+  }
+}
