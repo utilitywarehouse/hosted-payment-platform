@@ -9,6 +9,8 @@ import {
   useScrollTrigger,
   useTheme,
 } from "@material-ui/core";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import DesktopDark from "../../public/icons/logo/desktop/Dark.svg";
 import DesktopLight from "../../public/icons/logo/desktop/Light.svg";
@@ -16,6 +18,7 @@ import Mobile from "../../public/icons/logo/Mobile.svg";
 import Tablet from "../../public/icons/logo/Tablet.svg";
 import CloseIcon from "../../public/icons/small/close.svg";
 import MenuIcon from "../../public/icons/small/menu.svg";
+import { Button } from "../Button";
 import RootContainer from "../RootContainer";
 import Menu from "./Menu";
 import getStyles from "./styles";
@@ -29,6 +32,8 @@ export const Navbar: React.FC = () => {
 
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
   const isTablet = useMediaQuery(theme.breakpoints.up("md"));
+
+  const router = useRouter();
 
   const [shownMenus, setShownMenus] = React.useState<boolean>(false);
   const [selectedMenu, changeSelectedMenu] = React.useState<string>("");
@@ -70,8 +75,33 @@ export const Navbar: React.FC = () => {
               />
             )}
 
+            {isDesktop && router.pathname === "/success" && (
+              <div className={classes.buttonContainer}>
+                <NextLink href="https://uw.co.uk/login?redirect_back=https://uw.co.uk/clubhouse/myServices">
+                  <Button
+                    styling="secondary"
+                    theme={isScrolled ? "light" : "dark"}
+                  >
+                    My account
+                  </Button>
+                </NextLink>
+              </div>
+            )}
+
             {!isDesktop && (
               <div className={classes.buttonContainer}>
+                {router.pathname === "/success" && (
+                  <NextLink href="https://uw.co.uk/login?redirect_back=https://uw.co.uk/clubhouse/myServices">
+                    <Button
+                      styling="secondary"
+                      size="small"
+                      theme={isScrolled ? "light" : "dark"}
+                    >
+                      My account
+                    </Button>
+                  </NextLink>
+                )}
+
                 {/* Mobile Menu Close Icon */}
                 {!isDesktop && shownMenus && (
                   <CloseIcon onClick={() => setShownMenus(!shownMenus)} />

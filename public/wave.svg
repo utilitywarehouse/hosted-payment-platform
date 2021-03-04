@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100%" height="47px" viewBox="0 0 1366 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none">
+    <title>Brakes / wave 1 Copy 2</title>
+    <g id="wave-Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="wave-Hosted-Payment---Payment-Success-Page" transform="translate(0.000000, -533.000000)">
+            <g id="wave-Module-/-Intro" transform="translate(0.000000, 94.000000)">
+                <g id="wave-Brakes-/-wave-1-Copy-2" transform="translate(0.000000, 439.000000)">
+                    <rect id="wave-Rectangle" fill="#1E0A46" x="0" y="0" width="1366" height="47"></rect>
+                    <rect id="wave-Top" fill="#550091" x="0" y="0" width="1366" height="47"></rect>
+                    <path d="M646.715013,19.4224461 C893.797829,5.01299966 1133.55949,7.13048351 1366,25.7748977 L1366,47 L0,47.0009988 L0,19.4224461 C123.085026,37.3878794 338.656697,37.3878794 646.715013,19.4224461 Z" id="wave-Bottom" fill="#F5F0F8"></path>
+                    <path d="M0,19 C48,27.6666667 150.333333,32 307,32 C542,32 724,10 984,10 C1244,10 1366,27 1366,27" id="wave-Path-2" stroke="#F495F9" stroke-width="3"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

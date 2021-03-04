@@ -1,16 +1,19 @@
+import classNames from "classnames";
 import Head from "next/head";
 import React, { FunctionComponent } from "react";
 import styles from "./styles.module.css";
 
 interface PageLayoutProps {
   title: string;
+  className?: string;
 }
 
 export const PageLayout: FunctionComponent<PageLayoutProps> = ({
   children,
   title,
+  className,
 }) => (
-  <div className={styles.container}>
+  <div className={classNames(styles.container, className)}>
     <Head>
       <title>{title}</title>
       <link rel="icon" href="/favicon.ico" />
