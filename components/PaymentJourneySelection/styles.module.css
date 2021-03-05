@@ -1,6 +1,5 @@
 section.amountSelection {
   padding: 1.5rem 0;
-  border-top: 2px solid rgba(30, 10, 70, 0.1);
   border-bottom: 2px solid rgba(30, 10, 70, 0.1);
 }
 
@@ -11,7 +10,7 @@ section.amountSelection {
 }
 
 .card {
-  width: 150px;
+  width: 48vw;
   height: 100px;
   border: 2px solid rgba(30, 10, 70, 0.1);
   border-radius: 8px;
@@ -35,12 +34,11 @@ section.amountSelection {
   display: flex;
 }
 
-.card:first-of-type {
-  margin-right: 1.5rem;
+.card.fullAmountCard {
+  margin-right: 4vw;
 }
 
-.card:last-of-type {
-  margin-right: 1.5rem;
+.card.partialAmountCard {
   align-items: center;
 }
 
@@ -54,18 +52,15 @@ section.amountSelection {
 }
 
 .amountSelectedContainer {
+  margin-top: -0.75rem;
+  margin-bottom: -0.75rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .amountSelectedContainer p {
   margin: 0;
-}
-
-.amountSelectedContainer p:first-of-type {
-  font-family: "Aeonik Bold";
-  font-size: 1.5rem;
 }
 
 .amountSelectedContainer p:last-of-type {
@@ -90,4 +85,33 @@ section.amountSelection {
 
 .partialAmountInfoMessage {
   max-width: 580px;
+}
+
+.mobileEditIcon {
+  line-height: 0;
+  padding: 12px;
+}
+
+@media only screen and (min-width: 768px) {
+  .amountSelectedContainer {
+    margin: 0;
+  }
+
+  .card {
+    width: 150px;
+  }
+
+  .card.fullAmountCard {
+    margin-right: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  section.amountSelection {
+    border-top: 2px solid rgba(30, 10, 70, 0.1);
+  }
+
+  .amountSelectedContainer h3 {
+    font-size: 1.5rem;
+  }
 }

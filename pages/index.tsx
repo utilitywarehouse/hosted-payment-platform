@@ -15,6 +15,7 @@ import {
   GetAccountResponseInterface,
   GetAccountVariablesInterface,
 } from "../gql/types";
+import { useWindowSize } from "../hooks";
 import styles from "../styles/Home.module.css";
 import { getIpAddress } from "../utils/ip";
 
@@ -25,9 +26,11 @@ export type PaymentJourneyType = "full" | "partial" | null;
 
 const Home = () => {
   const router = useRouter();
+  const { isPhone } = useWindowSize();
 
   const queryString = (router.query["id"] as string) || "";
   const accountNumber = decodeURIComponent(Base64.atob(queryString));
+
   const { data } = useQuery<
     GetAccountResponseInterface,
     GetAccountVariablesInterface
@@ -55,6 +58,10 @@ const Home = () => {
   };
 
   useEffect(() => {
+    if (!window.location.search) {
+      router.replace("https://uw.co.uk");
+    }
+
     setIpAddress();
   }, []);
 
@@ -129,16 +136,16 @@ const Home = () => {
   return (
     <PageLayout title="Debt payment - UW">
       <Grid container className={styles.grid}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} lg={4}>
           <h3 className={styles.greeting}>
             Hi {data?.getAccount.customerFirstName}
           </h3>
           <h1 className={styles.heading}>Make a payment</h1>
           <hr className={styles.horizontalRule} />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} lg={8}>
           <PaymentJourneySelection
-            fullAmount={Number(overdueBalance)}
+            overdueBalance={Number(overdueBalance)}
             paymentJourney={paymentJourney}
             paymentAmount={paymentAmount}
             onPaymentJourneyChange={setPaymentJourney}
@@ -169,6 +176,7 @@ const Home = () => {
               size="large"
               disabled={!isReadyToProceed}
               onClick={handleSubmit}
+              fullWidth={isPhone}
             >
               Continue
             </Button>

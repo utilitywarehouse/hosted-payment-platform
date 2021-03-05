@@ -14,6 +14,10 @@ button.button {
   outline: none;
 }
 
+button.button.fullWidth {
+  width: 100%;
+}
+
 button.button:hover:not(:disabled) {
   border-color: var(--primary-button-hover);
   background-color: var(--primary-button-hover);

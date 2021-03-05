@@ -13,6 +13,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: ButtonTheme;
   toggleable?: boolean;
   isOpen?: boolean;
+  fullWidth?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -21,6 +22,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = "regular",
       styling = "primary",
       theme = "light",
+      fullWidth = false,
       toggleable,
       isOpen,
       children,
@@ -36,7 +38,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         styles[styling],
         styles[theme],
         className,
-        { [styles.isOpen]: isOpen }
+        { [styles.isOpen]: isOpen, [styles.fullWidth]: fullWidth }
       )}
       ref={ref}
       {...rest}

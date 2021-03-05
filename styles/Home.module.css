@@ -1,7 +1,9 @@
 .grid {
   max-width: 1366px;
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
 .greeting {
@@ -9,26 +11,42 @@
 }
 
 .heading {
-  margin-bottom: 13.5px;
+  margin-bottom: 0.5rem;
   color: var(--primary-purple);
 }
 
 .horizontalRule {
-  width: 318px;
+  width: 223px;
   height: 2px;
+  margin-bottom: 0;
   margin-left: 0;
-  margin-bottom: 150px;
   border-width: 0;
   background-color: var(--highlight);
 }
 
+@media only screen and (max-width: 767px) {
+  .heading {
+    font-size: 1.75rem;
+  }
+}
+
 @media only screen and (min-width: 768px) {
+  .grid {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
   .greeting {
     margin-bottom: 1.5rem;
   }
 
+  .heading {
+    margin-bottom: 1.5rem;
+  }
+
   .horizontalRule {
-    width: 220px;
+    width: 414px;
+    margin-bottom: 1rem;
   }
 }
 
@@ -37,11 +55,8 @@
     margin-bottom: 2.5rem;
   }
 
-  .heading {
-    margin-bottom: 23.5px;
-  }
-
   .horizontalRule {
     width: 270px;
+    margin-bottom: 150px;
   }
 }

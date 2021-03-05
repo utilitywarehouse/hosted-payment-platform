@@ -18,7 +18,7 @@ const Success = () => {
       <PageLayout title="Payment succeeded - UW" className={styles.layout}>
         <div className={styles.gridWrapper}>
           <Grid container className={classNames(styles.grid, styles.darkGrid)}>
-            <Grid item md={7}>
+            <Grid item md={7} className={styles.heading}>
               <h1>You’re all done</h1>
               <p>We’ve received your payment. </p>
             </Grid>
@@ -29,10 +29,10 @@ const Success = () => {
         </div>
         <WaveImage />
         <Grid container className={classNames(styles.grid, styles.lightGrid)}>
-          <Grid item md={6}>
+          <Grid item md={12} lg={6}>
             <h1>Here’s what’ll happen next</h1>
           </Grid>
-          <Grid item md={6} />
+          <Grid item md={12} lg={6} />
         </Grid>
         <section className={styles.nextSteps}>
           <div>

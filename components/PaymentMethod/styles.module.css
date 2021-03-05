@@ -16,21 +16,12 @@ section.paymentMethod.show h4 {
   opacity: 1;
 }
 
-.cardDetailsContainer {
-  max-width: 350px;
-}
-
-.cardDetailsContainer {
-  display: flex;
-}
-
 .cardDetailsContainer > div {
-  max-width: 161px;
-  margin-bottom: 0.875rem;
+  margin-bottom: 1.5rem;
 }
 
-.cardDetailsContainer > div:first-child {
-  margin-right: 1.75rem;
+.cardDetailsContainer > div:last-child {
+  margin-bottom: 0.5rem;
 }
 
 .cardInput {
@@ -49,4 +40,23 @@ section.paymentMethod.show h4 {
 
 .acceptedCards > svg:last-child {
   margin-left: 0.5rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .cardDetailsContainer {
+    max-width: 350px;
+  }
+
+  .cardDetailsContainer {
+    display: flex;
+  }
+
+  .cardDetailsContainer > div {
+    max-width: 161px;
+    margin-bottom: 0.875rem;
+  }
+
+  .cardDetailsContainer > div:first-child {
+    margin-right: 1.75rem;
+  }
 }

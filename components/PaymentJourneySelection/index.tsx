@@ -1,4 +1,6 @@
+import classNames from "classnames";
 import React, { useEffect, useState } from "react";
+import { useWindowSize } from "../../hooks";
 import { PaymentJourneyType } from "../../pages";
 import EditIcon from "../../public/icons/small/edit.svg";
 import { formatGBP } from "../../utils/currency";
@@ -9,7 +11,7 @@ import { TertiaryButton } from "../TertiaryButton";
 import styles from "./styles.module.css";
 
 interface PaymentJourneySelectionProps {
-  fullAmount: number;
+  overdueBalance: number;
   paymentJourney: PaymentJourneyType;
   paymentAmount: number;
   onPaymentJourneyChange: (paymentJourney: PaymentJourneyType) => void;
@@ -18,13 +20,15 @@ interface PaymentJourneySelectionProps {
 }
 
 export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = ({
-  fullAmount,
+  overdueBalance,
   paymentJourney,
   paymentAmount,
   onPaymentJourneyChange,
   onPaymentAmountChange,
   onEdit,
 }) => {
+  const { isPhone } = useWindowSize();
+
   const [partialAmount, setPartialAmount] = useState<number>(0);
 
   useEffect(() => {
@@ -33,7 +37,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
 
   const handleSelectFullPayment = () => {
     onPaymentJourneyChange("full");
-    onPaymentAmountChange(fullAmount);
+    onPaymentAmountChange(overdueBalance);
   };
 
   const handleSelectPartialPayment = () => {
@@ -50,17 +54,26 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
 
   const isPartialAmountValid = partialAmount >= 5;
 
+  const renderEditButton = () =>
+    isPhone ? (
+      <div className={styles.mobileEditIcon} onClick={onEdit}>
+        <EditIcon />
+      </div>
+    ) : (
+      <TertiaryButton onClick={onEdit}>
+        <EditIcon />
+        Edit
+      </TertiaryButton>
+    );
+
   const renderJourney = () => {
     switch (paymentJourney) {
       case "full":
         return (
           <>
             <div className={styles.amountSelectedContainer}>
-              <p>Full amount of {formatGBP(fullAmount)}</p>
-              <TertiaryButton onClick={onEdit}>
-                <EditIcon />
-                Edit
-              </TertiaryButton>
+              <h3>Full amount of {formatGBP(overdueBalance)}</h3>
+              {renderEditButton()}
             </div>
             <InfoMessage>
               <p>
@@ -75,11 +88,8 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
           <>
             {!!paymentAmount ? (
               <div className={styles.amountSelectedContainer}>
-                <p>Partial amount of {formatGBP(paymentAmount)}</p>
-                <TertiaryButton onClick={onEdit}>
-                  <EditIcon />
-                  Edit
-                </TertiaryButton>
+                <h3>Partial amount of {formatGBP(paymentAmount)}</h3>
+                {renderEditButton()}
               </div>
             ) : (
               <>
@@ -129,13 +139,21 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
             <h4>Payment amount</h4>
             <p className={styles.subheading}>How much would you like to pay?</p>
             <div className={styles.cardsContainer}>
-              <div className={styles.card} onClick={handleSelectFullPayment}>
+              <div
+                className={classNames(styles.card, styles.fullAmountCard)}
+                onClick={handleSelectFullPayment}
+              >
                 <p>Full amount</p>
-                <p className={styles.fullAmount}>{formatGBP(fullAmount)}</p>
+                <p className={styles.fullAmount}>{formatGBP(overdueBalance)}</p>
               </div>
-              <div className={styles.card} onClick={handleSelectPartialPayment}>
-                <p>Other amount</p>
-              </div>
+              {overdueBalance > 5 && (
+                <div
+                  className={classNames(styles.card, styles.partialAmountCard)}
+                  onClick={handleSelectPartialPayment}
+                >
+                  <p>Other amount</p>
+                </div>
+              )}
             </div>
           </>
         );
