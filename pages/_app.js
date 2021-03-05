@@ -1,20 +1,20 @@
 import { ApolloProvider } from '@apollo/client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from '../components/Layout';
 import { useApollo } from '../lib/apolloClient';
 import '../styles/app.css';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   const apolloClient = useApollo(pageProps);
 
-  useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles);
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Remove the server-side injected CSS.
+  //   const jssStyles = document.querySelector('#jss-server-side');
+  //   if (jssStyles) {
+  //     jssStyles.parentElement.removeChild(jssStyles);
+  //   }
+  // }, []);
 
   return (
     <ApolloProvider client={apolloClient}>
@@ -25,4 +25,6 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp
+App.getInitialProps = () => ({});
+
+export default App;
