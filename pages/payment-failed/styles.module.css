@@ -5,22 +5,54 @@
 }
 
 .card {
-  max-width: 1366px;
-  width: calc(1366px - 8rem);
-  padding: 1rem 11rem 5.5rem;
+  max-width: calc(1366px - 8rem);
+  width: 90vw;
+  padding: 0 1rem 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--white);
   border-radius: 35px;
+  text-align: center;
+}
+
+.card svg {
+  width: 90%;
+  height: 90%;
 }
 
 .card h2 {
   color: var(--primary-purple);
-  margin-top: 2.75rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .card p {
   text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .card {
+    padding: 0 2rem 4rem;
+  }
+
+  .card h2 {
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .card {
+    padding: 1rem 11rem 5.5rem;
+  }
+
+  .card svg {
+    width: 639px;
+    height: 449px;
+  }
+
+  .card h2 {
+    margin-top: 2.5rem;
+  }
 }

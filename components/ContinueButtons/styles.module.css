@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -24,12 +25,34 @@
   margin-left: 0.5rem;
 }
 
+.safeAndSecureMessage svg {
+  flex-shrink: 0;
+}
+
 .buttonsContainer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.buttonsContainer button:last-of-type {
-  margin-left: 2rem;
+@media only screen and (max-width: 767px) {
+  .safeAndSecureMessage {
+    order: 2;
+  }
+
+  .buttonsContainer {
+    width: 100%;
+    margin-bottom: 2rem;
+    order: 1;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .buttonsContainer button:last-of-type {
+    margin-left: 2rem;
+  }
 }

@@ -12,6 +12,7 @@ import {
   MakePaymentResponseInterface,
   MakePaymentVariablesInterface,
 } from "../../gql/types";
+import { useWindowSize } from "../../hooks";
 import LeftChevronIcon from "../../public/icons/small/chevron-left.svg";
 import LoadingGif from "../../public/loading.gif";
 import TickGif from "../../public/tick.gif";
@@ -23,6 +24,7 @@ import styles from "./styles.module.css";
 
 const PaymentSummary = () => {
   const router = useRouter();
+  const { isPhone } = useWindowSize();
   const queryString = (router.query["q"] as string) || "";
   const decodedQueryString = decodeURIComponent(Base64.atob(queryString));
   const [
@@ -94,7 +96,7 @@ const PaymentSummary = () => {
           <Grid item xs={12}>
             <h1 className={styles.title}>Payment summary</h1>
             <span className={styles.subtitle}>
-              Please check and confirm payment:
+              Please check and confirm payment
             </span>
           </Grid>
           <Grid item md={1} />
@@ -122,16 +124,24 @@ const PaymentSummary = () => {
             </div>
           </Grid>
           <ContinueButtons>
-            <TertiaryButton
-              onClick={() => {
-                router.back();
-              }}
-            >
-              <LeftChevronIcon /> Back
-            </TertiaryButton>
-            <Button size="large" onClick={handlePayment}>
-              Confirm payment
-            </Button>
+            <div className={styles.continueButtonsContainer}>
+              <TertiaryButton
+                className={styles.backButton}
+                onClick={() => {
+                  router.back();
+                }}
+              >
+                <LeftChevronIcon /> Back
+              </TertiaryButton>
+              <Button
+                size="large"
+                onClick={handlePayment}
+                className={styles.confirmButton}
+                fullWidth={isPhone}
+              >
+                Confirm payment
+              </Button>
+            </div>
           </ContinueButtons>
         </Grid>
       </PageLayout>

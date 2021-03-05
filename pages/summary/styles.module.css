@@ -1,12 +1,11 @@
 .grid {
   max-width: 1366px;
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .title {
   color: var(--primary-purple);
-  margin-bottom: 2.5rem;
 }
 
 .subtitle {
@@ -93,4 +92,84 @@
 .paper p {
   font-family: "Aeonik Bold";
   font-size: 1.125rem;
+}
+
+.continueButtonsContainer {
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .title {
+    font-size: 1.75rem;
+    margin-bottom: 0;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+  }
+
+  .cardTop {
+    padding: 1.5rem 1rem;
+  }
+
+  .item {
+    font-size: 0.875rem;
+  }
+
+  .divider {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .cardBottom {
+    font-size: 0.875rem;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .outstandingBalanceAfterPayment {
+    font-size: 1.125rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .continueButtonsContainer {
+    width: 100%;
+    flex-direction: column;
+    margin: 0 2rem;
+  }
+
+  .backButton {
+    order: 2;
+    width: fit-content;
+    margin: 1rem auto 0;
+    padding: 10px 0;
+  }
+
+  .confirmButton {
+    order: 1;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .grid {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .title {
+    margin-bottom: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .grid {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .title {
+    margin-bottom: 2.5rem;
+  }
 }
