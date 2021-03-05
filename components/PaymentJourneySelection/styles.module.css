@@ -12,7 +12,7 @@ section.amountSelection {
 .card {
   width: 48vw;
   height: 100px;
-  border: 2px solid rgba(30, 10, 70, 0.1);
+  border: 2px solid rgba(85, 0, 145, 0.2);
   border-radius: 8px;
   padding: 0 1.5rem;
   display: flex;
@@ -27,7 +27,7 @@ section.amountSelection {
 }
 
 .card:hover {
-  border-color: var(--action-cyan);
+  border-color: rgba(85, 0, 145, 0.4);
 }
 
 .cardsContainer {

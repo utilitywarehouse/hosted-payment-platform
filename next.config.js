@@ -1,15 +1,8 @@
 const withImages = require('next-images')
 
 module.exports = withImages({
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
-      use: ["@svgr/webpack"],
-    });
-
-    return config;
-  },
+  publicRuntimeConfig: {
+    GRAPHQL_URL: process.env.GRAPHQL_URL || 'https://finance-graphql.dev.aws.uw.systems/query',
+    SPREEDLY_ENVIRONMENT_KEY: process.env.SPREEDLY_ENVIRONMENT_KEY || "LncsIjDAoJEsJdp51wFFONjRkzb"
+  }
 });
