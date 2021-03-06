@@ -9,7 +9,7 @@ import Logo from "./Logo";
 import SocialMediaIcons from "./SocialMediaIcons";
 import getStyles from "./styles";
 
-const useStyles = makeStyles(getStyles, { index: 1 });
+const useStyles = makeStyles(getStyles);
 
 const Footer: React.FC = () => {
   const classes = useStyles();

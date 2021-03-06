@@ -23,7 +23,7 @@ import RootContainer from "../RootContainer";
 import Menu from "./Menu";
 import getStyles from "./styles";
 
-const useStyles = makeStyles(getStyles, { index: 1 });
+const useStyles = makeStyles(getStyles);
 
 export const Navbar: React.FC = () => {
   const classes = useStyles();

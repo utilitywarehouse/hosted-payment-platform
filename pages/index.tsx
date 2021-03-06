@@ -3,7 +3,6 @@ import { Grid } from "@material-ui/core";
 import axios from "axios";
 import { CreditCardType } from "cleave.js/options/creditCard";
 import { Base64 } from "js-base64";
-import getConfig from "next/config";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Button } from "../components/Button";
@@ -21,8 +20,7 @@ import styles from "../styles/Home.module.css";
 import { getIpAddress } from "../utils/ip";
 
 const ACCEPTED_CARD_TYPES: CreditCardType[] = ["visa", "mastercard"];
-const SPREEDLY_DOMAIN =
-  "https://core.spreedly.com/v1/payment_methods.json?environment_key=";
+const SPREEDLY_URL = `https://core.spreedly.com/v1/payment_methods.json?environment_key=${process.env.SPREEDLY_ENVIRONMENT_KEY}`;
 
 export type PaymentJourneyType = "full" | "partial" | null;
 
@@ -103,22 +101,17 @@ const Home = () => {
   const handleSubmit = async () => {
     const [month, yearShort] = expiryDate.split("/");
 
-    const { data } = await axios.post(
-      `${SPREEDLY_DOMAIN}${
-        getConfig().publicRuntimeConfig?.SPREEDLY_ENVIRONMENT_KEY
-      }`,
-      {
-        payment_method: {
-          credit_card: {
-            full_name: name,
-            number: cardNumber.split(" ").join(""),
-            verification_value: securityCode,
-            month,
-            year: `20${yearShort}`,
-          },
+    const { data } = await axios.post(SPREEDLY_URL, {
+      payment_method: {
+        credit_card: {
+          full_name: name,
+          number: cardNumber.split(" ").join(""),
+          verification_value: securityCode,
+          month,
+          year: `20${yearShort}`,
         },
-      }
-    );
+      },
+    });
 
     if (data?.transaction.succeeded) {
       router.push(

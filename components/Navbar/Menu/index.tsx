@@ -14,7 +14,7 @@ interface MenuProps {
   changeSelectedMenu: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const useStyles = makeStyles(getStyles, { index: 1 });
+const useStyles = makeStyles(getStyles);
 
 const Menu: React.FC<MenuProps> = ({
   collapsePanelMobile,
