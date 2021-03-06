@@ -8,6 +8,13 @@ import '../styles/globals.css';
 function App({ Component, pageProps }) {
   const apolloClient = useApollo(pageProps);
 
+  React.useEffect(() => {
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
     <ApolloProvider client={apolloClient}>
       <Layout>
@@ -16,7 +23,5 @@ function App({ Component, pageProps }) {
     </ApolloProvider>
   );
 }
-
-App.getInitialProps = () => ({});
 
 export default App;
