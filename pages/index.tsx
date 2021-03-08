@@ -101,26 +101,28 @@ const Home = () => {
   const handleSubmit = async () => {
     const [month, yearShort] = expiryDate.split("/");
 
-    const { data } = await axios.post(SPREEDLY_URL, {
-      payment_method: {
-        credit_card: {
-          full_name: name,
-          number: cardNumber.split(" ").join(""),
-          verification_value: securityCode,
-          month,
-          year: `20${yearShort}`,
+    try {
+      const { data } = await axios.post(SPREEDLY_URL, {
+        payment_method: {
+          credit_card: {
+            full_name: name,
+            number: cardNumber.split(" ").join(""),
+            verification_value: securityCode,
+            month,
+            year: `20${yearShort}`,
+          },
         },
-      },
-    });
+      });
 
-    if (data?.transaction.succeeded) {
-      router.push(
-        getSummaryUrl(
-          data?.transaction.payment_method.token,
-          data?.transaction.payment_method.last_four_digits
-        )
-      );
-    } else {
+      if (data?.transaction.succeeded) {
+        router.push(
+          getSummaryUrl(
+            data?.transaction.payment_method.token,
+            data?.transaction.payment_method.last_four_digits
+          )
+        );
+      }
+    } catch (error) {
       router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
     }
   };
