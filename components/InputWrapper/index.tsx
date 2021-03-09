@@ -1,6 +1,13 @@
 import classNames from "classnames";
-import { FocusEvent, forwardRef, InputHTMLAttributes, useState } from "react";
+import {
+  FocusEvent,
+  forwardRef,
+  InputHTMLAttributes,
+  useEffect,
+  useState,
+} from "react";
 import SuccessOutlinedIcon from "../../public/icons/small/success-outlined.svg";
+import WarningOutlinedIcon from "../../public/icons/small/warning-outlined.svg";
 import styles from "./styles.module.css";
 
 interface FormFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -10,6 +17,7 @@ interface FormFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   isValid?: boolean;
   errorMessage?: string;
   showSuccessIcon?: boolean;
+  showErrorIcon?: boolean;
 }
 
 export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
@@ -23,6 +31,7 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
       isValid,
       errorMessage,
       showSuccessIcon,
+      showErrorIcon,
       onBlur,
       ...rest
     },
@@ -31,6 +40,12 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
     const [hovered, setHovered] = useState<boolean>(false);
     const [focused, setFocused] = useState<boolean>(false);
     const [error, setError] = useState<string | null>();
+
+    useEffect(() => {
+      if (!errorMessage) {
+        setError(null);
+      }
+    }, [errorMessage]);
 
     const handleMouseEnter = () => {
       setHovered(true);
@@ -62,39 +77,60 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
     const renderPrefix = () =>
       !!prefix ? <span className={styles.prefix}>{prefix}</span> : null;
 
-    const renderSuffix = () =>
-      !!showSuccessIcon && isValid ? (
-        <span className={styles.suffix}>
-          <SuccessOutlinedIcon />
-        </span>
-      ) : null;
+    const renderSuffix = () => {
+      if (!!showErrorIcon && !!error) {
+        return (
+          <span className={styles.suffix}>
+            <WarningOutlinedIcon />
+          </span>
+        );
+      } else if (!!showSuccessIcon && isValid) {
+        return (
+          <span className={styles.suffix}>
+            <SuccessOutlinedIcon />
+          </span>
+        );
+      }
+      return null;
+    };
 
     return (
-      <div
-        className={classNames(
-          {
-            [styles.withLabel]: !!label,
-            [styles.withoutLabel]: !label,
-            [styles.hovered]: hovered,
-            [styles.focused]: focused,
-            [styles.prefixed]: !!prefix,
-            [styles.valid]: isValid,
-            [styles.error]: !!error,
-          },
-          className
+      <div className={styles.container}>
+        <div
+          className={classNames(
+            {
+              [styles.withLabel]: !!label,
+              [styles.withoutLabel]: !label,
+              [styles.hovered]: hovered,
+              [styles.focused]: focused,
+              [styles.prefixed]: !!prefix,
+              [styles.valid]: isValid,
+              [styles.error]: !!error,
+            },
+            className
+          )}
+          {...rest}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          ref={ref}
+        >
+          {renderLabel()}
+          {renderPrefix()}
+          {children}
+          {renderSuffix()}
+          {!!label && <hr />}
+        </div>
+        {!!error && (
+          <small
+            className={classNames(styles.helperText, {
+              [styles.error]: !!error,
+            })}
+          >
+            {error}
+          </small>
         )}
-        {...rest}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        ref={ref}
-      >
-        {renderLabel()}
-        {renderPrefix()}
-        {children}
-        {renderSuffix()}
-        {!!label && <hr />}
       </div>
     );
   }

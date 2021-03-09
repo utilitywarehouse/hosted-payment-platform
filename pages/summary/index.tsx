@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { ContinueButtons } from "../../components/ContinueButtons";
+import { InfoMessage } from "../../components/InfoMessage";
 import { PageLayout } from "../../components/PageLayout";
 import { TertiaryButton } from "../../components/TertiaryButton";
 import { MAKE_PAYMENT } from "../../gql/mutation";
@@ -128,11 +129,18 @@ const PaymentSummary = () => {
               </div>
             </div>
             <div className={styles.cardBottom}>
-              <span>Outstanding balance after payment:</span>
+              <span>Outstanding debt after payment:</span>
               <span className={styles.outstandingBalanceAfterPayment}>
                 {formatGBP(balanceAfterPayment)}
               </span>
             </div>
+            <InfoMessage className={styles.summaryInfo}>
+              <p>
+                Please remember, if the full debt isn’t cleared, your services
+                may be suspended and won’t be switched on again until the total
+                overdue balance is paid.
+              </p>
+            </InfoMessage>
           </Grid>
           <ContinueButtons>
             <div className={styles.continueButtonsContainer}>

@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { CreditCardType } from "cleave.js/options/creditCard";
 import Cleave from "cleave.js/react";
 import React, { ChangeEvent, FunctionComponent } from "react";
+import MaestroIcon from "../../public/icons/small/maestro.svg";
 import MasterCardIcon from "../../public/icons/small/mastercard.svg";
 import VisaIcon from "../../public/icons/small/visa.svg";
 import { Input } from "../Input";
@@ -70,13 +71,16 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
             value={name}
             isValid={!!name?.trim()}
             showSuccessIcon={true}
+            showErrorIcon={true}
             onChange={handleNameChange}
             autoFocus={true}
+            errorMessage={!name?.trim() && "Invalid cardholder name"}
           />
           <InputWrapper
             className={styles.cardInput}
             label="Card number"
             isValid={isCardValid}
+            errorMessage={!isCardValid && "Invalid card number"}
           >
             <Cleave
               placeholder="16 digits"
@@ -89,15 +93,21 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
                 onCreditCardTypeChanged: onCardTypeChange,
               }}
             />
-            <div className={styles.acceptedCards}>
+            <div
+              className={classNames(styles.acceptedCards, {
+                [styles.invalid]: !isCardTypeValid,
+              })}
+            >
               {!isCardTypeValid && (
                 <>
                   <VisaIcon />
                   <MasterCardIcon />
+                  <MaestroIcon />
                 </>
               )}
               {cardType === "visa" && <VisaIcon />}
               {cardType === "mastercard" && <MasterCardIcon />}
+              {cardType === "maestro" && <MaestroIcon />}
             </div>
           </InputWrapper>
           <div className={styles.cardDetailsContainer}>
@@ -107,8 +117,10 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
               value={expiryDate}
               isValid={isExpiryDateValid}
               showSuccessIcon={true}
+              showErrorIcon={true}
               cleaveOptions={{ date: true, datePattern: ["m", "y"] }}
               onChange={handleExpiryDateChange}
+              errorMessage={!isExpiryDateValid && "Invalid expiry date"}
             />
             <Input
               type="tel"
@@ -119,8 +131,10 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
               maxLength={3}
               value={securityCode}
               isValid={isSecurityCodeValid}
+              showErrorIcon={true}
               showSuccessIcon={true}
               onChange={handleSecurityCodeChange}
+              errorMessage={!isSecurityCodeValid && "Invalid CV number"}
             />
           </div>
         </>

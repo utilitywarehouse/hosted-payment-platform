@@ -83,7 +83,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
             </div>
             <InfoMessage>
               <p>
-                This amount only includes the overdue amount, and may not
+                This amount only includes the debt on your account, and may not
                 include other recent bills added to your account.
               </p>
             </InfoMessage>
@@ -100,7 +100,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
             ) : (
               <>
                 <h4>Enter payment amount</h4>
-                <small>How much would you like to pay?</small>
+                <small>How much can you afford to pay?</small>
                 <Input
                   className={styles.partialAmountInput}
                   label="Payment amount"
@@ -129,12 +129,8 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
               <p>We recommend you pay off the full debt on your account.</p>
               <p>
                 If the full debt isn’t cleared, your services may be suspended
-                and won’t be switched on again until the total overdue balance
-                is paid.
-              </p>
-              <p>
-                If you’d like to set up a payment plan, please call our Member
-                Services team on 0333 777 0 777."
+                (if not already) and won’t be switched on again until the full
+                debt is paid.
               </p>
             </InfoMessage>
           </>

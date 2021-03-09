@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { PageLayout } from "../../components/PageLayout";
+import { TertiaryButton } from "../../components/TertiaryButton";
 import { useTracking } from "../../hooks/useTracking";
 import ThinkingImage from "../../public/thinking.svg";
 import styles from "./styles.module.css";
@@ -16,11 +17,19 @@ const PaymentFailed = () => {
       <div className={styles.container}>
         <div className={styles.card}>
           <ThinkingImage />
-          <h2>We’re having trouble processing your payment</h2>
+          <h2>There may be an issue processing your payment</h2>
           <p>
-            There’s a chance that your payment has already gone through. Please
-            call us on 0800&nbsp;xxx&nbsp;xxxx so that we can check this for
-            you.
+            Please don’t try again though as there’s a chance that your payment
+            has already gone through.
+          </p>
+          <p>
+            Please call us on{" "}
+            <strong>
+              <TertiaryButton>
+                <a href="tel:03337773215">0333 777 3215</a>
+              </TertiaryButton>
+            </strong>{" "}
+            so that we can check this for you.
           </p>
         </div>
       </div>

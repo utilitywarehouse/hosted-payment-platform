@@ -7,6 +7,8 @@ export interface IMenuLink {
   name: string;
   links?: ILink[];
   isLink?: boolean;
+  newTab?: boolean;
+  isContactLink?: boolean;
   href?: string;
 }
 
@@ -103,11 +105,12 @@ export const shortMenuLinks: IMenuLink[] = [
   {
     name: "Help",
     isLink: true,
-    href: "https://help.uw.co.uk/category/billing_and_payments",
+    newTab: true,
+    href: "https://help.uw.co.uk/article/7zHA50LECqmPgI8juXdpcK",
   },
   {
     name: "Contact us",
     isLink: true,
-    href: "https://uw.co.uk/help/contact-us",
+    isContactLink: true,
   },
 ];

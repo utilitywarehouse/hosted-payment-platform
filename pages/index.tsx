@@ -1,7 +1,8 @@
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { Grid } from "@material-ui/core";
 import axios from "axios";
 import { CreditCardType } from "cleave.js/options/creditCard";
+import { isAfter, parse } from "date-fns";
 import { Base64 } from "js-base64";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -20,7 +21,7 @@ import { useTracking } from "../hooks/useTracking";
 import styles from "../styles/Home.module.css";
 import { getIpAddress } from "../utils/ip";
 
-const ACCEPTED_CARD_TYPES: CreditCardType[] = ["visa", "mastercard"];
+const ACCEPTED_CARD_TYPES: CreditCardType[] = ["visa", "mastercard", "maestro"];
 const SPREEDLY_URL = `https://core.spreedly.com/v1/payment_methods.json?environment_key=${process.env.SPREEDLY_ENVIRONMENT_KEY}`;
 
 export type PaymentJourneyType = "full" | "partial" | null;
@@ -30,13 +31,12 @@ const Home = () => {
   const { isPhone } = useWindowSize();
   const trackEvent = useTracking();
 
-  const queryString = (router.query["id"] as string) || "";
-  const accountNumber = decodeURIComponent(Base64.atob(queryString));
+  const queryString = router.query["id"] as string;
 
-  const { data } = useQuery<
+  const [getAccount, { data, error }] = useLazyQuery<
     GetAccountResponseInterface,
     GetAccountVariablesInterface
-  >(GET_ACCOUNT, { variables: { accountNumber } });
+  >(GET_ACCOUNT);
 
   const [ip, setIp] = useState<string>();
   const [paymentJourney, setPaymentJourney] = useState<PaymentJourneyType>();
@@ -54,10 +54,22 @@ const Home = () => {
 
   const overdueBalance = data?.getAccount.overdueBalance.value;
 
+  const getAccountNumber = () => {
+    try {
+      return queryString ? decodeURIComponent(Base64.atob(queryString)) : "";
+    } catch (error) {
+      router.push("/404");
+    }
+  };
+
   const setIpAddress = async () => {
     const ipAddress = await getIpAddress();
     setIp(ipAddress);
   };
+
+  if (error) {
+    router.push("/404");
+  }
 
   useEffect(() => {
     if (!window.location.search) {
@@ -65,6 +77,13 @@ const Home = () => {
     }
     setIpAddress();
   }, []);
+
+  useEffect(() => {
+    const accountNumber = getAccountNumber();
+    if (!!accountNumber) {
+      getAccount({ variables: { accountNumber } });
+    }
+  }, [queryString]);
 
   useEffect(() => {
     const balance = Number(overdueBalance);
@@ -78,7 +97,10 @@ const Home = () => {
   }, [cardNumber]);
 
   useEffect(() => {
-    setIsExpiryDateValid(expiryDate.length === 5);
+    setIsExpiryDateValid(
+      expiryDate.length === 5 &&
+        isAfter(parse(expiryDate, "MM/yy", new Date()), new Date())
+    );
   }, [expiryDate]);
 
   useEffect(() => {
@@ -132,13 +154,15 @@ const Home = () => {
         );
       }
     } catch (error) {
-      router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
+      router.push(`/oops?id=${Base64.btoa(getAccountNumber())}`);
     }
   };
 
   const getSummaryUrl = (token: string, lastFourDigits: string) => {
     const amount = paymentAmount?.toFixed(2);
-    const queryString = `${accountNumber},${data?.getAccount.accountId},${cardType},${overdueBalance},${amount},${lastFourDigits},${token},${ip}`;
+    const queryString = `${getAccountNumber()},${
+      data?.getAccount.accountId
+    },${cardType},${overdueBalance},${amount},${lastFourDigits},${token},${ip}`;
     const base64QueryString = Base64.btoa(queryString);
     const encodedQueryString = encodeURIComponent(base64QueryString);
     return `/summary?q=${encodedQueryString}`;
