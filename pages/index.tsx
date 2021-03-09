@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { Grid } from "@material-ui/core";
 import axios from "axios";
 import { CreditCardType } from "cleave.js/options/creditCard";
@@ -30,13 +30,12 @@ const Home = () => {
   const { isPhone } = useWindowSize();
   const trackEvent = useTracking();
 
-  const queryString = (router.query["id"] as string) || "";
-  const accountNumber = decodeURIComponent(Base64.atob(queryString));
+  const queryString = router.query["id"] as string;
 
-  const { data } = useQuery<
+  const [getAccount, { data, error }] = useLazyQuery<
     GetAccountResponseInterface,
     GetAccountVariablesInterface
-  >(GET_ACCOUNT, { variables: { accountNumber } });
+  >(GET_ACCOUNT);
 
   const [ip, setIp] = useState<string>();
   const [paymentJourney, setPaymentJourney] = useState<PaymentJourneyType>();
@@ -54,10 +53,22 @@ const Home = () => {
 
   const overdueBalance = data?.getAccount.overdueBalance.value;
 
+  const getAccountNumber = () => {
+    try {
+      return queryString ? decodeURIComponent(Base64.atob(queryString)) : "";
+    } catch (error) {
+      router.push("/404");
+    }
+  };
+
   const setIpAddress = async () => {
     const ipAddress = await getIpAddress();
     setIp(ipAddress);
   };
+
+  if (error) {
+    router.push("/404");
+  }
 
   useEffect(() => {
     if (!window.location.search) {
@@ -65,6 +76,13 @@ const Home = () => {
     }
     setIpAddress();
   }, []);
+
+  useEffect(() => {
+    const accountNumber = getAccountNumber();
+    if (!!accountNumber) {
+      getAccount({ variables: { accountNumber } });
+    }
+  }, [queryString]);
 
   useEffect(() => {
     const balance = Number(overdueBalance);
@@ -132,13 +150,15 @@ const Home = () => {
         );
       }
     } catch (error) {
-      router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
+      router.push(`/oops?id=${Base64.btoa(getAccountNumber())}`);
     }
   };
 
   const getSummaryUrl = (token: string, lastFourDigits: string) => {
     const amount = paymentAmount?.toFixed(2);
-    const queryString = `${accountNumber},${data?.getAccount.accountId},${cardType},${overdueBalance},${amount},${lastFourDigits},${token},${ip}`;
+    const queryString = `${getAccountNumber()},${
+      data?.getAccount.accountId
+    },${cardType},${overdueBalance},${amount},${lastFourDigits},${token},${ip}`;
     const base64QueryString = Base64.btoa(queryString);
     const encodedQueryString = encodeURIComponent(base64QueryString);
     return `/summary?q=${encodedQueryString}`;
