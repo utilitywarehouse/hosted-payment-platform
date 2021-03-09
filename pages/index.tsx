@@ -21,7 +21,7 @@ import { useTracking } from "../hooks/useTracking";
 import styles from "../styles/Home.module.css";
 import { getIpAddress } from "../utils/ip";
 
-const ACCEPTED_CARD_TYPES: CreditCardType[] = ["visa", "mastercard"];
+const ACCEPTED_CARD_TYPES: CreditCardType[] = ["visa", "mastercard", "maestro"];
 const SPREEDLY_URL = `https://core.spreedly.com/v1/payment_methods.json?environment_key=${process.env.SPREEDLY_ENVIRONMENT_KEY}`;
 
 export type PaymentJourneyType = "full" | "partial" | null;

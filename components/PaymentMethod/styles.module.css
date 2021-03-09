@@ -24,6 +24,10 @@ section.paymentMethod > div:last-child {
   margin-bottom: 1rem;
 }
 
+.cardDetailsContainer {
+  max-width: 350px;
+}
+
 .cardDetailsContainer > div {
   margin-bottom: 1.5rem;
 }
@@ -46,15 +50,15 @@ section.paymentMethod > div:last-child {
   align-items: center;
 }
 
-.acceptedCards > svg:last-child {
+.acceptedCards.invalid {
+  opacity: 0.3;
+}
+
+.acceptedCards > svg {
   margin-left: 0.5rem;
 }
 
 @media only screen and (min-width: 768px) {
-  .cardDetailsContainer {
-    max-width: 350px;
-  }
-
   .cardDetailsContainer {
     display: flex;
   }
