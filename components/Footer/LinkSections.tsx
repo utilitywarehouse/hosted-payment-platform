@@ -44,7 +44,7 @@ const LinkSections: React.FC<LinkSectionsProps> = ({
           ))
         : shortFooterLinks.map(({ name, href }) => (
             <Grid key={name} item xs={12} md={4} lg={2}>
-              <Link href={href}>
+              <Link href={href} target="_blank">
                 <Typography variant="body2">{name}</Typography>
               </Link>
             </Grid>

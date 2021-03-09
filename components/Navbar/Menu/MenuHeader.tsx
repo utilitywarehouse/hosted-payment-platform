@@ -35,6 +35,7 @@ const MenuHeader: React.FC<IMenuHeaderProps> = ({
           variant={"body1"}
           href={menu.href}
           className={linkClass}
+          target={menu.newTab ? "_blank" : "_self"}
           onClick={() =>
             !menu.isLink &&
             changeSelectedMenu(selectedMenu === menu.name ? "" : menu.name)
