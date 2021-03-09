@@ -16,6 +16,14 @@ section.paymentMethod.show h4 {
   opacity: 1;
 }
 
+section.paymentMethod > div {
+  margin-bottom: 2rem;
+}
+
+section.paymentMethod > div:last-child {
+  margin-bottom: 1rem;
+}
+
 .cardDetailsContainer > div {
   margin-bottom: 1.5rem;
 }

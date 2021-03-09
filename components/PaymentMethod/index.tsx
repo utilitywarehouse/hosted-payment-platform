@@ -70,13 +70,16 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
             value={name}
             isValid={!!name?.trim()}
             showSuccessIcon={true}
+            showErrorIcon={true}
             onChange={handleNameChange}
             autoFocus={true}
+            errorMessage={!name?.trim() && "Invalid cardholder name"}
           />
           <InputWrapper
             className={styles.cardInput}
             label="Card number"
             isValid={isCardValid}
+            errorMessage={!isCardValid && "Invalid card number"}
           >
             <Cleave
               placeholder="16 digits"
@@ -107,8 +110,10 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
               value={expiryDate}
               isValid={isExpiryDateValid}
               showSuccessIcon={true}
+              showErrorIcon={true}
               cleaveOptions={{ date: true, datePattern: ["m", "y"] }}
               onChange={handleExpiryDateChange}
+              errorMessage={!isExpiryDateValid && "Invalid expiry date"}
             />
             <Input
               type="tel"
@@ -119,8 +124,10 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
               maxLength={3}
               value={securityCode}
               isValid={isSecurityCodeValid}
+              showErrorIcon={true}
               showSuccessIcon={true}
               onChange={handleSecurityCodeChange}
+              errorMessage={!isSecurityCodeValid && "Invalid CV number"}
             />
           </div>
         </>

@@ -2,6 +2,7 @@ import { useLazyQuery } from "@apollo/client";
 import { Grid } from "@material-ui/core";
 import axios from "axios";
 import { CreditCardType } from "cleave.js/options/creditCard";
+import { isAfter, parse } from "date-fns";
 import { Base64 } from "js-base64";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -96,7 +97,10 @@ const Home = () => {
   }, [cardNumber]);
 
   useEffect(() => {
-    setIsExpiryDateValid(expiryDate.length === 5);
+    setIsExpiryDateValid(
+      expiryDate.length === 5 &&
+        isAfter(parse(expiryDate, "MM/yy", new Date()), new Date())
+    );
   }, [expiryDate]);
 
   useEffect(() => {
