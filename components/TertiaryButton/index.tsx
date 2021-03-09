@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 export const TertiaryButton: FunctionComponent<
   HTMLAttributes<HTMLParagraphElement>
 > = ({ children, className, ...rest }) => (
-  <p className={classNames(styles.tertiaryButton, className)} {...rest}>
+  <span className={classNames(styles.tertiaryButton, className)} {...rest}>
     {children}
-  </p>
+  </span>
 );

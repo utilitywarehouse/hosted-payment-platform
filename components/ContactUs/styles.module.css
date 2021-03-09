@@ -1,0 +1,51 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paper {
+  position: relative;
+  max-width: 800px;
+  background-color: var(--white);
+  border-radius: 33px;
+  padding: 2rem 3rem;
+  margin-top: -15vh;
+}
+
+.paper:focus {
+  outline: none;
+}
+
+.paper h2 {
+  color: var(--primary-purple);
+  margin-bottom: 2rem;
+}
+
+.paper p {
+  font-family: "Aeonik Bold";
+  font-size: 1.125rem;
+}
+
+.paper small {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.link {
+  margin: 0;
+}
+
+.close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .paper {
+    padding: 3.25rem 6rem 4rem;
+  }
+}

@@ -8,6 +8,7 @@ export interface IMenuLink {
   links?: ILink[];
   isLink?: boolean;
   newTab?: boolean;
+  isContactLink?: boolean;
   href?: string;
 }
 
@@ -110,6 +111,6 @@ export const shortMenuLinks: IMenuLink[] = [
   {
     name: "Contact us",
     isLink: true,
-    href: "https://uw.co.uk/help/contact-us",
+    isContactLink: true,
   },
 ];
