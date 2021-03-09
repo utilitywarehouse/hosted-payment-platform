@@ -1,5 +1,6 @@
 import { ApolloProvider } from '@apollo/client';
 import * as Sentry from "@sentry/react";
+import mixpanel from "mixpanel-browser";
 import React from 'react';
 import Layout from '../components/Layout';
 import { useApollo } from '../lib/apolloClient';
@@ -9,6 +10,11 @@ import '../styles/globals.css';
 Sentry.init({
   dsn: "https://d278eedbda2548509dee9b37315cce37@o380586.ingest.sentry.io/5666398",
   environment: process.env.NODE_ENV,
+});
+
+mixpanel.init(process.env.MIXPANEL_TOKEN, {
+  api_host: "https://api-eu.mixpanel.com",
+  debug: process.env.NODE_ENV !== "production",
 });
 
 function App({ Component, pageProps }) {

@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { Backdrop, Fade, Grid, Modal } from "@material-ui/core";
+import { CreditCardType } from "cleave.js/options/creditCard";
 import { Base64 } from "js-base64";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -13,6 +14,7 @@ import {
   MakePaymentVariablesInterface,
 } from "../../gql/types";
 import { useWindowSize } from "../../hooks";
+import { useTracking } from "../../hooks/useTracking";
 import LeftChevronIcon from "../../public/icons/small/chevron-left.svg";
 import LoadingGif from "../../public/loading.gif";
 import TickGif from "../../public/tick.gif";
@@ -25,11 +27,14 @@ import styles from "./styles.module.css";
 const PaymentSummary = () => {
   const router = useRouter();
   const { isPhone } = useWindowSize();
+  const trackEvent = useTracking();
+
   const queryString = (router.query["q"] as string) || "";
   const decodedQueryString = decodeURIComponent(Base64.atob(queryString));
   const [
     accountNumber,
     accountId,
+    cardType,
     overdueBalance,
     paymentAmount,
     lastFourDigits,
@@ -57,6 +62,12 @@ const PaymentSummary = () => {
   });
 
   const handlePayment = () => {
+    trackEvent("payments-payment-submitted", {
+      card_type: cardType as CreditCardType,
+      required_amount: Number(overdueBalance),
+      paid_amount: Number(paymentAmount),
+    });
+
     makePayment({
       variables: {
         accountReference: `//uw.co.uk/customer/account-number/${accountNumber}`,
