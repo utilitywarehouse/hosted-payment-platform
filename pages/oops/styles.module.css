@@ -32,7 +32,7 @@
 
 @media only screen and (min-width: 768px) {
   .card {
-    padding: 4rem 2rem;
+    padding: 4rem;
   }
 
   .card h2 {
@@ -42,8 +42,7 @@
 
 @media only screen and (min-width: 1024px) {
   .card {
-    padding-top: 4.75rem;
-    padding-bottom: 3.5rem;
+    padding: 4.75rem 6rem 3.5rem;
   }
 
   .card svg {

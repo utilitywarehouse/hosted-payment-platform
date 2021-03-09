@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { Button } from "../../components/Button";
 import { PageLayout } from "../../components/PageLayout";
+import { TertiaryButton } from "../../components/TertiaryButton";
 import { useTracking } from "../../hooks/useTracking";
 import OneImage from "../../public/icons/large/1.svg";
 import TwoImage from "../../public/icons/large/2.svg";
@@ -52,7 +53,13 @@ const Success = () => {
           </div>
           <div>
             <ThreeImage />
-            <h3>You can login to your account to check payment status</h3>
+            <h3>
+              Set up a{" "}
+              <TertiaryButton className={styles.directDebitLink}>
+                <a href="http://uw.link/direct-debit-set-up">Direct Debit</a>
+              </TertiaryButton>{" "}
+              with us to help avoid overdue bills in the future
+            </h3>
           </div>
         </section>
         <section className={styles.downloadContainer}>

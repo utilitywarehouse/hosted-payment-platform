@@ -24,8 +24,8 @@ const Error = () => {
           <IceCreamImage />
           <h2>Oops, something went wrong</h2>
           <p>
-            That payment didn’t go through. Please check your details or use a
-            different payment method.
+            That payment didn’t go through. But don’t worry, please check your
+            card details or use a different payment method and try again.
           </p>
           <Link href={`/?id=${queryString}`}>
             <Button size="large">Try again</Button>
