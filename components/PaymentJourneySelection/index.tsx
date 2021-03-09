@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import { useWindowSize } from "../../hooks";
+import { useTracking } from "../../hooks/useTracking";
 import { PaymentJourneyType } from "../../pages";
 import EditIcon from "../../public/icons/small/edit.svg";
 import { formatGBP } from "../../utils/currency";
@@ -28,6 +29,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
   onEdit,
 }) => {
   const { isPhone } = useWindowSize();
+  const trackEvent = useTracking();
 
   const [partialAmount, setPartialAmount] = useState<number>(0);
 
@@ -38,10 +40,13 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
   const handleSelectFullPayment = () => {
     onPaymentJourneyChange("full");
     onPaymentAmountChange(overdueBalance);
+    trackEvent("payments-amount-selected", { full_amount: true });
+    trackEvent("payments-amount-confirmed", { amount: overdueBalance });
   };
 
   const handleSelectPartialPayment = () => {
     onPaymentJourneyChange("partial");
+    trackEvent("payments-amount-selected", { full_amount: false });
   };
 
   const handlePartialAmountChange = (event: any) => {
@@ -50,6 +55,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
 
   const handleConfirmPartialAmount = () => {
     onPaymentAmountChange(partialAmount);
+    trackEvent("payments-amount-confirmed", { amount: partialAmount });
   };
 
   const isPartialAmountValid = partialAmount >= 5;

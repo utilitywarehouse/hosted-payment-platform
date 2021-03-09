@@ -16,6 +16,7 @@ import {
   GetAccountVariablesInterface,
 } from "../gql/types";
 import { useWindowSize } from "../hooks";
+import { useTracking } from "../hooks/useTracking";
 import styles from "../styles/Home.module.css";
 import { getIpAddress } from "../utils/ip";
 
@@ -27,6 +28,7 @@ export type PaymentJourneyType = "full" | "partial" | null;
 const Home = () => {
   const router = useRouter();
   const { isPhone } = useWindowSize();
+  const trackEvent = useTracking();
 
   const queryString = (router.query["id"] as string) || "";
   const accountNumber = decodeURIComponent(Base64.atob(queryString));
@@ -61,9 +63,15 @@ const Home = () => {
     if (!window.location.search) {
       router.replace("https://uw.co.uk");
     }
-
     setIpAddress();
   }, []);
+
+  useEffect(() => {
+    const balance = Number(overdueBalance);
+    if (!!balance) {
+      trackEvent("payments-page-viewed", { overdue_balance: balance });
+    }
+  }, [overdueBalance]);
 
   useEffect(() => {
     setIsCardValid(cardNumber.split(" ").join("").length === 16);
@@ -115,6 +123,7 @@ const Home = () => {
       });
 
       if (data?.transaction.succeeded) {
+        trackEvent("payments-method-confirmed", { card_type: cardType });
         router.push(
           getSummaryUrl(
             data?.transaction.payment_method.token,
@@ -129,7 +138,7 @@ const Home = () => {
 
   const getSummaryUrl = (token: string, lastFourDigits: string) => {
     const amount = paymentAmount?.toFixed(2);
-    const queryString = `${accountNumber},${data?.getAccount.accountId},${overdueBalance},${amount},${lastFourDigits},${token},${ip}`;
+    const queryString = `${accountNumber},${data?.getAccount.accountId},${cardType},${overdueBalance},${amount},${lastFourDigits},${token},${ip}`;
     const base64QueryString = Base64.btoa(queryString);
     const encodedQueryString = encodeURIComponent(base64QueryString);
     return `/summary?q=${encodedQueryString}`;

@@ -1,9 +1,10 @@
 import { Grid } from "@material-ui/core";
 import classNames from "classnames";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../../components/Button";
 import { PageLayout } from "../../components/PageLayout";
+import { useTracking } from "../../hooks/useTracking";
 import OneImage from "../../public/icons/large/1.svg";
 import TwoImage from "../../public/icons/large/2.svg";
 import ThreeImage from "../../public/icons/large/3.svg";
@@ -13,6 +14,12 @@ import WaveImage from "../../public/wave.svg";
 import styles from "./styles.module.css";
 
 const Success = () => {
+  const trackEvent = useTracking();
+
+  useEffect(() => {
+    trackEvent("payments-success-page-viewed");
+  }, []);
+
   return (
     <>
       <PageLayout title="Payment succeeded - UW" className={styles.layout}>

@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PageLayout } from "../../components/PageLayout";
+import { useTracking } from "../../hooks/useTracking";
 import ThinkingImage from "../../public/thinking.svg";
 import styles from "./styles.module.css";
 
 const PaymentFailed = () => {
+  const trackEvent = useTracking();
+
+  useEffect(() => {
+    trackEvent("payments-unknown-outcome-page-viewed");
+  }, []);
+
   return (
     <PageLayout title="Payment failed - UW">
       <div className={styles.container}>
