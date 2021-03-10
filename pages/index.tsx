@@ -17,6 +17,7 @@ import {
   GetAccountVariablesInterface,
 } from "../gql/types";
 import { useWindowSize } from "../hooks";
+import { useAccountNumber } from "../hooks/useAccountNumber";
 import { useTracking } from "../hooks/useTracking";
 import styles from "../styles/Home.module.css";
 import { getIpAddress } from "../utils/ip";
@@ -30,8 +31,7 @@ const Home = () => {
   const router = useRouter();
   const { isPhone } = useWindowSize();
   const trackEvent = useTracking();
-
-  const queryString = router.query["id"] as string;
+  const { getAccountNumber } = useAccountNumber();
 
   const [getAccount, { data, error }] = useLazyQuery<
     GetAccountResponseInterface,
@@ -54,14 +54,6 @@ const Home = () => {
 
   const overdueBalance = data?.getAccount.overdueBalance.value;
 
-  const getAccountNumber = () => {
-    try {
-      return queryString ? decodeURIComponent(Base64.atob(queryString)) : "";
-    } catch (error) {
-      router.push("/404");
-    }
-  };
-
   const setIpAddress = async () => {
     const ipAddress = await getIpAddress();
     setIp(ipAddress);
@@ -83,11 +75,13 @@ const Home = () => {
     if (!!accountNumber) {
       getAccount({ variables: { accountNumber } });
     }
-  }, [queryString]);
+  }, [router.query]);
 
   useEffect(() => {
     const balance = Number(overdueBalance);
-    if (!!balance) {
+    if (!!balance && balance <= 0) {
+      router.push("/no-debt");
+    } else {
       trackEvent("payments-page-viewed", { overdue_balance: balance });
     }
   }, [overdueBalance]);
@@ -173,7 +167,8 @@ const Home = () => {
       <Grid container className={styles.grid}>
         <Grid item xs={12} lg={4}>
           <h3 className={styles.greeting}>
-            Hi {data?.getAccount.customerFirstName}
+            Hi {data?.getAccount.customerFirstName}{" "}
+            {data?.getAccount.customerLastName}
           </h3>
           <h1 className={styles.heading}>Make a payment</h1>
           <hr className={styles.horizontalRule} />
