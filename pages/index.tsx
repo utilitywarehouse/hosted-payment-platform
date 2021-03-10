@@ -79,7 +79,7 @@ const Home = () => {
 
   useEffect(() => {
     const balance = Number(overdueBalance);
-    if (!!balance && balance <= 0) {
+    if (balance <= 0) {
       router.push("/no-debt");
     } else {
       trackEvent("payments-page-viewed", { overdue_balance: balance });

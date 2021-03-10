@@ -38,18 +38,21 @@ const Success = () => {
         <WaveImage />
         <Grid container className={classNames(styles.grid, styles.lightGrid)}>
           <Grid item md={12} lg={6}>
-            <h1>Here’s what’ll happen next</h1>
+            <h1>What’s next?</h1>
           </Grid>
           <Grid item md={12} lg={6} />
         </Grid>
         <section className={styles.nextSteps}>
           <div>
             <OneImage />
-            <h3>We’ll send a confirmation email or text</h3>
+            <h3>Your payment will be reflected in your UW account shortly</h3>
           </div>
           <div>
             <TwoImage />
-            <h3>Your payment will update in your account in 3-5 days</h3>
+            <h3>
+              If your services were suspended and you’ve paid in full, they will
+              be reactivated
+            </h3>
           </div>
           <div>
             <ThreeImage />

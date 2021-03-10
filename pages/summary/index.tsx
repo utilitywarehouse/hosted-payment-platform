@@ -134,13 +134,15 @@ const PaymentSummary = () => {
                 {formatGBP(balanceAfterPayment)}
               </span>
             </div>
-            <InfoMessage className={styles.summaryInfo}>
-              <p>
-                Please remember, if the full debt isn’t cleared, your services
-                may be suspended and won’t be switched on again until the total
-                overdue balance is paid.
-              </p>
-            </InfoMessage>
+            {balanceAfterPayment > 0 && (
+              <InfoMessage className={styles.summaryInfo}>
+                <p>
+                  Please remember, if the full debt isn’t cleared, your services
+                  may be suspended and won’t be switched on again until the
+                  total overdue balance is paid.
+                </p>
+              </InfoMessage>
+            )}
           </Grid>
           <ContinueButtons>
             <div className={styles.continueButtonsContainer}>

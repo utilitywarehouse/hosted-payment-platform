@@ -167,9 +167,11 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
       {renderJourney()}
       {!paymentJourney && (
         <InfoMessage>
+          <p>We recommend you pay off the full debt on your account.</p>
           <p>
-            To avoid any disruption to your services, we recommend you paying
-            the full outstanding amount on your account.
+            If the full debt isn’t cleared, your services may be suspended (if
+            not already) and won’t be switched on again until the full debt is
+            paid.
           </p>
         </InfoMessage>
       )}
