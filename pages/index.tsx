@@ -89,7 +89,10 @@ const Home = () => {
   }, [overdueBalance]);
 
   useEffect(() => {
-    setIsCardValid(cardNumber.split(" ").join("").length === 16);
+    setIsCardValid(
+      cardNumber.split(" ").join("").length === 16 &&
+        ACCEPTED_CARD_TYPES.includes(cardType)
+    );
   }, [cardNumber]);
 
   useEffect(() => {
