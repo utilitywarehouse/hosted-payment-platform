@@ -41,9 +41,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         showErrorIcon={showErrorIcon}
       >
         {!!cleaveOptions ? (
-          <Cleave id={name} name={name} options={cleaveOptions} {...rest} />
+          <Cleave
+            id={name}
+            name={name}
+            options={cleaveOptions}
+            htmlRef={(r) => ((ref as any).current = r)}
+            {...rest}
+          />
         ) : (
-          <input id={name} name={name} {...rest} />
+          <input id={name} name={name} ref={ref} {...rest} />
         )}
       </InputWrapper>
     ) : (
