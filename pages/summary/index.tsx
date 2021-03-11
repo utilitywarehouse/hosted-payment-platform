@@ -129,7 +129,7 @@ const PaymentSummary = () => {
               </div>
             </div>
             <div className={styles.cardBottom}>
-              <span>Outstanding debt after payment:</span>
+              <span>Overdue balance after payment:</span>
               <span className={styles.outstandingBalanceAfterPayment}>
                 {formatGBP(balanceAfterPayment)}
               </span>
