@@ -60,6 +60,7 @@ const Home = () => {
   };
 
   if (error) {
+    trackEvent("payments-not-found-page-viewed");
     router.push("/404");
   }
 
@@ -79,10 +80,11 @@ const Home = () => {
 
   useEffect(() => {
     const balance = Number(overdueBalance);
+    if (!!overdueBalance) {
+      trackEvent("payments-page-viewed", { overdue_balance: balance });
+    }
     if (balance <= 0) {
       router.push("/no-debt");
-    } else {
-      trackEvent("payments-page-viewed", { overdue_balance: balance });
     }
   }, [overdueBalance]);
 
