@@ -45,7 +45,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={name}
             name={name}
             options={cleaveOptions}
-            htmlRef={(r) => ((ref as any).current = r)}
+            htmlRef={(r) => (((ref as any) || {}).current = r)}
             {...rest}
           />
         ) : (
