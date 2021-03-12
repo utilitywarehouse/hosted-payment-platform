@@ -1,3 +1,4 @@
+import { Collapse } from "@material-ui/core";
 import classNames from "classnames";
 import { CreditCardType } from "cleave.js/options/creditCard";
 import Cleave from "cleave.js/react";
@@ -76,82 +77,80 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
       })}
     >
       <h4>Payment method</h4>
-      {show && (
-        <>
+      <Collapse in={show} className={styles.collapse}>
+        <Input
+          className={styles.cardInput}
+          label="Name on card"
+          value={name}
+          isValid={!!name?.trim()}
+          showSuccessIcon={true}
+          showErrorIcon={true}
+          onChange={handleNameChange}
+          autoFocus={true}
+          errorMessage={!name?.trim() && "Invalid cardholder name"}
+        />
+        <InputWrapper
+          className={styles.cardInput}
+          label="Card number"
+          isValid={isCardValid}
+          errorMessage={!isCardValid && "Invalid card number"}
+        >
+          <Cleave
+            placeholder="16 digits"
+            value={cardNumber}
+            onChange={handleCardNumberChange}
+            options={{
+              creditCard: true,
+              onCreditCardTypeChanged: onCardTypeChange,
+            }}
+          />
+          <div
+            className={classNames(styles.acceptedCards, {
+              [styles.invalid]: !isCardTypeValid,
+            })}
+          >
+            {!isCardTypeValid && (
+              <>
+                <VisaIcon />
+                <MasterCardIcon />
+                <MaestroIcon />
+              </>
+            )}
+            {cardType === "visa" && <VisaIcon />}
+            {cardType === "mastercard" && <MasterCardIcon />}
+            {cardType === "maestro" && <MaestroIcon />}
+          </div>
+        </InputWrapper>
+        <div className={styles.cardDetailsContainer}>
           <Input
-            className={styles.cardInput}
-            label="Name on card"
-            value={name}
-            isValid={!!name?.trim()}
+            label="Expiry date"
+            placeholder="e.g. 01/23"
+            value={expiryDate}
+            isValid={isExpiryDateValid}
             showSuccessIcon={true}
             showErrorIcon={true}
-            onChange={handleNameChange}
-            autoFocus={true}
-            errorMessage={!name?.trim() && "Invalid cardholder name"}
+            cleaveOptions={{ date: true, datePattern: ["m", "y"] }}
+            onChange={handleExpiryDateChange}
+            errorMessage={!isExpiryDateValid && "Invalid expiry date"}
+            ref={expiryDateInput}
           />
-          <InputWrapper
-            className={styles.cardInput}
-            label="Card number"
-            isValid={isCardValid}
-            errorMessage={!isCardValid && "Invalid card number"}
-          >
-            <Cleave
-              placeholder="16 digits"
-              value={cardNumber}
-              onChange={handleCardNumberChange}
-              options={{
-                creditCard: true,
-                onCreditCardTypeChanged: onCardTypeChange,
-              }}
-            />
-            <div
-              className={classNames(styles.acceptedCards, {
-                [styles.invalid]: !isCardTypeValid,
-              })}
-            >
-              {!isCardTypeValid && (
-                <>
-                  <VisaIcon />
-                  <MasterCardIcon />
-                  <MaestroIcon />
-                </>
-              )}
-              {cardType === "visa" && <VisaIcon />}
-              {cardType === "mastercard" && <MasterCardIcon />}
-              {cardType === "maestro" && <MaestroIcon />}
-            </div>
-          </InputWrapper>
-          <div className={styles.cardDetailsContainer}>
-            <Input
-              label="Expiry date"
-              placeholder="e.g. 01/23"
-              value={expiryDate}
-              isValid={isExpiryDateValid}
-              showSuccessIcon={true}
-              showErrorIcon={true}
-              cleaveOptions={{ date: true, datePattern: ["m", "y"] }}
-              onChange={handleExpiryDateChange}
-              errorMessage={!isExpiryDateValid && "Invalid expiry date"}
-              ref={expiryDateInput}
-            />
-            <Input
-              type="tel"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              label="CV number"
-              placeholder="3 digits"
-              maxLength={3}
-              value={securityCode}
-              isValid={isSecurityCodeValid}
-              showErrorIcon={true}
-              showSuccessIcon={true}
-              onChange={handleSecurityCodeChange}
-              errorMessage={!isSecurityCodeValid && "Invalid CV number"}
-              ref={securityCodeInput}
-            />
-          </div>
-        </>
-      )}
+          <Input
+            type="tel"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            label="CV number"
+            placeholder="3 digits"
+            maxLength={3}
+            value={securityCode}
+            isValid={isSecurityCodeValid}
+            showErrorIcon={true}
+            showSuccessIcon={true}
+            onChange={handleSecurityCodeChange}
+            errorMessage={!isSecurityCodeValid && "Invalid CV number"}
+            ref={securityCodeInput}
+          />
+        </div>
+      </Collapse>
     </section>
   );
 };

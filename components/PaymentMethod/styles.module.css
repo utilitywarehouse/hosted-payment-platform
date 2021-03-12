@@ -24,6 +24,10 @@ section.paymentMethod > div:last-child {
   margin-bottom: 1rem;
 }
 
+.collapse {
+  margin: 0 !important;
+}
+
 .cardDetailsContainer {
   max-width: 350px;
 }
