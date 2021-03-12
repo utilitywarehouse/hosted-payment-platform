@@ -81,7 +81,10 @@ const Home = () => {
   useEffect(() => {
     const balance = Number(overdueBalance);
     if (!!overdueBalance) {
-      trackEvent("payments-page-viewed", { overdue_balance: balance });
+      trackEvent("payments-page-viewed", {
+        account_number: getAccountNumber(),
+        overdue_balance: balance,
+      });
     }
     if (balance <= 0) {
       router.push("/no-debt");
