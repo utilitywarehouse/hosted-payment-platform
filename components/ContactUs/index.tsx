@@ -27,20 +27,15 @@ export const ContactUs: FunctionComponent<ContactUsProps> = ({
         <h2>Contact us</h2>
         <p>
           If you’d like to send us a message, please go to{" "}
-          <TertiaryButton className={styles.link}>
-            <a href="https://uw.link/contact-us" target="_blank">
-              uw.link/contact-us
-            </a>
+          <TertiaryButton href="https://uw.link/contact-us">
+            uw.link/contact-us
           </TertiaryButton>
           .
         </p>
         <p>
           Alternatively if you would prefer to call us, you can speak to a
           member of our award winning team on{" "}
-          <TertiaryButton className={styles.link}>
-            <a href="tel:03337773215">0333 777 3215</a>
-          </TertiaryButton>
-          .
+          <TertiaryButton href="tel:03337773215">0333 777 3215</TertiaryButton>.
         </p>
         <small>
           Calls to our 0333 numbers are FREE when called from UW landlines and

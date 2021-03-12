@@ -167,12 +167,21 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
       {renderJourney()}
       {!paymentJourney && (
         <InfoMessage>
-          <p>We recommend you pay off the full debt on your account.</p>
-          <p>
-            If the full debt isn’t cleared, your services may be suspended (if
-            not already) and won’t be switched on again until the full debt is
-            paid.
-          </p>
+          {overdueBalance <= 5 ? (
+            <p>
+              This amount only includes the debt on your account, and may not
+              include other recent bills added to your account.
+            </p>
+          ) : (
+            <>
+              <p>We recommend you pay off the full debt on your account.</p>
+              <p>
+                If the full debt isn’t cleared, your services may be suspended
+                (if not already) and won’t be switched on again until the full
+                debt is paid.
+              </p>
+            </>
+          )}
         </InfoMessage>
       )}
     </section>

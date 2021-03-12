@@ -22,3 +22,9 @@
 .tertiaryButton:active {
   color: var(--action-cyan);
 }
+
+.link {
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}

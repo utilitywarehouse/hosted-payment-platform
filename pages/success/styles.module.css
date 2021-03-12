@@ -79,16 +79,6 @@
   right: 2vw;
 }
 
-.directDebitLink {
-  margin: 0;
-}
-
-.directDebitLink * {
-  font-weight: 600;
-  font-size: 1.125rem;
-  line-height: 1.265625rem;
-}
-
 @media only screen and (max-width: 1023px) {
   .grid h1 {
     text-align: center;
@@ -173,11 +163,6 @@
   .downloadContainer svg {
     right: 0;
   }
-
-  .directDebitLink * {
-    font-size: 1.5rem;
-    line-height: 1.6875rem;
-  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -187,10 +172,5 @@
 
   .downloadContainer svg {
     right: 10vw;
-  }
-
-  .directDebitLink * {
-    font-size: 2.0625rem;
-    line-height: 2.3203125rem;
   }
 }

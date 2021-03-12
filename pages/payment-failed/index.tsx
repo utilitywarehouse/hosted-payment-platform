@@ -24,11 +24,9 @@ const PaymentFailed = () => {
           </p>
           <p>
             Please call us on{" "}
-            <strong>
-              <TertiaryButton>
-                <a href="tel:03337773215">0333 777 3215</a>
-              </TertiaryButton>
-            </strong>{" "}
+            <TertiaryButton href="tel:03337773215">
+              0333 777 3215
+            </TertiaryButton>{" "}
             so that we can check this for you.
           </p>
         </div>
