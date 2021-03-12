@@ -1,5 +1,4 @@
-import { Grid, Link, Typography } from "@material-ui/core";
-import { ClassNameMap } from "@material-ui/core/styles/withStyles";
+import { Grid, Link } from "@material-ui/core";
 import { useRouter } from "next/router";
 import React from "react";
 import {
@@ -9,16 +8,13 @@ import {
   shortFooterLinks,
 } from "./footerLinks";
 import LinkSection from "./LinkSection";
+import styles from "./styles.module.css";
 
 interface LinkSectionsProps {
   linkSections: typeof mobileLinkSections | typeof desktopLinkSections;
-  classes: ClassNameMap;
 }
 
-const LinkSections: React.FC<LinkSectionsProps> = ({
-  classes,
-  linkSections,
-}) => {
+const LinkSections: React.FC<LinkSectionsProps> = ({ linkSections }) => {
   const router = useRouter();
   const showAllFooterLinks = router.pathname === "/success";
 
@@ -28,24 +24,20 @@ const LinkSections: React.FC<LinkSectionsProps> = ({
       item
       xs={12}
       lg={showAllFooterLinks ? 9 : 12}
-      className={classes.linksContainer}
+      className={styles.linksContainer}
     >
       {showAllFooterLinks
         ? linkSections.map((sections, index) => (
             <Grid item xs={6} md={4} key={index}>
               {sections.map((section, index) => (
-                <LinkSection
-                  key={index}
-                  section={footerLinks[section]}
-                  classes={classes}
-                />
+                <LinkSection key={index} section={footerLinks[section]} />
               ))}
             </Grid>
           ))
         : shortFooterLinks.map(({ name, href }) => (
             <Grid key={name} item xs={12} md={4} lg={2}>
               <Link href={href} target="_blank">
-                <Typography variant="body2">{name}</Typography>
+                <p className={styles.footerLink}>{name}</p>
               </Link>
             </Grid>
           ))}

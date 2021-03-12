@@ -2,13 +2,13 @@ import {
   AppBar,
   Backdrop,
   Link,
-  makeStyles,
   Theme,
   Toolbar,
   useMediaQuery,
   useScrollTrigger,
   useTheme,
 } from "@material-ui/core";
+import classNames from "classnames";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -19,14 +19,10 @@ import Tablet from "../../public/icons/logo/Tablet.svg";
 import CloseIcon from "../../public/icons/small/close.svg";
 import MenuIcon from "../../public/icons/small/menu.svg";
 import { Button } from "../Button";
-import RootContainer from "../RootContainer";
 import Menu from "./Menu";
-import getStyles from "./styles";
-
-const useStyles = makeStyles(getStyles);
+import styles from "./styles.module.css";
 
 export const Navbar: React.FC = () => {
-  const classes = useStyles();
   const theme: Theme = useTheme();
   const isScrolled = useScrollTrigger({ disableHysteresis: true });
 
@@ -48,17 +44,17 @@ export const Navbar: React.FC = () => {
       <Backdrop
         open={!!selectedMenu || shownMenus || false}
         onClick={onBackdropClick}
-        className={classes.backdrop}
+        className={styles.backdrop}
       />
 
       <AppBar
         position="fixed"
-        className={`${classes.appBar} ${isScrolled && classes.scrolled}`}
+        className={classNames(styles.appBar, { scrolled: isScrolled })}
       >
-        <RootContainer>
-          <Toolbar className={classes.root} component="nav">
+        <div className={styles.container}>
+          <Toolbar className={styles.root} component="nav">
             {/* UW Logo */}
-            <Link href="https://uw.co.uk/" className={classes.logo}>
+            <Link href="https://uw.co.uk/" className={styles.logo}>
               {isDesktop && !isScrolled && <DesktopDark />}
               {isDesktop && isScrolled && <DesktopLight />}
               {!isDesktop && isTablet && <Tablet />}
@@ -76,7 +72,7 @@ export const Navbar: React.FC = () => {
             )}
 
             {isDesktop && router.pathname === "/success" && (
-              <div className={classes.buttonContainer}>
+              <div className={styles.buttonContainer}>
                 <NextLink href="https://uw.co.uk/login?redirect_back=https://uw.co.uk/clubhouse/myServices">
                   <Button
                     styling="secondary"
@@ -89,7 +85,7 @@ export const Navbar: React.FC = () => {
             )}
 
             {!isDesktop && (
-              <div className={classes.buttonContainer}>
+              <div className={styles.buttonContainer}>
                 {router.pathname === "/success" && (
                   <NextLink href="https://uw.co.uk/login?redirect_back=https://uw.co.uk/clubhouse/myServices">
                     <Button
@@ -124,7 +120,7 @@ export const Navbar: React.FC = () => {
               changeSelectedMenu={changeSelectedMenu}
             />
           )}
-        </RootContainer>
+        </div>
       </AppBar>
     </div>
   );

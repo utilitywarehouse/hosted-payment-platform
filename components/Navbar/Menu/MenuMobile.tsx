@@ -1,14 +1,13 @@
 import { Collapse, Fade } from "@material-ui/core";
-import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import React from "react";
 import PreviousIcon from "../../../public/icons/small/previous.svg";
 import MenuHeader from "./MenuHeader";
 import MenuLink from "./MenuLink";
 import { IMenuLink } from "./menuLinks";
+import styles from "./styles.module.css";
 
 interface IMobileProps {
   menuLinks: IMenuLink[];
-  classes: ClassNameMap;
   isDesktop: boolean;
   isScrolled: boolean;
   selectedMenu: string;
@@ -19,7 +18,6 @@ interface IMobileProps {
 
 const MenuMobile: React.FC<IMobileProps> = ({
   menuLinks,
-  classes,
   isDesktop,
   isScrolled,
   selectedMenu,
@@ -27,10 +25,8 @@ const MenuMobile: React.FC<IMobileProps> = ({
   changeSelectedMenu,
   collapsePanelMobile,
 }) => (
-  <Collapse in={collapsePanelMobile} className={classes.collapsePanel}>
-    <div
-      className={`${classes.mobileMenuParent} ${selectedMenu && "selected"}`}
-    >
+  <Collapse in={collapsePanelMobile} className={styles.collapsePanel}>
+    <div className={`${styles.mobileMenuParent} ${selectedMenu && "selected"}`}>
       <MenuHeader
         menuLinks={menuLinks}
         changeSelectedMenu={changeSelectedMenu}
@@ -38,10 +34,9 @@ const MenuMobile: React.FC<IMobileProps> = ({
         isScrolled={isScrolled}
         selectedMenu={selectedMenu}
         linkClass={linkClass}
-        classes={classes}
       />
 
-      <div className={classes.menuBodyMobile}>
+      <div className={styles.menuBodyMobile}>
         {menuLinks.map(
           (menu, index) =>
             !menu.isLink && (

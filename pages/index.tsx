@@ -4,6 +4,7 @@ import axios from "axios";
 import { CreditCardType } from "cleave.js/options/creditCard";
 import { isAfter, parse } from "date-fns";
 import { Base64 } from "js-base64";
+import getConfig from "next/config";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Button } from "../components/Button";
@@ -23,7 +24,9 @@ import styles from "../styles/Home.module.css";
 import { getIpAddress } from "../utils/ip";
 
 const ACCEPTED_CARD_TYPES: CreditCardType[] = ["visa", "mastercard", "maestro"];
-const SPREEDLY_URL = `https://core.spreedly.com/v1/payment_methods.json?environment_key=${process.env.SPREEDLY_ENVIRONMENT_KEY}`;
+const SPREEDLY_URL = `https://core.spreedly.com/v1/payment_methods.json?environment_key=${
+  getConfig().publicRuntimeConfig?.SPREEDLY_ENVIRONMENT_KEY
+}`;
 
 export type PaymentJourneyType = "full" | "partial" | null;
 

@@ -1,35 +1,29 @@
-import { Grid, makeStyles, Theme, useMediaQuery } from "@material-ui/core";
+import { Grid, Theme, useMediaQuery } from "@material-ui/core";
 import { useRouter } from "next/router";
 import React from "react";
-import RootContainer from "../RootContainer";
 import Copyrights from "./Copyrights";
 import { desktopLinkSections, mobileLinkSections } from "./footerLinks";
 import LinkSections from "./LinkSections";
 import Logo from "./Logo";
 import SocialMediaIcons from "./SocialMediaIcons";
-import getStyles from "./styles";
-
-const useStyles = makeStyles(getStyles);
+import styles from "./styles.module.css";
 
 const Footer: React.FC = () => {
-  const classes = useStyles();
   const isDesktop = useMediaQuery((theme: Theme) => theme.breakpoints.up("md"));
   const router = useRouter();
 
   const linkSections = isDesktop ? desktopLinkSections : mobileLinkSections;
 
   return (
-    <footer className={classes.root}>
-      <RootContainer>
+    <footer className={styles.root}>
+      <div className={styles.container}>
         <Grid container>
-          <LinkSections linkSections={linkSections} classes={classes} />
-          {router.pathname === "/success" && (
-            <SocialMediaIcons classes={classes} />
-          )}
-          <Logo classes={classes} />
-          <Copyrights classes={classes} />
+          <LinkSections linkSections={linkSections} />
+          {router.pathname === "/success" && <SocialMediaIcons />}
+          <Logo />
+          <Copyrights />
         </Grid>
-      </RootContainer>
+      </div>
     </footer>
   );
 };

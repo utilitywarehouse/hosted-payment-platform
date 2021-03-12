@@ -1,13 +1,12 @@
 import { Collapse, Fade } from "@material-ui/core";
-import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import React from "react";
 import MenuHeader from "./MenuHeader";
 import MenuLink from "./MenuLink";
 import { IMenuLink } from "./menuLinks";
+import styles from "./styles.module.css";
 
 interface IDesktopProps {
   menuLinks: IMenuLink[];
-  classes: ClassNameMap;
   isDesktop: boolean;
   selectedMenu: string;
   linkClass: string;
@@ -16,7 +15,6 @@ interface IDesktopProps {
 
 const MenuDesktop: React.FC<IDesktopProps> = ({
   menuLinks,
-  classes,
   isDesktop,
   selectedMenu,
   linkClass,
@@ -29,10 +27,9 @@ const MenuDesktop: React.FC<IDesktopProps> = ({
       isDesktop={isDesktop}
       selectedMenu={selectedMenu}
       linkClass={linkClass}
-      classes={classes}
     />
 
-    <Collapse in={!!selectedMenu} className={classes.collapsePanel}>
+    <Collapse in={!!selectedMenu} className={styles.collapsePanel}>
       {menuLinks.map((menu, index) => (
         <ul key={index}>
           {/* Menu section */}

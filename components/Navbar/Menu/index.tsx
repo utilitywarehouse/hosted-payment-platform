@@ -1,10 +1,10 @@
-import { makeStyles } from "@material-ui/core";
+import classNames from "classnames";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import MenuDesktop from "./MenuDesktop";
 import { menuLinks, shortMenuLinks } from "./menuLinks";
 import MenuMobile from "./MenuMobile";
-import getStyles from "./styles";
+import styles from "./styles.module.css";
 
 interface MenuProps {
   isScrolled: boolean;
@@ -14,8 +14,6 @@ interface MenuProps {
   changeSelectedMenu: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const useStyles = makeStyles(getStyles);
-
 const Menu: React.FC<MenuProps> = ({
   collapsePanelMobile,
   isDesktop = false,
@@ -23,12 +21,9 @@ const Menu: React.FC<MenuProps> = ({
   selectedMenu,
   changeSelectedMenu,
 }) => {
-  const classes = useStyles();
-  const linkClass = `${classes.link} ${isScrolled && "scrolled"}`;
-
   const router = useRouter();
-
   const links = router.pathname === "/success" ? menuLinks : shortMenuLinks;
+  const linkClass = classNames(styles.link, { scrolled: isScrolled });
 
   useEffect(() => {
     if (!collapsePanelMobile) {
@@ -37,7 +32,7 @@ const Menu: React.FC<MenuProps> = ({
   }, [collapsePanelMobile]);
 
   return (
-    <div className={classes.menuContainer}>
+    <div className={styles.menuContainer}>
       {isDesktop ? (
         <MenuDesktop
           menuLinks={links}
@@ -45,7 +40,6 @@ const Menu: React.FC<MenuProps> = ({
           isDesktop={isDesktop}
           selectedMenu={selectedMenu}
           linkClass={linkClass}
-          classes={classes}
         />
       ) : (
         <MenuMobile
@@ -55,7 +49,6 @@ const Menu: React.FC<MenuProps> = ({
           isScrolled={isScrolled}
           selectedMenu={selectedMenu}
           linkClass={linkClass}
-          classes={classes}
           collapsePanelMobile={collapsePanelMobile}
         />
       )}

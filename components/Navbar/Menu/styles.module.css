@@ -1,0 +1,183 @@
+.menuContainer {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.menuContainer ul {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.menuContainer ul li {
+  list-style: none !important;
+}
+
+.link {
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  color: var(--white) !important;
+  margin-left: 16px !important;
+  margin-right: 16px !important;
+  transition: 300ms all ease-in-out !important;
+  font-family: "Work Sans SemiBold" !important;
+  font-weight: 600 !important;
+}
+
+.link:global(.scrolled) {
+  color: var(--midnight) !important;
+}
+
+.link:global(.selected) {
+  color: var(--action-cyan) !important;
+}
+
+.link:hover {
+  text-decoration: none !important;
+  color: var(--action-cyan) !important;
+  opacity: 1;
+}
+
+.collapsePanel,
+.collapsePanel :global(.MuiCollapse-wrapper) {
+  width: 100% !important;
+}
+
+.collapsePanel :global(.MuiCollapse-wrapperInner) {
+  display: flex !important;
+  padding-top: 48px !important;
+  padding-bottom: 48px !important;
+}
+
+.collapsePanel a {
+  display: flex !important;
+  justify-content: space-between !important;
+  margin: 0 !important;
+  height: 3.5rem !important;
+  white-space: nowrap !important;
+}
+
+.collapsePanel a:hover {
+  text-decoration: none !important;
+  color: var(--action-cyan) !important;
+}
+
+.arrow {
+  margin-left: 4px !important;
+  transition: 300ms all ease-in-out !important;
+}
+
+.arrow:global(.selected) {
+  transform: rotate(180deg) !important;
+}
+
+.mobileMenuParent {
+  width: 1000vw !important;
+  display: flex !important;
+  flex-direction: row !important;
+  z-index: 500 !important;
+  transition: 300ms all ease-in-out !important;
+  transition-delay: 0ms !important;
+}
+
+.mobileMenuParent:global(.selected) {
+  transform: translateX(-110vw) !important;
+}
+
+.menuBodyMobile {
+  display: flex !important;
+  width: 100vw !important;
+  flex-direction: row !important;
+  overflow: hidden !important;
+  position: relative !important;
+  justify-content: flex-end !important;
+}
+
+.menuBodyMobile > ul {
+  width: 90vw !important;
+}
+
+.menuBodyMobile > svg {
+  cursor: pointer !important;
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1150px) {
+  .collapsePanel :global(.MuiCollapse-wrapperInner) ul:nth-child(1) {
+    position: relative !important;
+    left: 50px !important;
+  }
+
+  .collapsePanel :global(.MuiCollapse-wrapperInner) ul:nth-child(2) {
+    position: relative !important;
+    left: -14px !important;
+  }
+
+  .collapsePanel :global(.MuiCollapse-wrapperInner) ul:nth-child(3) {
+    position: relative !important;
+    left: -40px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  ul.menuItem {
+    width: 100vw !important;
+    padding-right: 8rem !important;
+  }
+
+  .collapsePanel li:not(:first-of-type) {
+    border-top: 2px solid rgba(244, 149, 249, 0.3) !important;
+  }
+
+  .collapsePanel li:global(.scrolled):not(:first-of-type) {
+    border-top: 2px solid rgb(251, 223, 253) !important;
+  }
+
+  .collapsePanel :global(.MuiCollapse-wrapperInner) {
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  ul.menuItem {
+    padding-right: 4rem !important;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .menuContainer {
+    padding-top: 8px !important;
+  }
+
+  .link {
+    font-size: 1.125rem !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  ul.menuItem {
+    display: flex !important;
+  }
+
+  .collapsePanel :global(.MuiCollapse-wrapperInner) ul:nth-child(1) {
+    position: relative !important;
+    left: 32px !important;
+  }
+
+  .collapsePanel :global(.MuiCollapse-wrapperInner) ul:nth-child(2) {
+    position: relative !important;
+  }
+
+  .collapsePanel :global(.MuiCollapse-wrapperInner) ul:nth-child(3) {
+    position: relative !important;
+    left: 4px !important;
+  }
+}
+
+@media only screen and (min-width: 1150px) {
+  .link {
+    margin-left: 32px !important;
+    margin-right: 32px !important;
+  }
+}

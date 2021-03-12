@@ -1,0 +1,141 @@
+.root {
+  padding-top: 128px;
+  padding-bottom: 128px;
+  background-color: var(--midnight);
+}
+
+.container {
+  width: 100%;
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.root p {
+  transition: all 0.3s ease;
+  color: var(--white);
+}
+
+.img {
+  flex: 1;
+  height: 2.1875rem;
+  margin-top: 48px;
+  margin-bottom: 64px;
+}
+
+.iconContainer a:not(:last-child) {
+  margin-right: 16px;
+}
+
+.footerSection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+  padding: 0;
+}
+
+.footerSection li {
+  display: block;
+}
+
+.footerSection a {
+  line-height: 1.82025rem;
+}
+
+.footerSection a:hover {
+  text-decoration: none;
+}
+
+.footerSection a p:hover {
+  color: rgb(153, 153, 153);
+}
+
+.linksContainer a {
+  line-height: "1.82025rem";
+}
+
+.linksContainer a:hover {
+  text-decoration: none;
+}
+
+.linksContainer a p:hover {
+  color: rgb(153, 153, 153);
+}
+
+.sectionHeading {
+  font-family: "Work Sans SemiBold";
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-top: 0;
+}
+
+.copyrights {
+  font-size: 0.875rem;
+  line-height: " 1.375rem";
+  color: var(--white);
+  opacity: 0.5;
+}
+
+.footerLink {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .footerSection {
+    padding-right: 16px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .root {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .iconContainer {
+    display: flex;
+    margin-top: 32px !important;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    padding: 0 4rem;
+  }
+
+  .root p {
+    line-height: 1.82025rem;
+  }
+
+  .img {
+    height: 4.0625rem;
+    margin-top: 32px;
+    margin-bottom: 56px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .img {
+    height: 5.3125rem;
+  }
+
+  .iconContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 16px;
+  }
+
+  .copyrights {
+    font-size: 1rem;
+  }
+
+  .sectionHeading,
+  .footerLink {
+    font-size: 1rem;
+  }
+}
