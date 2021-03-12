@@ -58,8 +58,11 @@ const Success = () => {
             <ThreeImage />
             <h3>
               Set up a{" "}
-              <TertiaryButton className={styles.directDebitLink}>
-                <a href="http://uw.link/direct-debit-set-up">Direct Debit</a>
+              <TertiaryButton
+                className={styles.directDebitLink}
+                href="http://uw.link/direct-debit-set-up"
+              >
+                Direct Debit
               </TertiaryButton>{" "}
               with us to help avoid overdue bills in the future
             </h3>
