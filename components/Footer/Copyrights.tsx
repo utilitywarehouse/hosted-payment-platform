@@ -1,10 +1,10 @@
-import { Grid } from '@material-ui/core';
-import { ClassNameMap } from '@material-ui/core/styles/withStyles';
-import React from 'react';
+import { Grid } from "@material-ui/core";
+import React from "react";
+import styles from "./styles.module.css";
 
-const Copyrights: React.FC<{ classes: ClassNameMap }> = ({ classes }) => (
+const Copyrights = () => (
   <Grid item xs={12}>
-    <span className={classes.copyrights}>
+    <span className={styles.copyrights}>
       © Utility Warehouse Limited 2020. Registered in England. Company number:
       04594421
       <br />

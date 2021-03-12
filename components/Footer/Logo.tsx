@@ -1,16 +1,16 @@
 import { Grid } from "@material-ui/core";
-import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import React from "react";
+import styles from "./styles.module.css";
 
-const Logo: React.FC<{ classes: ClassNameMap }> = ({ classes }) => (
+const Logo = () => (
   <Grid container>
     <img
-      className={classes.img}
+      className={styles.img}
       src="/icons/logo/footer/footerLogo-fill.svg"
       alt="Logo footer logo fill"
     />
     <img
-      className={classes.img}
+      className={styles.img}
       src="/icons/logo/footer/footerLogo-logo.svg"
       alt="UW Footer logo"
     />

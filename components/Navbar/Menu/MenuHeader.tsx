@@ -1,15 +1,14 @@
 import { Link, Typography } from "@material-ui/core";
-import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import React, { useState } from "react";
 import { useTracking } from "../../../hooks/useTracking";
 import PlayIcon from "../../../public/icons/small/play.svg";
 import RightChevronIcon from "../../../public/icons/small/rightChevron.svg";
 import { ContactUs } from "../../ContactUs";
 import { IMenuLink } from "./menuLinks";
+import styles from "./styles.module.css";
 
 interface IMenuHeaderProps {
   menuLinks: IMenuLink[];
-  classes: ClassNameMap;
   isDesktop: boolean;
   isScrolled?: boolean;
   selectedMenu: string;
@@ -19,7 +18,6 @@ interface IMenuHeaderProps {
 
 const MenuHeader: React.FC<IMenuHeaderProps> = ({
   menuLinks,
-  classes,
   isDesktop,
   isScrolled,
   selectedMenu,
@@ -32,7 +30,7 @@ const MenuHeader: React.FC<IMenuHeaderProps> = ({
 
   return (
     <>
-      <ul className={classes.menuItem}>
+      <ul className={styles.menuItem}>
         {menuLinks.map((menu, index) => (
           <Typography
             key={index}
@@ -68,7 +66,7 @@ const MenuHeader: React.FC<IMenuHeaderProps> = ({
                 {/* Desktop Arrow Icon */}
                 {!menu.isLink && isDesktop && (
                   <PlayIcon
-                    className={`${classes.arrow} ${
+                    className={`${styles.arrow} ${
                       selectedMenu === menu.name && "selected"
                     }`}
                   />

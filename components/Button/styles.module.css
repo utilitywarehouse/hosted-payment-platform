@@ -20,9 +20,13 @@ button.button.fullWidth {
   width: 100%;
 }
 
-button.button:hover:not(:disabled) {
+button.button.primary:hover:not(:disabled) {
   border-color: var(--primary-button-hover);
   background-color: var(--primary-button-hover);
+}
+
+button.button.secondary:hover:not(:disabled) {
+  border-color: var(--white);
 }
 
 button.button:active,
