@@ -36,14 +36,10 @@ section.paymentMethod > div:last-child {
   margin-bottom: 1.5rem;
 }
 
-.cardDetailsContainer > div:last-child {
-  margin-bottom: 0.5rem;
-}
-
 .cardInput {
   position: relative;
   max-width: 350px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.875rem;
 }
 
 .acceptedCards {
