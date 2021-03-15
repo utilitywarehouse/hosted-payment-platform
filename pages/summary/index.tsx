@@ -25,6 +25,8 @@ import { getHost } from "../../utils/host";
 import { uuid } from "../../utils/uuid";
 import styles from "./styles.module.css";
 
+const PAYMENT_TIMEOUT = 6400; // 64 seconds
+
 const PaymentSummary = () => {
   const router = useRouter();
   const { isPhone } = useWindowSize();
@@ -62,12 +64,20 @@ const PaymentSummary = () => {
     },
   });
 
+  const redirectToErrorPage = () => {
+    router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
+  };
+
   const handlePayment = () => {
     trackEvent("payments-payment-submitted", {
       card_type: cardType as CreditCardType,
       required_amount: Number(overdueBalance),
       paid_amount: Number(paymentAmount),
     });
+
+    setTimeout(() => {
+      redirectToErrorPage();
+    }, PAYMENT_TIMEOUT);
 
     makePayment({
       variables: {
@@ -93,7 +103,7 @@ const PaymentSummary = () => {
   }, [loading]);
 
   if (error) {
-    router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
+    redirectToErrorPage();
   }
 
   const getLoadingImage = () => (paymentConfirmed ? TickGif : LoadingGif);
