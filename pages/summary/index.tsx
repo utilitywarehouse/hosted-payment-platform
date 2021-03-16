@@ -3,7 +3,7 @@ import { Backdrop, Fade, Grid, Modal } from "@material-ui/core";
 import { CreditCardType } from "cleave.js/options/creditCard";
 import { Base64 } from "js-base64";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../../components/Button";
 import { ContinueButtons } from "../../components/ContinueButtons";
 import { InfoMessage } from "../../components/InfoMessage";
@@ -25,12 +25,13 @@ import { getHost } from "../../utils/host";
 import { uuid } from "../../utils/uuid";
 import styles from "./styles.module.css";
 
-const PAYMENT_TIMEOUT = 6400; // 64 seconds
+const PAYMENT_TIMEOUT = 64000; // 64 seconds
 
 const PaymentSummary = () => {
   const router = useRouter();
   const { isPhone } = useWindowSize();
   const trackEvent = useTracking();
+  const timer = useRef() || { current: 0 as any };
 
   const queryString = (router.query["q"] as string) || "";
   const decodedQueryString = decodeURIComponent(Base64.atob(queryString));
@@ -56,6 +57,7 @@ const PaymentSummary = () => {
   >(MAKE_PAYMENT, {
     onCompleted: ({ makePayment: { success } }) => {
       if (success) {
+        clearTimeout(timer.current);
         setPaymentConfirmed(true);
         setTimeout(() => {
           router.push("/success");
@@ -75,7 +77,7 @@ const PaymentSummary = () => {
       paid_amount: Number(paymentAmount),
     });
 
-    setTimeout(() => {
+    timer.current = setTimeout(() => {
       redirectToErrorPage();
     }, PAYMENT_TIMEOUT);
 

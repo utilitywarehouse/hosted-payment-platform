@@ -99,6 +99,7 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
             placeholder="16 digits"
             value={cardNumber}
             onChange={handleCardNumberChange}
+            type="tel"
             options={{
               creditCard: true,
               onCreditCardTypeChanged: onCardTypeChange,
@@ -133,6 +134,7 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
             onChange={handleExpiryDateChange}
             errorMessage={!isExpiryDateValid && "Invalid expiry date"}
             ref={expiryDateInput}
+            type="tel"
           />
           <Input
             type="tel"
