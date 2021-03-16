@@ -72,7 +72,11 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
     };
 
     const renderLabel = () =>
-      !!label ? <label htmlFor={name}>{label}</label> : null;
+      !!label ? (
+        <label className={styles.label} htmlFor={name}>
+          {label}
+        </label>
+      ) : null;
 
     const renderPrefix = () =>
       !!prefix ? <span className={styles.prefix}>{prefix}</span> : null;
@@ -96,6 +100,7 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
 
     return (
       <div className={styles.container}>
+        {renderLabel()}
         <div
           className={classNames(
             {
@@ -116,11 +121,9 @@ export const InputWrapper = forwardRef<HTMLInputElement, FormFieldProps>(
           onBlur={handleBlur}
           ref={ref}
         >
-          {renderLabel()}
           {renderPrefix()}
           {children}
           {renderSuffix()}
-          {!!label && <hr />}
         </div>
         {!!error && (
           <small

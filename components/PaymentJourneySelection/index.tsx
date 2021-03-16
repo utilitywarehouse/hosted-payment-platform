@@ -107,6 +107,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
                   placeholder="0.00"
                   prefix="£"
                   autoFocus={true}
+                  type="number"
                   cleaveOptions={{
                     numeral: true,
                     numeralThousandsGroupStyle: "thousand",

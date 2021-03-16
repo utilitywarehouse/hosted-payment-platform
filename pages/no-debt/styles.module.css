@@ -7,7 +7,7 @@
 .card {
   max-width: calc(1366px - 8rem);
   width: 90vw;
-  padding: 0 1rem 4rem;
+  padding: 2rem 1rem 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,7 +35,7 @@
 
 @media only screen and (min-width: 768px) {
   .card {
-    padding: 0 2rem 4rem;
+    padding: 2rem 2rem 4rem;
   }
 
   .card h2 {
@@ -46,7 +46,7 @@
 
 @media only screen and (min-width: 1024px) {
   .card {
-    padding: 1rem 6rem 5.5rem;
+    padding: 2rem 6rem 5.5rem;
   }
 
   .card svg {

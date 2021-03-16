@@ -3,6 +3,11 @@ section.amountSelection {
   border-bottom: 2px solid rgba(30, 10, 70, 0.1);
 }
 
+section.amountSelection small {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
 .subheading {
   font-size: 0.875rem;
   margin-top: 0;
@@ -21,9 +26,9 @@ section.amountSelection {
   align-items: flex-start;
   cursor: pointer;
   transition: all 0.3s ease;
-  border-color: rgba(30, 10, 70, 0.3);
   background-color: var(--white);
   user-select: none;
+  color: var(--primary-purple);
 }
 
 .card:hover {
@@ -34,12 +39,17 @@ section.amountSelection {
   display: flex;
 }
 
+.card.fullAmountCard,
+.card.partialAmountCard {
+  align-items: center;
+}
+
 .card.fullAmountCard {
   margin-right: 4vw;
 }
 
-.card.partialAmountCard {
-  align-items: center;
+.card.fullAmountCard p {
+  line-height: 1.625rem;
 }
 
 .card p {
@@ -49,6 +59,7 @@ section.amountSelection {
 
 .card p.fullAmount {
   font-size: 1.25rem;
+  font-family: "Work Sans Semibold";
 }
 
 .amountSelectedContainer {
@@ -73,7 +84,6 @@ section.amountSelection {
 
 .partialAmountInput {
   max-width: 236px;
-  margin-top: 1.5rem;
   margin-bottom: 0.2rem;
 }
 
