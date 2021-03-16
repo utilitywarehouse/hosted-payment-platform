@@ -39,12 +39,12 @@ section.paymentMethod > div:last-child {
 .cardInput {
   position: relative;
   max-width: 350px;
-  margin-bottom: 1.875rem;
+  margin-bottom: 1.5rem;
 }
 
 .acceptedCards {
   position: absolute;
-  top: 2rem;
+  top: 1.25rem;
   right: 1rem;
   display: flex;
   align-items: center;

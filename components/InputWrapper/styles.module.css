@@ -2,13 +2,38 @@
   position: relative;
 }
 
+.withLabel,
+.withoutLabel input {
+  border: none;
+  border-radius: var(--input-border-radius);
+  border-bottom: 2px var(--primary-purple) solid;
+  background-color: var(--white);
+  transition: border 350ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.withLabel.valid,
+.withoutLabel.valid input {
+  border-color: var(--success);
+}
+
+.withLabel.error,
+.withoutLabel.error input {
+  border-color: var(--error);
+}
+
+.withLabel.hovered,
+.withLabel.focused,
+.withoutLabel.hovered input,
+.withoutLabel.focused input {
+  border-color: var(--action-cyan);
+}
+
 .withLabel *,
 .withoutLabel * {
   font-family: "Work Sans";
 }
 
 .withoutLabel {
-  position: relative;
   width: 100%;
   height: 4rem;
   margin-bottom: 4rem;
@@ -21,11 +46,7 @@
   padding: 1.25rem 1rem;
   font-size: 1.125rem;
   line-height: 2.875rem;
-  background-color: var(--white);
   outline: none;
-  border: none;
-  border-radius: var(--input-border-radius);
-  border-bottom: 2px var(--primary-purple) solid;
 }
 
 .withoutLabel input:hover,
@@ -57,49 +78,30 @@
 }
 
 .withLabel {
-  position: relative;
   width: 100%;
-  height: 4rem;
+  height: 3.625rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: var(--white);
-  border: none;
-  border-radius: var(--input-border-radius);
-  border-bottom: 2px solid transparent;
+  position: relative;
 }
 
-.withLabel label {
+label.label {
   padding-top: 0.125rem;
-  margin: 0 1rem;
-  font-size: 0.8125rem;
-  line-height: 1.5625rem;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  font-family: "Aeonik Bold";
   height: 1.625rem;
   color: var(--midnight);
   transition: all 350ms cubic-bezier(0.165, 0.84, 0.44, 1);
   cursor: text;
   user-select: none;
-}
-
-.withLabel hr {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  margin: -2px 0;
-  width: 99.9%;
-  height: 0.125rem;
-  background-color: var(--primary-purple);
-  transition: all 350ms cubic-bezier(0.165, 0.84, 0.44, 1);
-  border: none;
-  overflow: visible;
+  display: inline-block;
 }
 
 .withLabel .prefix,
 .withLabel .suffix {
   position: absolute;
-  top: 1.625rem;
   bottom: 0;
   line-height: 1.92rem;
   padding-left: 1rem;
@@ -107,15 +109,17 @@
 }
 
 .withLabel .prefix {
+  top: 0.875rem;
   left: 0;
 }
 
 .withLabel .suffix {
+  top: 1rem;
   right: 1rem;
 }
 
 .withLabel input {
-  padding: 0 1rem 0.5rem 1rem;
+  padding: 0.5rem 1rem;
   margin: 0;
   min-height: 1.5rem;
   font-size: 1rem;
@@ -127,32 +131,6 @@
 
 .withLabel.prefixed input {
   text-indent: 1.125rem;
-}
-
-.withLabel.hovered label,
-.withLabel.focused label {
-  color: var(--action-cyan);
-}
-
-.withLabel.hovered hr,
-.withLabel.focused hr {
-  background-color: var(--action-cyan);
-}
-
-.withLabel.valid label {
-  color: var(--success);
-}
-
-.withLabel.valid hr {
-  background-color: var(--success);
-}
-
-.withLabel.error label {
-  color: var(--error);
-}
-
-.withLabel.error hr {
-  background-color: var(--error);
 }
 
 .helperText {
