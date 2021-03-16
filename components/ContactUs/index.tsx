@@ -27,7 +27,7 @@ export const ContactUs: FunctionComponent<ContactUsProps> = ({
         <h2>Contact us</h2>
         <p>
           If you’d like to send us a message, please go to{" "}
-          <TertiaryButton href="https://uw.link/contact-us">
+          <TertiaryButton href="https://uw.link/contact-us" target="_blank">
             uw.link/contact-us
           </TertiaryButton>
           .

@@ -56,12 +56,14 @@ const PaymentSummary = () => {
     MakePaymentVariablesInterface
   >(MAKE_PAYMENT, {
     onCompleted: ({ makePayment: { success } }) => {
+      clearTimeout(timer.current);
       if (success) {
-        clearTimeout(timer.current);
         setPaymentConfirmed(true);
         setTimeout(() => {
           router.push("/success");
         }, 2000);
+      } else {
+        redirectToErrorPage();
       }
     },
   });
