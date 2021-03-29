@@ -29,7 +29,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
   onEdit,
 }) => {
   const { isPhone } = useWindowSize();
-  const trackEvent = useTracking();
+  const { trackEvent } = useTracking();
 
   const [partialAmount, setPartialAmount] = useState<number>(0);
 
@@ -108,6 +108,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
                   prefix="£"
                   autoFocus={true}
                   type="number"
+                  name="paymentAmount"
                   cleaveOptions={{
                     numeral: true,
                     numeralThousandsGroupStyle: "thousand",

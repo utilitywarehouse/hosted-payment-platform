@@ -4,7 +4,7 @@ import { useTracking } from "./useTracking";
 
 export const useAccountNumber = () => {
   const router = useRouter();
-  const trackEvent = useTracking();
+  const { trackEvent } = useTracking();
   const encodedAccountNumber = router.query["id"] as string;
 
   const getAccountNumber = () => {

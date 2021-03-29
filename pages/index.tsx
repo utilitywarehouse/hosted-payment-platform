@@ -33,7 +33,7 @@ export type PaymentJourneyType = "full" | "partial" | null;
 const Home = () => {
   const router = useRouter();
   const { isPhone } = useWindowSize();
-  const trackEvent = useTracking();
+  const { identify, trackEvent } = useTracking();
   const { getAccountNumber } = useAccountNumber();
 
   const [getAccount, { data, error }] = useLazyQuery<
@@ -83,12 +83,17 @@ const Home = () => {
 
   useEffect(() => {
     const balance = Number(overdueBalance);
+
     if (!!overdueBalance) {
+      const accountNumber = getAccountNumber();
+
+      identify(accountNumber);
+
       trackEvent("payments-page-viewed", {
-        account_number: getAccountNumber(),
         overdue_balance: balance,
       });
     }
+
     if (balance <= 0) {
       router.push("/no-debt");
     }

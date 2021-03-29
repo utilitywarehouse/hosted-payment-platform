@@ -24,7 +24,7 @@ const MenuHeader: React.FC<IMenuHeaderProps> = ({
   linkClass,
   changeSelectedMenu,
 }) => {
-  const trackEvent = useTracking();
+  const { trackEvent } = useTracking();
 
   const [showContactUsModal, setShowContactUsModal] = useState<boolean>(false);
 
