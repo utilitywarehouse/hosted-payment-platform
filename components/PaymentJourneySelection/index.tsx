@@ -29,7 +29,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
   onEdit,
 }) => {
   const { isPhone } = useWindowSize();
-  const trackEvent = useTracking();
+  const { trackEvent } = useTracking();
 
   const [partialAmount, setPartialAmount] = useState<number>(0);
 
@@ -72,6 +72,19 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
       </TertiaryButton>
     );
 
+  const renderFullAmountRecommendation = () => (
+    <>
+      <p>
+        We recommend you pay off the full debt of{" "}
+        <strong>{formatGBP(overdueBalance)}</strong> on your account.
+      </p>
+      <p>
+        If the full debt isn’t cleared, your services may be suspended (if not
+        already) and won’t be switched on again until the full debt is paid.
+      </p>
+    </>
+  );
+
   const renderJourney = () => {
     switch (paymentJourney) {
       case "full":
@@ -108,6 +121,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
                   prefix="£"
                   autoFocus={true}
                   type="number"
+                  name="paymentAmount"
                   cleaveOptions={{
                     numeral: true,
                     numeralThousandsGroupStyle: "thousand",
@@ -127,12 +141,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
               </>
             )}
             <InfoMessage className={styles.partialAmountInfoMessage}>
-              <p>We recommend you pay off the full debt on your account.</p>
-              <p>
-                If the full debt isn’t cleared, your services may be suspended
-                (if not already) and won’t be switched on again until the full
-                debt is paid.
-              </p>
+              {renderFullAmountRecommendation()}
             </InfoMessage>
           </>
         );
@@ -174,14 +183,7 @@ export const PaymentJourneySelection: React.FC<PaymentJourneySelectionProps> = (
               include other recent bills added to your account.
             </p>
           ) : (
-            <>
-              <p>We recommend you pay off the full debt on your account.</p>
-              <p>
-                If the full debt isn’t cleared, your services may be suspended
-                (if not already) and won’t be switched on again until the full
-                debt is paid.
-              </p>
-            </>
+            renderFullAmountRecommendation()
           )}
         </InfoMessage>
       )}

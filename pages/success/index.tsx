@@ -15,7 +15,7 @@ import WaveImage from "../../public/wave.svg";
 import styles from "./styles.module.css";
 
 const Success = () => {
-  const trackEvent = useTracking();
+  const { trackEvent } = useTracking();
 
   useEffect(() => {
     trackEvent("payments-success-page-viewed");

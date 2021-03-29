@@ -8,7 +8,7 @@ import IceCreamImage from "../../public/ice-cream.svg";
 import styles from "./styles.module.css";
 
 const Error = () => {
-  const trackEvent = useTracking();
+  const { trackEvent } = useTracking();
   const { encodedAccountNumber } = useAccountNumber();
 
   useEffect(() => {

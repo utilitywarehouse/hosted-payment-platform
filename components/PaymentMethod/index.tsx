@@ -88,6 +88,7 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
           onChange={handleNameChange}
           autoFocus={true}
           errorMessage={!name?.trim() && "Invalid cardholder name"}
+          name="cardholderName"
         />
         <InputWrapper
           className={styles.cardInput}
@@ -100,6 +101,7 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
             value={cardNumber}
             onChange={handleCardNumberChange}
             type="tel"
+            name="cardNumber"
             options={{
               creditCard: true,
               onCreditCardTypeChanged: onCardTypeChange,
@@ -135,6 +137,7 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
             errorMessage={!isExpiryDateValid && "Invalid expiry date"}
             ref={expiryDateInput}
             type="tel"
+            name="expiryDate"
           />
           <Input
             type="tel"
@@ -150,6 +153,7 @@ export const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
             onChange={handleSecurityCodeChange}
             errorMessage={!isSecurityCodeValid && "Invalid CV number"}
             ref={securityCodeInput}
+            name="cvNumber"
           />
         </div>
       </Collapse>

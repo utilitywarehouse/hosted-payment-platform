@@ -11,7 +11,8 @@ type TrackingEventType =
   | "payments-page-viewed"
   | "payments-payment-submitted"
   | "payments-success-page-viewed"
-  | "payments-unknown-outcome-page-viewed";
+  | "payments-unknown-outcome-page-viewed"
+  | "payments-unknown-page-viewed";
 
 interface TrackingPropertiesInterface {
   account_number: string;
@@ -20,10 +21,15 @@ interface TrackingPropertiesInterface {
   full_amount: boolean;
   overdue_balance: number;
   paid_amount: number;
+  location: string;
   required_amount: number;
 }
 
 export const useTracking = () => {
+  const identify = (accountNumber: string) => {
+    mixpanel.identify(accountNumber);
+  };
+
   const trackEvent = (
     eventName: TrackingEventType,
     properties?: Partial<TrackingPropertiesInterface>,
@@ -33,5 +39,8 @@ export const useTracking = () => {
     mixpanel.track(eventName, properties, optionsOrCallback, callback);
   };
 
-  return trackEvent;
+  return {
+    identify,
+    trackEvent,
+  };
 };

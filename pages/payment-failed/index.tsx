@@ -6,7 +6,7 @@ import ThinkingImage from "../../public/thinking.svg";
 import styles from "./styles.module.css";
 
 const PaymentFailed = () => {
-  const trackEvent = useTracking();
+  const { trackEvent } = useTracking();
 
   useEffect(() => {
     trackEvent("payments-unknown-outcome-page-viewed");

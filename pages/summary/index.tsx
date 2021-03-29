@@ -30,7 +30,7 @@ const PAYMENT_TIMEOUT = 64000; // 64 seconds
 const PaymentSummary = () => {
   const router = useRouter();
   const { isPhone } = useWindowSize();
-  const trackEvent = useTracking();
+  const { trackEvent } = useTracking();
   const timer = useRef() || { current: 0 as any };
 
   const queryString = (router.query["q"] as string) || "";
