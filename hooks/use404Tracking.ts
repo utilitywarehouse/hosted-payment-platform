@@ -2,7 +2,14 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useTracking } from "./useTracking";
 
-const KNOWN_PATHS = ["?id=", "summary", "success", "oops", "payment-failed"];
+const KNOWN_PATHS = [
+  "?id=",
+  "no-debt",
+  "oops",
+  "payment-failed",
+  "success",
+  "summary",
+];
 
 export const use404Tracking = () => {
   const router = useRouter();
