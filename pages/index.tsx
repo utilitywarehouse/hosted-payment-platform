@@ -183,8 +183,7 @@ const Home = () => {
       <Grid container className={styles.grid}>
         <Grid item xs={12} lg={4}>
           <h3 className={styles.greeting}>
-            Hi {data?.getAccount.customerFirstName}{" "}
-            {data?.getAccount.customerLastName}
+            Hi {data?.getAccount.accountLabel}
           </h3>
           <h1 className={styles.heading}>Make a payment</h1>
           <hr className={styles.horizontalRule} />

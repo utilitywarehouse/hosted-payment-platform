@@ -22,7 +22,7 @@ mixpanel.init(getConfig().publicRuntimeConfig?.MIXPANEL_TOKEN, {
 function App({ Component, pageProps }) {
   const apolloClient = useApollo(pageProps);
 
-  use404Tracking()
+  use404Tracking();
 
   useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
