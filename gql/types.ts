@@ -5,8 +5,7 @@ export interface GetAccountResponseInterface {
 export interface GetAccountInterface {
   accountId: string;
   accountNumber: string;
-  customerFirstName: string;
-  customerLastName: string;
+  accountLabel: string;
   overdueBalance: AmountInterface;
 }
 

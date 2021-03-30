@@ -5,8 +5,7 @@ export const GET_ACCOUNT = gql`
     getAccount(accountNumber: $accountNumber) {
       accountId
       accountNumber
-      customerFirstName
-      customerLastName
+      accountLabel
       overdueBalance {
         value
         currency

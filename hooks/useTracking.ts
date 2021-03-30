@@ -15,7 +15,6 @@ type TrackingEventType =
   | "payments-unknown-page-viewed";
 
 interface TrackingPropertiesInterface {
-  account_number: string;
   amount: number;
   card_type: CreditCardType;
   full_amount: boolean;
