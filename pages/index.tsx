@@ -63,7 +63,6 @@ const Home = () => {
   };
 
   if (error) {
-    trackEvent("payments-not-found-page-viewed");
     router.push("/404");
   }
 
