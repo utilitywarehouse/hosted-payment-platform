@@ -11,8 +11,7 @@ type TrackingEventType =
   | "payments-page-viewed"
   | "payments-payment-submitted"
   | "payments-success-page-viewed"
-  | "payments-unknown-outcome-page-viewed"
-  | "payments-unknown-page-viewed";
+  | "payments-unknown-outcome-page-viewed";
 
 interface TrackingPropertiesInterface {
   amount: number;

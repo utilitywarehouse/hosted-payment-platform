@@ -13,7 +13,6 @@ export const useAccountNumber = () => {
         ? decodeURIComponent(Base64.atob(encodedAccountNumber))
         : "";
     } catch (error) {
-      trackEvent("payments-not-found-page-viewed");
       router.push("/404");
     }
   };

@@ -19,7 +19,7 @@ export const use404Tracking = () => {
     if (
       !KNOWN_PATHS.some((path) => router.asPath.substring(1).startsWith(path))
     ) {
-      trackEvent("payments-unknown-page-viewed", { location: router.asPath });
+      trackEvent("payments-not-found-page-viewed", { location: router.asPath });
     }
   }, [router.asPath]);
 };
