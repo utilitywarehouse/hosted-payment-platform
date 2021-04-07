@@ -1,0 +1,11 @@
+{
+  "data": {
+    "makePayment": {
+      "success": true,
+      "failureCode": "FAILURE_NONE",
+      "requiredAction": null,
+      "paymentMethod": null,
+      "__typename": "MakePayment"
+    }
+  }
+}
