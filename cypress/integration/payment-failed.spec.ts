@@ -1,6 +1,5 @@
 describe("The Payment Failed page", () => {
   before(() => {
-    cy.fixCypressSpec("/cypress/integration/payment-failed.spec.ts");
     cy.loadAccount();
     cy.visitLandingPage();
     cy.enterPaymentDetails();
@@ -10,8 +9,7 @@ describe("The Payment Failed page", () => {
     cy.stubConfirmPayment("failure").as("confirmPayment");
     cy.contains("button", "Confirm payment").click();
     cy.wait("@confirmPayment").then(() => {
-      cy.url().should("include", "/payment-failed");
-      cy.document().toMatchImageSnapshot();
+      cy.url({ timeout: 10000 }).should("include", "/payment-failed");
     });
   });
 });

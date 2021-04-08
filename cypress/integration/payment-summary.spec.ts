@@ -63,7 +63,7 @@ describe("The Payment Summary page", () => {
     cy.stubConfirmPayment("success").as("confirmPayment");
     cy.contains("button", "Confirm payment").click();
     cy.wait("@confirmPayment").then(() => {
-      cy.url().should("include", "/success");
+      cy.url({ timeout: 10000 }).should("include", "/success");
     });
   });
 });

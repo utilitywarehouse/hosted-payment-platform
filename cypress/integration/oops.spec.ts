@@ -1,6 +1,5 @@
 describe("The Oops page", () => {
   before(() => {
-    cy.fixCypressSpec("/cypress/integration/oops.spec.ts");
     cy.loadAccount();
     cy.visitLandingPage();
     cy.enterPaymentDetails();
@@ -11,7 +10,6 @@ describe("The Oops page", () => {
     cy.contains("button", "Confirm payment").click();
     cy.wait("@confirmPayment").then(() => {
       cy.url().should("include", "/oops");
-      cy.document().toMatchImageSnapshot();
     });
   });
 
