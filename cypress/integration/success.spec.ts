@@ -1,6 +1,5 @@
-describe("The payment summary page", () => {
+describe("The Success page", () => {
   before(() => {
-    cy.fixCypressSpec("/cypress/integration/success.spec.ts");
     cy.loadAccount();
     cy.visitLandingPage();
     cy.enterPaymentDetails();
@@ -12,7 +11,6 @@ describe("The payment summary page", () => {
   });
 
   it("shows the Success page", () => {
-    cy.url().should("include", "/success");
-    cy.document().toMatchImageSnapshot();
+    cy.url({ timeout: 10000 }).should("include", "/success");
   });
 });

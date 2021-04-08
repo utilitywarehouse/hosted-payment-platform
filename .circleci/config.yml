@@ -1,4 +1,13 @@
 version: 2.1
+
+orbs:
+  cypress: cypress-io/cypress@1
+
+executors:
+  with-chrome:
+    docker:
+      - image: cypress/browsers:node14.16.0-chrome89-ff86
+
 jobs:
   build:
     working_directory: ~/repo
@@ -28,5 +37,10 @@ jobs:
 workflows:
   build:
     jobs:
+      - cypress/run:
+          executor: with-chrome
+          browser: chrome
+          start: npm run dev
+          wait-on: "http://localhost:3000"
       - build:
           context: billing

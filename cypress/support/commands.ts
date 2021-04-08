@@ -97,20 +97,3 @@ Cypress.Commands.add("enterPaymentDetails", () => {
     .type("123");
   cy.contains("button", "Continue").click();
 });
-
-Cypress.Commands.add("fixCypressSpec", (filename) => {
-  // @ts-ignore
-  const path = require("path");
-  const relative = filename.substr(1); // removes leading "/"
-
-  const projectRoot = Cypress.config(
-    // @ts-ignore
-    "projectRoot"
-  );
-  const absolute = path.join(projectRoot, relative);
-  Cypress.spec = {
-    absolute,
-    name: path.basename(filename),
-    relative,
-  };
-});
