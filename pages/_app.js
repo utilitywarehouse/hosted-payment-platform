@@ -8,6 +8,7 @@ import { use404Tracking } from '../hooks/use404Tracking';
 import { useApollo } from '../lib/apolloClient';
 import '../styles/app.css';
 import '../styles/globals.css';
+import Oops from './oops';
 
 Sentry.init({
   dsn: "https://d278eedbda2548509dee9b37315cce37@o380586.ingest.sentry.io/5666398",
@@ -32,11 +33,13 @@ function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <Sentry.ErrorBoundary fallback={Oops}>
+      <ApolloProvider client={apolloClient}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloProvider>
+    </Sentry.ErrorBoundary>
   );
 }
 

@@ -6,11 +6,13 @@ import styles from "./styles.module.css";
 interface PageLayoutProps {
   title: string;
   className?: string;
+  isEmpty?: boolean;
 }
 
 export const PageLayout: FunctionComponent<PageLayoutProps> = ({
   children,
   title,
+  isEmpty,
   className,
 }) => (
   <div className={classNames(styles.container, className)}>
@@ -23,6 +25,6 @@ export const PageLayout: FunctionComponent<PageLayoutProps> = ({
       />
       <script src="https://core.spreedly.com/iframe/iframe-v1.min.js" />
     </Head>
-    {children}
+    {isEmpty ? null : children}
   </div>
 );

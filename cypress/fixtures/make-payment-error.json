@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "message": "rpc error: code = Internal desc = failed to make payment for account reference //uw.co.uk/customer/account-number/8113246: rpc error: code = InvalidArgument desc = invalid argument",
+      "path": ["makePayment"]
+    }
+  ],
+  "data": null
+}

@@ -51,6 +51,14 @@ const PaymentSummary = () => {
 
   const balanceAfterPayment = Number(overdueBalance) - Number(paymentAmount);
 
+  const redirectToErrorPage = () => {
+    router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
+  };
+
+  const redirectToPaymentFailedPage = () => {
+    router.push(`/payment-failed`);
+  };
+
   const [makePayment, { loading, error }] = useMutation<
     MakePaymentResponseInterface,
     MakePaymentVariablesInterface
@@ -63,14 +71,11 @@ const PaymentSummary = () => {
           router.push("/success");
         }, 2000);
       } else {
-        redirectToErrorPage();
+        redirectToPaymentFailedPage();
       }
     },
+    onError: redirectToErrorPage,
   });
-
-  const redirectToErrorPage = () => {
-    router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
-  };
 
   const handlePayment = () => {
     trackEvent("payments-payment-submitted", {

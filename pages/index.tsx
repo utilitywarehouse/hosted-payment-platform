@@ -123,6 +123,7 @@ const Home = () => {
   const isReadyToProceed =
     !!paymentJourney &&
     paymentAmount &&
+    !!name.trim() &&
     isCardValid &&
     isExpiryDateValid &&
     isSecurityCodeValid;

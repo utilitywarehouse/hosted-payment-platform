@@ -1,0 +1,11 @@
+{
+  "data": {
+    "makePayment": {
+      "success": false,
+      "failureCode": "FAILURE_PAYMENT_METHOD_NOT_ALLOWED",
+      "requiredAction": null,
+      "paymentMethod": null,
+      "__typename": "MakePayment"
+    }
+  }
+}

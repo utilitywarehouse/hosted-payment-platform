@@ -1,0 +1,15 @@
+{
+  "data": {
+    "getAccount": {
+      "accountId": "6488388d-d7ec-50e8-b427-103108740bdb",
+      "accountNumber": "015991",
+      "accountLabel": "Antony Kwok",
+      "overdueBalance": {
+        "value": "385.37",
+        "currency": "GBP",
+        "__typename": "Amount"
+      },
+      "__typename": "Account"
+    }
+  }
+}
