@@ -2,14 +2,14 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { Button } from "../../components/Button";
 import { PageLayout } from "../../components/PageLayout";
-import { useAccountNumber } from "../../hooks/useAccountNumber";
-import { useTracking } from "../../hooks/useTracking";
+import { useTracking } from "../../hooks";
 import IceCreamImage from "../../public/ice-cream.svg";
+import { usePayment } from "../paymentSlice";
 import styles from "./styles.module.css";
 
 const Error = () => {
   const { trackEvent } = useTracking();
-  const { encodedAccountNumber } = useAccountNumber();
+  const { accountNumber } = usePayment();
 
   useEffect(() => {
     trackEvent("payments-failure-page-viewed");
@@ -25,7 +25,7 @@ const Error = () => {
             That payment didn’t go through. But don’t worry, please check your
             card details or use a different payment method and try again.
           </p>
-          <Link href={`/?id=${encodedAccountNumber}`}>
+          <Link href={`/?id=${encodeURIComponent(btoa(accountNumber))}`}>
             <Button size="large">Try again</Button>
           </Link>
         </div>

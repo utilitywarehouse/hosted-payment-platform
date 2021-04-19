@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useTracking } from "./useTracking";
 
 const KNOWN_PATHS = [
+  "404",
   "?id=",
   "no-debt",
   "oops",

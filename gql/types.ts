@@ -40,12 +40,33 @@ export interface MakePaymentVariablesInterface {
   amount: AmountInterface;
 }
 
+export interface Continue3DSPaymentResponseInterface {
+  continueChallengedPayment: Continue3DSPaymentInterface;
+}
+
+export interface Continue3DSPaymentInterface {
+  success: boolean;
+  failureCode: FailureCodeType;
+  internalTransactionToken: string;
+  paymentMethod: PaymentMethodInterface;
+  __typename: string;
+}
+
+export interface Continue3DSPaymentVariablesInterface {
+  externalTransactionToken: string;
+  correlationId: string;
+  accountReference: string;
+  accountId: string;
+  amount: AmountInterface;
+  continue: boolean;
+}
+
 export interface AmountInterface {
   value: string;
   currency: string;
 }
 
-interface RequiredActionInterface {
+export interface RequiredActionInterface {
   externalTransactionToken: string;
   transactionData: string;
 }
@@ -54,7 +75,7 @@ interface PaymentMethodInterface {
   paymentMethodToken: string;
 }
 
-type FailureCodeType =
+export type FailureCodeType =
   | "FAILURE_NONE"
   | "FAILURE_INVALID_PAYMENT_METHOD"
   | "FAILURE_PAYMENT_METHOD_NOT_ALLOWED"

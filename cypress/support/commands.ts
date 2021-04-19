@@ -69,31 +69,16 @@ Cypress.Commands.add("clickOutside", () => {
 });
 
 Cypress.Commands.add("enterPaymentDetails", () => {
-  cy.contains("Other amount")
-    .should("be.visible")
-    .click();
-  cy.get("input[name=paymentAmount]")
-    .should("be.visible")
-    .type("85.37");
+  cy.contains("Other amount").should("be.visible").click();
+  cy.get("input[name=paymentAmount]").should("be.visible").type("85.37");
   cy.contains("button", "Confirm amount").click();
-  cy.contains("Name on card")
-    .siblings()
-    .children()
-    .type("A Kwok");
+  cy.contains("Name on card").siblings().children().type("A Kwok");
   cy.contains("Card number")
     .siblings()
     .children()
     .first()
     .type("4111111111111111");
-  cy.contains("Expiry date")
-    .siblings()
-    .children()
-    .first()
-    .type("1029");
-  cy.contains("CV number")
-    .siblings()
-    .children()
-    .first()
-    .type("123");
+  cy.contains("Expiry date").siblings().children().first().type("1029");
+  cy.contains("CV number").siblings().children().first().type("123");
   cy.contains("button", "Continue").click();
 });

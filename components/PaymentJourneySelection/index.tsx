@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
-import { useWindowSize } from "../../hooks";
-import { useTracking } from "../../hooks/useTracking";
+import { useTracking, useWindowSize } from "../../hooks";
 import { PaymentJourneyType } from "../../pages";
 import EditIcon from "../../public/icons/small/edit.svg";
 import { formatGBP } from "../../utils/currency";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { PageLayout } from "../../components/PageLayout";
 import { TertiaryButton } from "../../components/TertiaryButton";
-import { useTracking } from "../../hooks/useTracking";
+import { useTracking } from "../../hooks";
 import ThinkingImage from "../../public/thinking.svg";
 import styles from "./styles.module.css";
 

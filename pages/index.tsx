@@ -3,10 +3,11 @@ import { Grid } from "@material-ui/core";
 import axios from "axios";
 import { CreditCardType } from "cleave.js/options/creditCard";
 import { isAfter, parse } from "date-fns";
-import { Base64 } from "js-base64";
 import getConfig from "next/config";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Persistor } from "redux-persist/es/types";
 import { Button } from "../components/Button";
 import { ContinueButtons } from "../components/ContinueButtons";
 import { PageLayout } from "../components/PageLayout";
@@ -17,11 +18,21 @@ import {
   GetAccountResponseInterface,
   GetAccountVariablesInterface,
 } from "../gql/types";
-import { useWindowSize } from "../hooks";
-import { useAccountNumber } from "../hooks/useAccountNumber";
-import { useTracking } from "../hooks/useTracking";
+import { useIp, useTracking, useWindowSize } from "../hooks";
 import styles from "../styles/Home.module.css";
-import { getIpAddress } from "../utils/ip";
+import {
+  updateAccountId,
+  updateAccountNumber,
+  updateCardType,
+  updateExternalPaymentToken,
+  updateLastFourDigits,
+  updateOverdueBalance,
+  updatePaymentAmount,
+} from "./paymentSlice";
+
+interface HomeProps {
+  persistor: Persistor;
+}
 
 const ACCEPTED_CARD_TYPES: CreditCardType[] = ["visa", "mastercard", "maestro"];
 const SPREEDLY_URL = `https://core.spreedly.com/v1/payment_methods.json?environment_key=${
@@ -30,95 +41,84 @@ const SPREEDLY_URL = `https://core.spreedly.com/v1/payment_methods.json?environm
 
 export type PaymentJourneyType = "full" | "partial" | null;
 
-const Home = () => {
+const Home: FunctionComponent<HomeProps> = ({ persistor }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { isPhone } = useWindowSize();
   const { identify, trackEvent } = useTracking();
-  const { getAccountNumber } = useAccountNumber();
 
-  const [getAccount, { data, error }] = useLazyQuery<
+  useIp();
+
+  const [getAccount, { data }] = useLazyQuery<
     GetAccountResponseInterface,
     GetAccountVariablesInterface
-  >(GET_ACCOUNT);
+  >(GET_ACCOUNT, {
+    onCompleted: ({ getAccount: { accountId, overdueBalance } }) => {
+      const overdue = parseFloat(overdueBalance.value);
+      setOverdueBalance(overdue);
+      dispatch(updateAccountId(accountId));
+      dispatch(updateOverdueBalance(overdue));
+    },
+    onError: () => {
+      router.push("/404");
+    },
+  });
 
-  const [ip, setIp] = useState<string>();
+  const [accountNumber, setAccountNumber] = useState<string>();
   const [paymentJourney, setPaymentJourney] = useState<PaymentJourneyType>();
+  const [overdueBalance, setOverdueBalance] = useState<number>();
   const [paymentAmount, setPaymentAmount] = useState<number>();
   const [name, setName] = useState<string>("");
   const [cardType, setCardType] = useState<CreditCardType>();
   const [cardNumber, setCardNumber] = useState<string>("");
   const [expiryDate, setExpiryDate] = useState<string>("");
   const [securityCode, setSecurityCode] = useState<string>("");
-  const [isCardValid, setIsCardValid] = useState<boolean>(false);
-  const [isExpiryDateValid, setIsExpiryDateValid] = useState<boolean>(false);
-  const [isSecurityCodeValid, setIsSecurityCodeValid] = useState<boolean>(
-    false
-  );
-
-  const overdueBalance = data?.getAccount.overdueBalance.value;
-
-  const setIpAddress = async () => {
-    const ipAddress = await getIpAddress();
-    setIp(ipAddress);
-  };
-
-  if (error) {
-    router.push("/404");
-  }
 
   useEffect(() => {
-    if (!window.location.search) {
-      router.replace("https://uw.co.uk");
-    }
-    setIpAddress();
+    persistor.purge();
   }, []);
 
   useEffect(() => {
-    const accountNumber = getAccountNumber();
-    if (!!accountNumber) {
-      getAccount({ variables: { accountNumber } });
+    if (!!router.query && !router.query["id"]) {
+      router.replace("https://uw.co.uk");
+      return;
+    }
+
+    const encodedAccountNumber = router.query["id"] as string;
+    const account = decodeURIComponent(atob(encodedAccountNumber));
+
+    if (!!account) {
+      setAccountNumber(account);
+      dispatch(updateAccountNumber(account));
+      getAccount({ variables: { accountNumber: account } });
     }
   }, [router.query]);
 
   useEffect(() => {
-    const balance = Number(overdueBalance);
-
-    if (!!overdueBalance) {
-      const accountNumber = getAccountNumber();
-
+    if (typeof overdueBalance === "number") {
       identify(accountNumber);
-
       trackEvent("payments-page-viewed", {
-        overdue_balance: balance,
+        overdue_balance: overdueBalance,
       });
-    }
 
-    if (balance <= 0) {
-      router.push("/no-debt");
+      if (overdueBalance <= 0) {
+        router.push("/no-debt");
+      }
     }
   }, [overdueBalance]);
 
-  useEffect(() => {
-    setIsCardValid(
-      cardNumber.split(" ").join("").length === 16 &&
-        ACCEPTED_CARD_TYPES.includes(cardType)
-    );
-  }, [cardNumber]);
-
-  useEffect(() => {
-    setIsExpiryDateValid(
-      expiryDate.length === 5 &&
-        isAfter(parse(expiryDate, "MM/yy", new Date()), new Date())
-    );
-  }, [expiryDate]);
-
-  useEffect(() => {
-    setIsSecurityCodeValid(
-      securityCode.length === 3 && /^[0-9]*$/.test(securityCode)
-    );
-  }, [securityCode]);
-
   const isCardTypeValid = ACCEPTED_CARD_TYPES.includes(cardType);
+
+  const isCardValid =
+    cardNumber.split(" ").join("").length === 16 &&
+    ACCEPTED_CARD_TYPES.includes(cardType);
+
+  const isExpiryDateValid =
+    expiryDate.length === 5 &&
+    isAfter(parse(expiryDate, "MM/yy", new Date()), new Date());
+
+  const isSecurityCodeValid =
+    securityCode.length === 3 && /^[0-9]*$/.test(securityCode);
 
   const isReadyToProceed =
     !!paymentJourney &&
@@ -154,28 +154,22 @@ const Home = () => {
         },
       });
 
+      dispatch(updateCardType(cardType));
+      dispatch(updatePaymentAmount(paymentAmount));
+      dispatch(
+        updateExternalPaymentToken(data?.transaction.payment_method.token)
+      );
+      dispatch(
+        updateLastFourDigits(data?.transaction.payment_method.last_four_digits)
+      );
+
       if (data?.transaction.succeeded) {
         trackEvent("payments-method-confirmed", { card_type: cardType });
-        router.push(
-          getSummaryUrl(
-            data?.transaction.payment_method.token,
-            data?.transaction.payment_method.last_four_digits
-          )
-        );
+        router.push("/summary");
       }
     } catch (error) {
-      router.push(`/oops?id=${Base64.btoa(getAccountNumber())}`);
+      router.push(`/oops?id=${encodeURIComponent(btoa(accountNumber))}`);
     }
-  };
-
-  const getSummaryUrl = (token: string, lastFourDigits: string) => {
-    const amount = paymentAmount?.toFixed(2);
-    const queryString = `${getAccountNumber()},${
-      data?.getAccount.accountId
-    },${cardType},${overdueBalance},${amount},${lastFourDigits},${token},${ip}`;
-    const base64QueryString = Base64.btoa(queryString);
-    const encodedQueryString = encodeURIComponent(base64QueryString);
-    return `/summary?q=${encodedQueryString}`;
   };
 
   return (
@@ -190,7 +184,7 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} lg={8}>
           <PaymentJourneySelection
-            overdueBalance={Number(overdueBalance)}
+            overdueBalance={overdueBalance}
             paymentJourney={paymentJourney}
             paymentAmount={paymentAmount}
             onPaymentJourneyChange={setPaymentJourney}
