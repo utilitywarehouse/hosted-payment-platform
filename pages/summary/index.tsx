@@ -1,83 +1,96 @@
 import { useMutation } from "@apollo/client";
-import { Backdrop, Fade, Grid, Modal } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { CreditCardType } from "cleave.js/options/creditCard";
-import { Base64 } from "js-base64";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Button } from "../../components/Button";
 import { ContinueButtons } from "../../components/ContinueButtons";
 import { InfoMessage } from "../../components/InfoMessage";
+import { Loader } from "../../components/Loader";
 import { PageLayout } from "../../components/PageLayout";
 import { TertiaryButton } from "../../components/TertiaryButton";
+import { ThreeDSChallenge } from "../../components/ThreeDSChallenge";
 import { MAKE_PAYMENT } from "../../gql/mutation";
 import {
   MakePaymentResponseInterface,
   MakePaymentVariablesInterface,
 } from "../../gql/types";
-import { useWindowSize } from "../../hooks";
-import { useTracking } from "../../hooks/useTracking";
+import { useTracking, useWindowSize } from "../../hooks";
 import LeftChevronIcon from "../../public/icons/small/chevron-left.svg";
-import LoadingGif from "../../public/loading.gif";
-import TickGif from "../../public/tick.gif";
 import { getBrowserInfo } from "../../utils/browser";
 import { formatGBP } from "../../utils/currency";
 import { getHost } from "../../utils/host";
 import { uuid } from "../../utils/uuid";
+import { usePayment } from "../paymentSlice";
 import styles from "./styles.module.css";
+import {
+  updateAccountReference,
+  updateCorrelationId,
+  updateExternalTransactionToken,
+} from "./summarySlice";
 
 const PAYMENT_TIMEOUT = 64000; // 64 seconds
 
 const PaymentSummary = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { isPhone } = useWindowSize();
   const { trackEvent } = useTracking();
-  const timer = useRef() || { current: 0 as any };
 
-  const queryString = (router.query["q"] as string) || "";
-  const decodedQueryString = decodeURIComponent(Base64.atob(queryString));
-  const [
-    accountNumber,
+  const {
     accountId,
+    accountNumber,
     cardType,
-    overdueBalance,
-    paymentAmount,
-    lastFourDigits,
     externalPaymentToken,
     ip,
-  ] = decodedQueryString.split(",");
+    lastFourDigits,
+    overdueBalance,
+    paymentAmount,
+  } = usePayment();
+
+  const timer = useRef() || { current: 0 as any };
 
   const [showLoader, setShowLoader] = useState<boolean>(false);
   const [paymentConfirmed, setPaymentConfirmed] = useState<boolean>(false);
 
-  const balanceAfterPayment = Number(overdueBalance) - Number(paymentAmount);
-
-  const redirectToErrorPage = () => {
-    router.push(`/oops?id=${Base64.btoa(accountNumber)}`);
-  };
-
-  const redirectToPaymentFailedPage = () => {
-    router.push(`/payment-failed`);
-  };
+  const balanceAfterPayment = overdueBalance - paymentAmount;
 
   const [makePayment, { loading, error }] = useMutation<
     MakePaymentResponseInterface,
     MakePaymentVariablesInterface
   >(MAKE_PAYMENT, {
-    onCompleted: ({ makePayment: { success } }) => {
+    onCompleted: ({ makePayment: { success, requiredAction } }) => {
       clearTimeout(timer.current);
       if (success) {
         setPaymentConfirmed(true);
         setTimeout(() => {
           router.push("/success");
         }, 2000);
+      } else if (!!requiredAction) {
+        setShowLoader(false);
+        dispatch(
+          updateExternalTransactionToken(
+            requiredAction.externalTransactionToken
+          )
+        );
       } else {
-        redirectToPaymentFailedPage();
+        router.push(`/oops?id=${encodeURIComponent(btoa(accountNumber))}`);
       }
     },
-    onError: redirectToErrorPage,
+    onError: async () => {
+      clearTimeout(timer.current);
+      router.push(`/payment-failed`);
+    },
   });
 
   const handlePayment = () => {
+    const correlationId = uuid();
+    const accountReference = `//uw.co.uk/customer/account-number/${accountNumber}`;
+
+    dispatch(updateCorrelationId(correlationId));
+    dispatch(updateAccountReference(accountReference));
+
     trackEvent("payments-payment-submitted", {
       card_type: cardType as CreditCardType,
       required_amount: Number(overdueBalance),
@@ -85,22 +98,19 @@ const PaymentSummary = () => {
     });
 
     timer.current = setTimeout(() => {
-      redirectToErrorPage();
+      router.push(`/payment-failed`);
     }, PAYMENT_TIMEOUT);
 
     makePayment({
       variables: {
-        accountReference: `//uw.co.uk/customer/account-number/${accountNumber}`,
+        ip,
         accountId,
+        correlationId,
+        accountReference,
         externalPaymentToken,
         clientFingerprint: getBrowserInfo(),
         redirectUrl: getHost(),
-        correlationId: uuid(),
-        ip,
-        amount: {
-          currency: "GBP",
-          value: paymentAmount,
-        },
+        amount: { currency: "GBP", value: String(paymentAmount) },
       },
     });
   };
@@ -112,16 +122,11 @@ const PaymentSummary = () => {
   }, [loading]);
 
   if (error) {
-    redirectToErrorPage();
+    router.push(`/payment-failed`);
   }
 
-  const getLoadingImage = () => (paymentConfirmed ? TickGif : LoadingGif);
-
-  const getPaymentMessage = () =>
-    paymentConfirmed ? "Payment confirmed" : "Processing payment";
-
   return (
-    <>
+    <ThreeDSChallenge>
       <PageLayout title="Payment summary - UW">
         <Grid container className={styles.grid}>
           <Grid item xs={12}>
@@ -185,22 +190,10 @@ const PaymentSummary = () => {
           </ContinueButtons>
         </Grid>
       </PageLayout>
-      <Modal
-        className={styles.modal}
-        open={showLoader}
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={showLoader}>
-          <div className={styles.paper}>
-            <img src={getLoadingImage()} width={100} />
-            <p>{getPaymentMessage()}</p>
-          </div>
-        </Fade>
-      </Modal>
-    </>
+      <Loader show={showLoader} done={paymentConfirmed}>
+        {paymentConfirmed ? "Payment confirmed" : "Processing payment"}
+      </Loader>
+    </ThreeDSChallenge>
   );
 };
 

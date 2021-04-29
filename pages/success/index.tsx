@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { Button } from "../../components/Button";
 import { PageLayout } from "../../components/PageLayout";
 import { TertiaryButton } from "../../components/TertiaryButton";
-import { useTracking } from "../../hooks/useTracking";
+import { useTracking } from "../../hooks";
 import OneImage from "../../public/icons/large/1.svg";
 import TwoImage from "../../public/icons/large/2.svg";
 import ThreeImage from "../../public/icons/large/3.svg";

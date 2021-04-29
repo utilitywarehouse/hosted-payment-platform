@@ -33,3 +33,30 @@ export const MAKE_PAYMENT = gql`
     }
   }
 `;
+
+export const CONTINUE_3DS_PAYMENT = gql`
+  mutation(
+    $externalTransactionToken: String!
+    $correlationId: String!
+    $accountReference: String!
+    $accountId: String!
+    $amount: AmountInput!
+    $continue: Boolean!
+  ) {
+    continueChallengedPayment(
+      externalTransactionToken: $externalTransactionToken
+      correlationId: $correlationId
+      accountReference: $accountReference
+      accountId: $accountId
+      amount: $amount
+      continue: $continue
+    ) {
+      success
+      failureCode
+      internalTransactionToken
+      paymentMethod {
+        paymentMethodToken
+      }
+    }
+  }
+`;

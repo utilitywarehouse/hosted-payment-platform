@@ -1,6 +1,6 @@
 import { Link, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import { useTracking } from "../../../hooks/useTracking";
+import { useTracking } from "../../../hooks";
 import PlayIcon from "../../../public/icons/small/play.svg";
 import RightChevronIcon from "../../../public/icons/small/rightChevron.svg";
 import { ContactUs } from "../../ContactUs";
