@@ -20,7 +20,6 @@ export const MAKE_PAYMENT = gql`
       correlationId: $correlationId
       ip: $ip
       amount: $amount
-      metadata: { Test3ds: true }
     ) {
       success
       failureCode
