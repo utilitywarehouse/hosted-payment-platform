@@ -38,6 +38,11 @@ export interface MakePaymentVariablesInterface {
   correlationId: string;
   ip: string;
   amount: AmountInterface;
+  metadata?: MetadataInterface;
+}
+
+interface MetadataInterface {
+  Test3ds?: boolean;
 }
 
 export interface Continue3DSPaymentResponseInterface {
