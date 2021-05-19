@@ -111,6 +111,7 @@ const PaymentSummary = () => {
         clientFingerprint: getBrowserInfo(),
         redirectUrl: getHost(),
         amount: { currency: "GBP", value: String(paymentAmount) },
+        metadata: { Test3ds: true },
       },
     });
   };

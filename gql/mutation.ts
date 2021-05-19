@@ -10,6 +10,7 @@ export const MAKE_PAYMENT = gql`
     $correlationId: String!
     $ip: String!
     $amount: AmountInput!
+    $metadata: Metadata
   ) {
     makePayment(
       accountReference: $accountReference
@@ -20,6 +21,7 @@ export const MAKE_PAYMENT = gql`
       correlationId: $correlationId
       ip: $ip
       amount: $amount
+      metadata: $metadata
     ) {
       success
       failureCode
