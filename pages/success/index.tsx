@@ -44,6 +44,13 @@ const Success = () => {
             <p>
               <span className={styles.dot} />
               <span className={styles.nextStepItem}>
+                If we have an email address for you,
+                we'll send you a payment confirmation email
+              </span>
+            </p>
+            <p>
+              <span className={styles.dot} />
+              <span className={styles.nextStepItem}>
                 Update or set up a{" "}
                 <TertiaryButton href="http://uw.link/direct-debit-set-up">
                   <strong>Direct Debit</strong>
