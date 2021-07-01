@@ -13,7 +13,7 @@ const NoDebt = () => (
           You don't currently have any outstanding debt on your account to pay.
         </p>
         <p>
-          However, if your May Direct Debit payment was rejected, <strong>your overdue balance may take up to 24 hours to show on your account, so please check again tomorrow</strong>.
+          However, if your June Direct Debit payment was rejected, <strong>your overdue balance may take up to 24 hours to show on your account, so please check again tomorrow</strong>.
         </p>
         <p>
           Remember, you can keep up to date with your monthly bills via the{" "}
